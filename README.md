@@ -1,7 +1,7 @@
 # Junjie Chu — Personal Résumé Site
 
 纯静态网站（HTML + CSS + JS，无需构建工具），可直接部署到 GitHub Pages。
-
+网页链接：[https://chu-junjie.github.io/junjie-chu.cv/](url)
 ## 文件结构
 
 ```
