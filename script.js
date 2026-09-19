@@ -3,8 +3,8 @@
    ============================================================ */
 const DATA = {
   role: {
-    zh: "软件开发工程师｜Android 开发工程师｜前端开发工程师",
-    en: "Software Developer · Android Developer · Frontend Developer"
+    zh: "Android / 软件开发工程师",
+    en: "Android / Software Developer"
   },
   degree: {
     zh: "2027 届海外本科应届生｜GPA 5.85/7.00（专业前 5%）",
