@@ -7,7 +7,7 @@ const UI = {
   experience:['实习经历','Experience'], education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['校园贡献与荣誉','Mentoring & recognition'],
   contactTitle:['进一步交流','Get in touch'], contactIntro:['欢迎就项目、实习与工作机会联系我。','Open to conversations about projects, internships and graduate opportunities.'],
   print:['打印 / 保存通用简历','Print / Save general résumé'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['按岗位查看简历 · 中文 Word','Role-specific CVs · Chinese Word files'], backTop:['回到顶部 ↑','Back to top ↑'],
-  problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['展开方法与验证','Methods & validation'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →']
+  problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['展开方法与验证','Methods & validation'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps']
 };
 let lang='zh';
 const t = value => value?.[lang] ?? value?.zh ?? '';
@@ -27,8 +27,10 @@ function renderProjects(){
     <p class="project-result">${tx(p.result)}</p>
     <dl class="case-summary"><div><dt>${ui('problem')}</dt><dd>${tx(p.problem)}</dd></div><div><dt>${ui('contribution')}</dt><dd>${tx(p.contribution)}</dd></div></dl>
     ${p.screenshots?`<div class="project-gallery">${p.screenshots.map(shot=>`<figure><a href="assets/scamwise/${shot.file}.jpg" target="_blank" rel="noopener" aria-label="${tx(shot)} — ${ui('original')}"><img src="assets/scamwise/${shot.file}.jpg" alt="ScamWise Campus — ${tx(shot)}" loading="lazy" decoding="async" width="474" height="1001"></a><figcaption>${tx(shot)}</figcaption></figure>`).join('')}</div>`:''}
+    ${p.evidence?`<div class="evidence-gallery">${p.evidence.map(shot=>`<figure><a href="${escapeHTML(shot.src)}" target="_blank" rel="noopener" aria-label="${tx(shot.caption)} — ${ui('original')}"><img src="${escapeHTML(shot.src)}" alt="${tx(shot.caption)}" loading="lazy" decoding="async" width="${shot.width}" height="${shot.height}"></a><figcaption>${tx(shot.caption)}<span>${tx(shot.source)}</span></figcaption></figure>`).join('')}</div>`:''}
+    ${p.boundary?`<p class="project-boundary">${tx(p.boundary)}</p>`:''}
     <div class="project-links">${(p.links||[]).map(link=>`<a class="text-link" href="${escapeHTML(link.url)}" target="_blank" rel="noopener">${t(link.label)==='GitHub'?ui('code'):tx(link.label)+' ↗'}</a>`).join('')}</div>
-    <details class="case-details" id="${p.id}-details"><summary>${ui('details')}</summary><div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p><p class="stack">${p.stack.map(escapeHTML).join(' · ')}</p></div></details>
+    <details class="case-details" id="${p.id}-details"><summary>${ui('details')}</summary><div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p>${p.reflection?`<h4>${ui('lesson')}</h4><p>${tx(p.reflection)}</p>`:''}<p class="stack">${p.stack.map(escapeHTML).join(' · ')}</p></div></details>
   </article>`).join('');
 }
 function renderTimeline(id,items){

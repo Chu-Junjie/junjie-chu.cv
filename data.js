@@ -316,12 +316,16 @@ const DATA = {
         "en": "18 scenarios · 102 automated tests"
       },
       "decision": {
-        "zh": "采用 MVVM + Use Case + Repository 分离界面与业务逻辑。链接检测前说明数据去向并征得同意；未命中已知威胁不等于链接安全。",
-        "en": "Separated UI and business logic with MVVM, use cases and repositories. Link checks require consent to send the URL to an external service; no known threat match is not a guarantee of safety."
+        "zh": "采用 MVVM + Use Case + Repository 分离界面与业务逻辑，以 Room 保存学习记录，不要求用户创建账号或填写个人资料。外部 URL 检测前征得同意，将结果表述为“未发现已知威胁”；提供清除历史、语义标签和反馈提示，避免恐吓式文案与惩罚性打卡机制。",
+        "en": "Separated UI and business logic using MVVM, use cases and repositories. Stored learning attempts in Room without requiring accounts or personal profiles. Required consent before external URL checks, used “no known threat” wording, and provided history deletion, semantic labels and feedback announcements without fear-based messaging or punitive streaks."
       },
       "validation": {
         "zh": "79 个单元测试与 23 个 UI 测试覆盖业务层和页面流程。将密钥配置迁出源码，清理 Git 历史并重置曾暴露的 API Key。",
         "en": "79 unit tests and 23 UI tests cover business logic and screen flows. Moved key configuration out of source code, cleaned Git history and rotated exposed API keys."
+      },
+      "reflection": {
+        "zh": "反思中识别出自动化测试无法替代发布审查：测试没有发现密钥暴露、备份配置假设和大屏适配问题。下一步计划提前梳理数据流与威胁模型，并把备份规则、导航一致性、无障碍和最终打包文件检查纳入发布清单。",
+        "en": "The reflection identified gaps beyond automated tests: credential exposure, assumptions about backup configuration and large-screen layouts. Planned improvements include earlier data-flow and threat modelling, and release checks for backup rules, navigation consistency, accessibility and packaged files."
       }
     },
     {
@@ -394,13 +398,45 @@ const DATA = {
         "en": "3 sprints · 10 user stories delivered on time"
       },
       "decision": {
-        "zh": "制定用户故事验收标准，追踪需求与测试对应关系，协调 PR 合并和版本冻结。先完成核心推荐链路，再逐步补充功能。",
-        "en": "Defined acceptance criteria, traced requirements to tests and coordinated PR merges and release freezes. Delivered the core recommendation flow first, then added features incrementally."
+        "zh": "制定用户故事验收标准，追踪需求与测试对应关系，协调 PR 合并和版本冻结。用户指南记录了匿名搜索、登录后的收藏与历史记录，以及通过 /api/compare 返回最多三款产品对比的团队交付流程；缺失参数明确显示 N/A 或 Not specified。",
+        "en": "Defined acceptance criteria, traced requirements to tests and coordinated PR merges and release freezes. The team’s user guide documents anonymous search, account-based favorites and history, and comparison of up to three products through /api/compare. Missing specifications are shown as N/A or Not specified."
       },
       "validation": {
         "zh": "候选版本通过 12/12 项测试；统筹发布检查清单与验收。交付结果为团队成果，个人实现重点为分享功能和前后端集成。",
         "en": "The release candidate passed 12/12 tests. Managed release checklists and acceptance. Delivery was a team outcome; my implementation focused on sharing and frontend/backend integration."
-      }
+      },
+      "boundary": {
+        "zh": "课程教学原型 · 产品与价格来自后端及公开／教学数据，非实时零售库存。截图展示团队交付界面。",
+        "en": "Educational prototype · Product and price data comes from the backend and public/educational datasets, not live retail inventory. Screenshots show the team’s delivered interface."
+      },
+      "evidence": [
+        {
+          "src": "assets/evidence/recommendation-home.png",
+          "width": 893,
+          "height": 545,
+          "caption": {
+            "zh": "结构化需求输入与匿名搜索",
+            "en": "Structured preferences & anonymous search"
+          },
+          "source": {
+            "zh": "用户指南 · 第 1 页，图 1",
+            "en": "User guide · Page 1, Figure 1"
+          }
+        },
+        {
+          "src": "assets/evidence/recommendation-compare.jpg",
+          "width": 893,
+          "height": 578,
+          "caption": {
+            "zh": "三产品对比与缺失参数展示",
+            "en": "Three-product comparison & missing specifications"
+          },
+          "source": {
+            "zh": "用户指南 · 第 10 页，图 8",
+            "en": "User guide · Page 10, Figure 8"
+          }
+        }
+      ]
     },
     {
       "title": {
@@ -469,8 +505,8 @@ const DATA = {
         "en": "Student Dropout Prediction & Model Comparison"
       },
       "role": {
-        "zh": "个人项目｜数据分析与机器学习",
-        "en": "Individual project · Data analysis & machine learning"
+        "zh": "个人课程项目｜数据分析与机器学习",
+        "en": "Individual course project · Data analysis & machine learning"
       },
       "meta": {
         "zh": "",
@@ -516,13 +552,45 @@ const DATA = {
         "en": "10-fold cross-validation · Weighted F1 0.893"
       },
       "decision": {
-        "zh": "以 ZeroR 为基线，比较 J48、Naive Bayes、IBk 与 MLP；识别第二学期通过课程数为关键预测特征。",
-        "en": "Compared J48, Naive Bayes, IBk and MLP against a ZeroR baseline; identified second-semester course completions as a key predictor."
+        "zh": "以 ZeroR 为基线，比较 J48、Naive Bayes、IBk 与 DL4J MLP 的 10 折交叉验证结果，权衡可解释性与分类指标。普通 MLP 因计算成本改用 66% 训练集划分，报告单独注明该结果不能与交叉验证指标直接比较。",
+        "en": "Compared J48, Naive Bayes, IBk and DL4J MLP using 10-fold cross-validation against a ZeroR baseline, weighing interpretability against classification metrics. Standard MLP used a 66% training split due to computational cost; the report explicitly separates that result from cross-validation comparisons."
       },
       "validation": {
-        "zh": "调优 MLP 后取得 MCC 0.776、ROC-AUC 0.933、辍学召回率 0.825。以上为项目交叉验证结果。",
-        "en": "The tuned MLP achieved MCC 0.776, ROC-AUC 0.933 and dropout recall 0.825. These are project cross-validation results."
-      }
+        "zh": "Q9 的 Run C 原始截图确认：3,630 条记录、10 折分层交叉验证，准确率 89.4215%、加权 F1 0.893、MCC 0.776、ROC-AUC 0.933、辍学召回率 0.825。配置为 100 epochs、batch size 64、learning rate 0.005、早停验证比例 8%。",
+        "en": "The original Q9 Run C screenshot records 3,630 instances and stratified 10-fold cross-validation: accuracy 89.4215%, weighted F1 0.893, MCC 0.776, ROC-AUC 0.933 and dropout recall 0.825. Configuration: 100 epochs, batch size 64, learning rate 0.005 and an 8% early-stopping validation split."
+      },
+      "boundary": {
+        "zh": "课程实验结果 · 指标来自报告中的 Weka 交叉验证输出，不代表独立外部测试集或实际学生干预效果。",
+        "en": "Course experiment · Metrics come from the report’s Weka cross-validation output, not an independent external test set or a measured student intervention."
+      },
+      "evidence": [
+        {
+          "src": "assets/evidence/dropout-run-c-results.png",
+          "width": 1766,
+          "height": 1337,
+          "caption": {
+            "zh": "Run C：10 折交叉验证与混淆矩阵",
+            "en": "Run C: 10-fold cross-validation & confusion matrix"
+          },
+          "source": {
+            "zh": "A1-Junjie-Chu.docx · Q9，Run C 结果截图",
+            "en": "A1-Junjie-Chu.docx · Q9, Run C results"
+          }
+        },
+        {
+          "src": "assets/evidence/dropout-run-c-settings.png",
+          "width": 1869,
+          "height": 1351,
+          "caption": {
+            "zh": "Run C：模型与早停参数",
+            "en": "Run C: model & early-stopping settings"
+          },
+          "source": {
+            "zh": "A1-Junjie-Chu.docx · Q9，Run C 参数截图",
+            "en": "A1-Junjie-Chu.docx · Q9, Run C configuration"
+          }
+        }
+      ]
     },
     {
       "title": {
@@ -530,8 +598,8 @@ const DATA = {
         "en": "SmartSeat"
       },
       "role": {
-        "zh": "AI 驱动课堂座位管理系统｜UI/前端负责人",
-        "en": "AI-driven classroom seating management system · UI/Frontend Lead"
+        "zh": "课堂座位管理课程项目｜前端开发 · 曾任 Scrum Master",
+        "en": "Classroom seating course project · Frontend developer; also served as Scrum Master"
       },
       "meta": {
         "zh": "2025.09 – 2025.12",
@@ -548,48 +616,86 @@ const DATA = {
       ],
       "stack": [
         "Scrum",
+        "Pair Programming",
         "Figma",
-        "FigJam",
         "GitHub Issues",
-        "CI/CD",
-        "Lean UX",
-        "Design Thinking"
+        "CI/CD"
       ],
       "bullets": [
         {
-          "zh": "主导 16 屏高保真原型，执行 3 轮 Lean UX 测试、累计 60 人次参与；与后端协商接口，将座位检测、占用率预测与分配结果接入前端，完成模拟数据流的端到端原型演示。",
-          "en": "Led 16 high-fidelity prototype screens, ran 3 rounds of Lean UX testing with 60 participant sessions, agreed data interfaces with the backend team, and delivered an end-to-end prototype with simulated seat detection, occupancy prediction and allocation data."
+          "zh": "负责前端开发，参与登录与选座页面实现；与后端开展结对编程和接口联调，并曾担任 Scrum Master。",
+          "en": "Owned frontend development, including login and seat-selection screens; paired with the backend developer on implementation and integration, and also served as Scrum Master."
+        },
+        {
+          "zh": "选座页面出现座位位置偏移后，与后端联合排查，定位双方对坐标原点的约定不一致。登录模块进度受阻时，与后端结对编程，交替进行编码和检查，推进界面交付。",
+          "en": "When seats rendered outside the intended area, investigated with the backend developer and identified inconsistent assumptions about the coordinate origin. Paired on coding and review when login-page development fell behind, helping the team complete the interface."
         }
       ],
       "id": "smartseat",
       "category": {
-        "zh": "用户研究 / 交互设计",
-        "en": "USER RESEARCH / INTERACTION"
+        "zh": "前端开发 / 敏捷协作",
+        "en": "FRONTEND / AGILE COLLABORATION"
       },
       "tagline": {
-        "zh": "把课堂座位需求转化为可测试的交互。",
-        "en": "Turning classroom seating needs into testable interactions."
+        "zh": "通过前后端协作推进座位管理界面交付。",
+        "en": "Delivering seating interfaces through frontend/backend collaboration."
       },
       "problem": {
-        "zh": "为课堂座位管理设计界面，表达座位检测、占用率预测与分配结果。",
-        "en": "Design a classroom seating interface for seat detection, occupancy predictions and allocation results."
+        "zh": "构建学生预约、讲师管理和管理员视图，支持课堂座位管理流程演示。",
+        "en": "Build student reservation, lecturer and administrator interfaces for a classroom seating management demonstration."
       },
       "contribution": {
-        "zh": "担任 UI/前端负责人，主导 16 屏高保真原型，与后端协商数据接口。",
-        "en": "UI/frontend lead; designed 16 high-fidelity screens and agreed data interfaces with the backend team."
+        "zh": "负责前端开发，参与登录与选座页面实现；与后端开展结对编程和接口联调，并曾担任 Scrum Master。",
+        "en": "Owned frontend development, including login and seat-selection screens; paired with the backend developer on implementation and integration, and also served as Scrum Master."
       },
       "result": {
-        "zh": "3 轮 Lean UX 测试 · 60 人次",
-        "en": "3 Lean UX rounds · 60 participant sessions"
+        "zh": "七人团队 · 6 次 Scrum 迭代",
+        "en": "7-person team · 6 Scrum sprints"
       },
       "decision": {
-        "zh": "根据用户研究与测试反馈迭代原型，将发现转化为开发任务；把模型输出映射到前端交互。",
-        "en": "Iterated prototypes from user research and testing, turned findings into development tasks and mapped model outputs to frontend interactions."
+        "zh": "选座页面出现座位位置偏移后，与后端联合排查，定位双方对坐标原点的约定不一致。登录模块进度受阻时，与后端结对编程，交替进行编码和检查，推进界面交付。",
+        "en": "When seats rendered outside the intended area, investigated with the backend developer and identified inconsistent assumptions about the coordinate origin. Paired on coding and review when login-page development fell behind, helping the team complete the interface."
       },
       "validation": {
-        "zh": "完成模拟数据流的端到端原型演示。60 人次为三轮累计参与次数；本项目职责聚焦交互与前端集成。",
-        "en": "Delivered an end-to-end prototype using simulated data. The 60 sessions are cumulative across three testing rounds; my role focused on interaction and frontend integration."
-      }
+        "zh": "项目反思记录了六次迭代中的前后端集成过程，并附学生预约、讲师与管理员界面截图。展示的是课程演示系统，不代表已经在校园生产环境部署。",
+        "en": "The reflection documents frontend/backend integration across six sprints and includes student reservation, lecturer and administrator screenshots. This is a course demonstration system, not a claim of production deployment on campus."
+      },
+      "reflection": {
+        "zh": "联调问题暴露了口头接口约定的不足。后续改进计划是在迭代规划时明确坐标原点、参数范围和示例数据，并提前验证跨角色依赖；对设计歧义和进度风险更早提出阻碍。",
+        "en": "Integration problems exposed the limits of verbal interface agreements. Planned improvements include documenting coordinate origins, parameter ranges and sample data during sprint planning, validating cross-role dependencies early, and raising design ambiguity and delivery risks sooner."
+      },
+      "boundary": {
+        "zh": "课程演示界面 · 展示学生预约与讲师管理流程。",
+        "en": "Course demonstration interface · Student reservation and lecturer management workflows."
+      },
+      "evidence": [
+        {
+          "src": "assets/evidence/smartseat-lecturer.png",
+          "width": 2559,
+          "height": 1285,
+          "caption": {
+            "zh": "讲师与管理员面板",
+            "en": "Lecturer & administrator dashboard"
+          },
+          "source": {
+            "zh": "CP3405 个人反思 · 附录讲师页面",
+            "en": "CP3405 reflection · Lecturer-page appendix"
+          }
+        },
+        {
+          "src": "assets/evidence/smartseat-reservations.png",
+          "width": 2559,
+          "height": 1285,
+          "caption": {
+            "zh": "学生预约管理界面",
+            "en": "Student reservation management"
+          },
+          "source": {
+            "zh": "CP3405 个人反思 · 附录学生页面",
+            "en": "CP3405 reflection · Student-page appendix"
+          }
+        }
+      ]
     }
   ],
   "leadership": [
