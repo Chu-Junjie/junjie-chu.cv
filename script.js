@@ -3,8 +3,8 @@
    ============================================================ */
 const DATA = {
   role: {
-    zh: "Android / 软件开发工程师",
-    en: "Android / Software Developer"
+    zh: "软件开发 · 数据与 AI · 项目协作",
+    en: "Software · Data & AI · Project Delivery"
   },
   degree: {
     zh: "2027 届海外本科应届生｜GPA 5.85/7.00（专业前 5%）",
@@ -21,7 +21,7 @@ const DATA = {
     education:  { zh: "教育背景", en: "Education" },
     skills:     { zh: "专业技能", en: "Skills" },
     experience: { zh: "实习经历", en: "Experience" },
-    projects:   { zh: "核心项目经历", en: "Projects" },
+    projects:   { zh: "精选项目", en: "Projects" },
     leadership: { zh: "校园领导力与荣誉", en: "Leadership & Honors" }
   },
 
@@ -68,8 +68,8 @@ const DATA = {
       org: { zh: "上海意言科技有限公司（TYRION.AI）+ 新加坡 Basilos Pte. Ltd.", en: "TYRION.AI (Shanghai Yiyan Tech) + Basilos Pte. Ltd., Singapore" },
       current: true,
       bullets: [
-        { zh: "完成 InsightFace、CompreFace、DeepFace 等方案选型与开放集测试，推动 Workbench Connector 集成；13/13 已知样本匹配、10/10 陌生样本拒识，并稳定处理 6 类异常输入。",
-          en: "Evaluated InsightFace, CompreFace and DeepFace through open-set testing to drive Workbench Connector integration — 13/13 known-sample matches, 10/10 unknown-sample rejections, and stable handling of 6 exception input types." },
+        { zh: "完成 InsightFace、CompreFace、DeepFace 等方案选型与开放集测试，推动 Workbench Connector 集成；在小规模验证集中实现 13/13 已知样本匹配、10/10 陌生样本拒识，并稳定处理 6 类异常输入。",
+          en: "Evaluated InsightFace, CompreFace and DeepFace through open-set testing to drive Workbench Connector integration — 13/13 known-sample matches and 10/10 unknown-sample rejections in a small validation set, and stable handling of 6 exception input types." },
         { zh: "完成 PNG-to-SVG 与 Traced Paths 工程验证，测试 36 张黑白技术图、60 张彩色插画及 3 组混合方案，为产品选型形成可复现实验依据。",
           en: "Ran PNG-to-SVG and Traced Paths engineering validation across 36 black-and-white technical drawings, 60 colour illustrations and 3 hybrid schemes, forming a reproducible basis for product selection." },
         { zh: "调研 20 个主流海外 AI 模型，并评估 Lark CLI 9 个模块的自动化能力，解决 Scope 授权与身份切换问题，沉淀团队复用操作规范。",
@@ -99,8 +99,8 @@ const DATA = {
       bullets: [
         { zh: "基于 MVVM + Use Case + Repository 构建 5 页面应用，实现 18 个诈骗训练场景、URL 威胁检测和学习统计。",
           en: "Built a 5-screen app on an MVVM + Use Case + Repository architecture, delivering 18 scam-training scenarios, URL threat detection and learning statistics." },
-        { zh: "编写 102 个自动化测试（79 单元、23 UI），并通过 BuildConfig、Git 历史清理和密钥重置完成 API Key 安全加固。",
-          en: "Wrote 102 automated tests (79 unit, 23 UI) and hardened API-key security via BuildConfig, Git history cleanup and key rotation." }
+        { zh: "编写 102 个自动化测试（79 单元、23 UI），将密钥配置迁出源码，并清理 Git 历史、重置曾暴露的 API Key。",
+          en: "Wrote 102 automated tests (79 unit, 23 UI) moved key configuration out of source code, cleaned Git history and rotated exposed API keys." }
       ]
     },
     {
@@ -128,8 +128,8 @@ const DATA = {
       ],
       stack: ["Scrum", "Figma", "FigJam", "GitHub Issues", "CI/CD", "Lean UX", "Design Thinking"],
       bullets: [
-        { zh: "主导 16 屏高保真原型，执行 3 轮 Lean UX 测试、累计 60 人次参与，并将座位检测、占用率预测与分配结果转化为前端交互。",
-          en: "Led 16 high-fidelity prototype screens, ran 3 rounds of Lean UX testing with 60 total participants, and translated seat detection, occupancy prediction and allocation results into frontend interactions." }
+        { zh: "主导 16 屏高保真原型，执行 3 轮 Lean UX 测试、累计 60 人次参与；与后端协商接口，将座位检测、占用率预测与分配结果接入前端，完成模拟数据流的端到端原型演示。",
+          en: "Led 16 high-fidelity prototype screens, ran 3 rounds of Lean UX testing with 60 participant sessions, agreed data interfaces with the backend team, and delivered an end-to-end prototype with simulated seat detection, occupancy prediction and allocation data." }
       ]
     }
   ],
@@ -145,8 +145,60 @@ const DATA = {
     }
   ],
 
-  footer: {}
+  footer: { zh: "更新于 2026 年 9 月", en: "Updated September 2026" }
 };
+
+// General profile: factual highlights shared across the supplied role-specific CVs.
+DATA.nav.about = { zh: "个人概览", en: "Overview" };
+DATA.nav.downloads = { zh: "简历下载", en: "Download CVs" };
+DATA.summary = {
+  zh: "2027 届信息技术本科生，具备软件开发、机器学习与数据分析实践，能够从需求梳理、方案实现推进到测试验证和团队交付。独立开发反诈骗 Android 应用，带领团队完成推荐平台与图像分类项目；英语可作为工作语言。",
+  en: "Information Technology undergraduate graduating in 2027, with hands-on experience in software development, machine learning and data analysis. I work across requirements, implementation, testing and team delivery, from an independently built Android app to team-led recommendation and image-classification projects. Comfortable working in English."
+};
+DATA.availability = { zh: "2026 年 12 月下旬可到岗 · 2027 年 3 月毕业后可全职", en: "Available from late December 2026 · Full-time after graduation in March 2027" };
+DATA.highlights = [
+  { value: "102", zh: "Android 自动化测试", en: "Automated Android tests" },
+  { value: "Top 5%", zh: "DrivenData 公开榜", en: "DrivenData public leaderboard" },
+  { value: "3", zh: "带领团队完成敏捷迭代", en: "Team-led agile sprints" }
+];
+DATA.resumes = [
+  { file: "software-development", zh: "软件开发工程师", en: "Software Development" },
+  { file: "technical-project-management", zh: "技术项目管理", en: "Technical Project Management" },
+  { file: "data-analysis", zh: "数据分析师", en: "Data Analysis" },
+  { file: "test-development", zh: "测试开发工程师", en: "Test Development" },
+  { file: "machine-learning", zh: "算法工程师", en: "Machine Learning" }
+];
+DATA.skills = [
+  { label: {zh:"软件开发",en:"Software development"}, items:["Kotlin", "Python", "JavaScript", "SQL", "C++", "Jetpack Compose", "MVVM", "Room", "Retrofit", "Flask", "PostgreSQL"] },
+  { label: {zh:"数据分析与机器学习",en:"Data & machine learning"}, items:["pandas", "NumPy", "scikit-learn", "PyTorch", "FastAI", "Weka", "EDA", "OpenCV", "Optuna"] },
+  { label: {zh:"测试与工程实践",en:"Testing & engineering"}, items:["JUnit", "Mockito", "Espresso", "Git/GitHub", "GitHub Actions", "CI/CD", "OOF", "Group K-Fold"] },
+  { label: {zh:"项目协作与用户研究",en:"Delivery & user research"}, items:["Scrum", "User Story", "Requirements Traceability", "Release Management", "Figma", "Lean UX"] }
+];
+DATA.projects[0].screenshots = [
+  {file:"home", zh:"首页与学习进度", en:"Home & learning progress"},
+  {file:"practice", zh:"诈骗场景练习", en:"Scenario practice"},
+  {file:"statistics", zh:"学习统计", en:"Learning statistics"},
+  {file:"verification", zh:"链接威胁检测", en:"Link verification"}
+];
+DATA.projects.splice(2, 0, {
+  title: {zh:"野生动物保护图像分类",en:"Wildlife Conservation Image Classification"},
+  role: {zh:"五人团队组长｜DrivenData 国际竞赛 · 公开榜前 5%",en:"Team lead · 5 members · DrivenData public leaderboard top 5%"},
+  meta: {zh:"2026.05 – 2026.08",en:"May 2026 – Aug 2026"},
+  stack: ["Python", "PyTorch", "FastAI", "ConvNeXt", "Optuna", "Stratified Group K-Fold"],
+  bullets: [
+    {zh:"针对 8 类、16,488 张图像搭建训练与验证流程；定位地理站点数据泄漏，采用按站点分组的交叉验证，实现训练与验证站点零重叠。",en:"Built a training and validation pipeline for 16,488 images across 8 classes. Identified site leakage and adopted grouped cross-validation with no site overlap between training and validation."},
+    {zh:"主导 19 组控制变量实验，结合 TTA、五折集成与 logit 融合，将公开榜 Log Loss 从 2.5453 降至 1.0136，降低约 60%。",en:"Led 19 controlled experiments; combined TTA, five-fold ensembles and logit blending to reduce public leaderboard log loss from 2.5453 to 1.0136, a reduction of about 60%."}
+  ]
+}, {
+  title: {zh:"学生辍学预测与模型比较",en:"Student Dropout Prediction & Model Comparison"},
+  role: {zh:"个人项目｜数据分析与机器学习",en:"Individual project · Data analysis & machine learning"},
+  meta: {zh:"",en:""},
+  stack:["Weka", "EDA", "K-means", "J48", "Naive Bayes", "DL4J MLP"],
+  bullets:[
+    {zh:"分析 3,630 条学生记录与 36 项特征，完成探索性分析、特征处理、聚类与多模型比较，识别第二学期通过课程数为关键预测特征。",en:"Analysed 3,630 student records and 36 features through EDA, feature processing, clustering and model comparison; identified second-semester course completions as a key predictor."},
+    {zh:"通过 10 折交叉验证调优 MLP，取得加权 F1 0.893、MCC 0.776、ROC-AUC 0.933、辍学召回率 0.825。",en:"Tuned an MLP using 10-fold cross-validation, achieving weighted F1 0.893, MCC 0.776, ROC-AUC 0.933 and dropout recall 0.825."}
+  ]
+});
 
 const ICONS = {
   phone: '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.2 2.3z"/></svg>',
@@ -162,7 +214,7 @@ const ICONS = {
 let lang = "zh";
 
 function t(field){
-  return field[lang] !== undefined ? field[lang] : field.zh;
+  return field?.[lang] ?? field?.zh ?? "";
 }
 
 function el(tag, className, html){
@@ -184,6 +236,7 @@ function renderContact(){
     } else {
       li.innerHTML = `${icon}<span>${textVal}</span>`;
     }
+    li.className = "contact-" + c.key;
     list.appendChild(li);
   });
 }
@@ -261,6 +314,11 @@ function renderProjects(){
     if (p.stack && p.stack.length){
       html += `<div class="proj-stack">${p.stack.join("  ·  ")}</div>`;
     }
+    if (p.screenshots) {
+      html += `<div class="project-gallery">` + p.screenshots.map(shot =>
+        `<figure><a href="assets/scamwise/${shot.file}.jpg" target="_blank" rel="noopener" aria-label="${t(shot)} — ${lang === "zh" ? "查看原图" : "View full image"}"><img src="assets/scamwise/${shot.file}.jpg" alt="ScamWise Campus — ${t(shot)}" loading="lazy" width="474" height="1001"></a><figcaption>${t(shot)}</figcaption></figure>`
+      ).join("") + `</div>`;
+    }
     html += `<ul class="proj-bullets">` + p.bullets.map(b => `<li>${t(b)}</li>`).join("") + `</ul>`;
     div.innerHTML = html;
     wrap.appendChild(div);
@@ -282,8 +340,20 @@ function renderStatic(){
   document.getElementById("degree-text").textContent = t(DATA.degree);
   document.getElementById("footer-text").textContent = t(DATA.footer);
   document.title = lang === "zh"
-    ? "褚俊杰 Junjie Chu — 软件开发工程师"
-    : "Junjie Chu — Software Developer";
+    ? "褚俊杰 Junjie Chu — 个人简历"
+    : "Junjie Chu — Résumé";
+  document.querySelector('meta[name="description"]').content = t(DATA.summary);
+  document.getElementById("summary-text").textContent = t(DATA.summary);
+  document.getElementById("availability-text").textContent = t(DATA.availability);
+  document.getElementById("highlights-list").innerHTML = DATA.highlights.map(h => `<div><strong>${h.value}</strong><span>${t(h)}</span></div>`).join("");
+  document.getElementById("download-intro").textContent = lang === "zh" ? "按岗位方向下载中文 Word 简历。" : "Download a role-specific CV (Chinese · Word).";
+  document.getElementById("downloads-list").innerHTML = DATA.resumes.map(r => `<a href="assets/resumes/${r.file}.docx" download="褚俊杰_${r.zh}.docx"><span>${t(r)}</span><small>DOCX ↓</small></a>`).join("");
+  document.getElementById("print-button").textContent = lang === "zh" ? "打印 / 保存 PDF" : "Print / Save PDF";
+  document.getElementById("cv-link").textContent = lang === "zh" ? "下载简历 ↓" : "Download CV ↓";
+  document.querySelector(".skip-link").textContent = lang === "zh" ? "跳至正文" : "Skip to content";
+  document.getElementById("side-nav").setAttribute("aria-label", lang === "zh" ? "简历章节" : "Résumé sections");
+  document.getElementById("lang-toggle").setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换为中文");
+  document.getElementById("lang-toggle").setAttribute("aria-pressed", String(lang === "en"));
 }
 
 function renderAll(){
@@ -305,8 +375,9 @@ function setLang(next){
   lang = next;
   document.documentElement.lang = lang === "zh" ? "zh" : "en";
   document.body.classList.toggle("lang-en", lang === "en");
-  localStorage.setItem("site-lang", lang);
+  try { localStorage.setItem("site-lang", lang); } catch {}
   renderAll();
+  window.dispatchEvent(new Event("resize"));
 }
 
 document.getElementById("lang-toggle").addEventListener("click", () => {
@@ -328,8 +399,9 @@ function initScrollSpy(){
       const link = links.find(a => a.getAttribute("href") === id);
       if (!link) return;
       if (entry.isIntersecting){
-        links.forEach(a => a.classList.remove("is-active"));
+        links.forEach(a => { a.classList.remove("is-active"); a.removeAttribute("aria-current"); });
         link.classList.add("is-active");
+        link.setAttribute("aria-current", "location");
       }
     });
   }, { rootMargin: "-15% 0px -70% 0px", threshold: 0 });
@@ -388,8 +460,11 @@ function initScrollProgress(){
 /* ============================================================
    Init
    ============================================================ */
+document.getElementById("print-button").addEventListener("click", () => window.print());
+
 (function init(){
-  const saved = localStorage.getItem("site-lang");
+  let saved;
+  try { saved = localStorage.getItem("site-lang"); } catch {}
   lang = saved === "en" ? "en" : "zh";
   document.documentElement.lang = lang === "zh" ? "zh" : "en";
   document.body.classList.toggle("lang-en", lang === "en");
