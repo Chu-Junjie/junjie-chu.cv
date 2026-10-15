@@ -27,9 +27,9 @@ const DATA = {
     },
     {
       "key": "mail",
-      "zh": "chujunjie0908@gmail.com",
-      "en": "chujunjie0908@gmail.com",
-      "href": "mailto:chujunjie0908@gmail.com"
+      "zh": "2903442978@qq.com",
+      "en": "2903442978@qq.com",
+      "href": "mailto:2903442978@qq.com"
     },
     {
       "key": "github",
@@ -39,9 +39,9 @@ const DATA = {
     },
     {
       "key": "mail-alt",
-      "zh": "备用邮箱 2903442978@qq.com",
-      "en": "Alternative email: 2903442978@qq.com",
-      "href": "mailto:2903442978@qq.com"
+      "zh": "备用邮箱 chujunjie0908@gmail.com",
+      "en": "Alternative email: chujunjie0908@gmail.com",
+      "href": "mailto:chujunjie0908@gmail.com"
     }
   ],
   "nav": {
@@ -256,25 +256,57 @@ const DATA = {
         "en": "April–September 2024"
       },
       "title": {
-        "zh": "运营与行政实习生",
-        "en": "Operations & Administration Intern"
+        "zh": "运营与行政实习生（录用职称：Associate）",
+        "en": "Operations & Administration Intern (offer designation: Associate)"
       },
       "org": {
-        "zh": "Specialists Trade Alliance of Singapore（STAS）｜新加坡",
+        "zh": "新加坡建筑专业联盟（STAS）｜新加坡",
         "en": "Specialists Trade Alliance of Singapore (STAS) · Singapore"
       },
       "bullets": [
         {
-          "zh": "对照评审标准核验预制 MEP 厂商申请材料，整理在办／已结案件及审核要点笔记，支持认证相关行政工作。",
-          "en": "Checked prefabricated MEP vendor application materials against assessment criteria and organised open/closed cases and review notes for certification administration."
+          "zh": "认证材料审核：参与预制机电（MEP）厂商认证计划，查阅公司文件夹中申请企业提交的人员配置、工作流程与厂区布局材料，对照官方评审标准检查是否符合要求；梳理在办／已结申请并整理审核要点笔记，为后续材料复核提供参考。",
+          "en": "Accreditation review support: reviewed applicant documents on staffing, workflows and factory layouts in company folders against the official criteria of the Prefabricated MEP Manufacturer Accreditation Scheme. Organised open and closed applications and compiled review notes for subsequent document checks."
         },
         {
-          "zh": "以 Excel 维护 3 场展会的双阶段付款、参展商和业务记录，整理分类供应商清单；独立完成中国区建材展会调研，输出结构化信息供业务筛选。",
-          "en": "Maintained two-stage payment, exhibitor and business records for three trade shows in Excel; organised supplier categories and independently researched building-materials exhibitions in China for business screening."
+          "zh": "展会运营与市场调研：参与行业展会全流程运营支持，维护 3 场展会的双阶段付款记录，为卡塔尔预制主题展馆定向筛选参展企业；通过公开资料检索，独立完成中国建材展会市场调研并输出结构化成果，供业务筛选与筹备参考。",
+          "en": "Exhibition operations and market research: supported end-to-end trade show operations, maintained two-stage payment records for three exhibitions and screened prospective exhibitors for a Qatar prefab pavilion. Independently researched construction materials exhibitions in China using public sources and produced structured findings for business screening and planning."
         },
         {
-          "zh": "拓展管道供应商资源，调整空间参数参与 MEP 配置工具基础模块测试，将供应商、参展商及付款信息整理为可检索的业务资料。",
-          "en": "Expanded piping-supplier resources and adjusted spatial parameters in basic MEP configuration-tool testing; organised supplier, exhibitor and payment information for retrieval."
+          "zh": "供应商研究与配置测试：参与 Prefab MEP Configurator 数字化配置工具项目，通过 Google、SGBC 等渠道搜集管道供应商并建立分类资源清单；调整空间参数，完成基础模块配置测试，支持供应商资源准备与工具功能验证。",
+          "en": "Supplier research and configuration testing: contributed to the Prefab MEP Configurator project by sourcing piping suppliers through Google, SGBC and other channels and building a categorised resource list. Adjusted spatial parameters to test basic module configurations, supporting supplier research and functional checks."
+        },
+        {
+          "zh": "业务数据与共享资料：使用 Excel 整理业务数据、维护格式一致的信息清单，并通过 Google Drive 整理共享工作资料；完成相关行政记录，便于团队查阅、更新和交接审核、展会及供应商资料。",
+          "en": "Business data and shared documentation: used Excel to organise business data and maintain consistently formatted information lists, and Google Drive to organise shared working documents. Maintained administrative records to support access, updates and handovers of accreditation, exhibition and supplier information."
+        }
+      ]
+    },
+    {
+      "date": {
+        "zh": "2021.03–2021.10",
+        "en": "March–October 2021"
+      },
+      "title": {
+        "zh": "质量部文员",
+        "en": "Quality Department Clerk"
+      },
+      "org": {
+        "zh": "徐州华夏电子有限公司｜中国·徐州",
+        "en": "Xuzhou Huaxia Electronics Co., Ltd. · Xuzhou, China"
+      },
+      "bullets": [
+        {
+          "zh": "出货质量单证：每日编制十余份车用线束、汽车连接配件及五金冲压件的出货检验报告，按规范随货装箱并归档，维护出货单证完整性，便于后续查阅。",
+          "en": "Shipment quality documentation: prepared more than 10 outgoing inspection reports daily for automotive wiring harnesses, connectors and metal stamping parts. Included the required documents with shipments and archived records for completeness and later retrieval."
+        },
+        {
+          "zh": "日常数据维护：使用 Excel 每日录入并维护约 200 名员工的工作数据；同时整理质量检测数据与测试结果，及时更新相关记录，支持日常信息查询。",
+          "en": "Daily data maintenance: used Excel to enter and maintain daily work data for approximately 200 employees. Also updated quality inspection data and test results for routine information retrieval."
+        },
+        {
+          "zh": "审核与车间沟通：协助内部质量审核各环节工作；日常工作中发现问题时，直接与车间沟通核实情况。",
+          "en": "Audit support and workshop coordination: assisted across the internal quality audit process. Communicated directly with the workshop to clarify issues arising in day-to-day work."
         }
       ]
     }
@@ -1078,22 +1110,89 @@ const DATA = {
   "leadership": [
     {
       "title": {
-        "zh": "JCU Learning Centre｜EMAS Peer Tutor（2026.05–2026.08）",
-        "en": "JCU Learning Centre — EMAS Peer Tutor (May–August 2026)"
+        "zh": "EMAS Peer Tutor 感谢证书",
+        "en": "EMAS Peer Tutor — Certificate of Appreciation"
       },
       "body": {
-        "zh": "为 50 余名学生提供编程及核心 IT 课程辅导，并与项目顾问跟踪学习进展。",
-        "en": "Tutored 50+ students in programming and core IT coursework, tracking learning progress together with program advisors."
+        "zh": "校园辅导认可｜James Cook University Singapore，2026 年第 2 学期。2026.05–2026.08 辅导服务期间，为 50 余名学生提供编程及核心 IT 课程辅导，并与项目顾问跟踪学习进展。",
+        "en": "Peer tutoring recognition · James Cook University Singapore, Trimester 2, 2026. During May–August 2026, tutored 50+ students in programming and core IT coursework and tracked their learning progress with programme advisors."
+      },
+      "link": {
+        "url": "assets/certificates/emas-peer-tutor.pdf",
+        "label": { "zh": "查看证书 PDF", "en": "View certificate PDF" }
       }
     },
     {
       "title": {
-        "zh": "荣誉",
-        "en": "Honor"
+        "zh": "建筑工程文凭",
+        "en": "Diploma in Construction Engineering"
       },
       "body": {
-        "zh": "BIMAGE Virtual Design & Construction Boot Camp Competition 季军（四人团队，2023）",
-        "en": "BIMAGE Virtual Design & Construction Boot Camp Competition — 2nd Runner-up (4-person team, 2023)"
+        "zh": "学历文凭｜新加坡建设局学院（BCA Academy），2024.11.19。",
+        "en": "Academic qualification · BCA Academy, 19 November 2024."
+      },
+      "link": {
+        "url": "assets/certificates/bca-construction-engineering-diploma.pdf",
+        "label": { "zh": "查看证书 PDF", "en": "View certificate PDF" }
+      }
+    },
+    {
+      "title": {
+        "zh": "WSQ 建筑行业工作场所安全与健康管理证书",
+        "en": "Certificate of WSQ WSH Management in Construction Industry"
+      },
+      "body": {
+        "zh": "课程结业证书｜LearnCollab Pte Ltd。课程时间：2023.11.18–2023.11.26。",
+        "en": "Certificate of Successful Completion · LearnCollab Pte Ltd. Course dates: 18–26 November 2023."
+      },
+      "link": {
+        "url": "assets/certificates/wsq-wsh-management.pdf",
+        "label": { "zh": "查看证书 PDF", "en": "View certificate PDF" }
+      }
+    },
+    {
+      "title": {
+        "zh": "ISO 9001 / 14001 / 45001 内部质量审核课程结业证书",
+        "en": "Internal Quality Audit: ISO 9001, ISO 14001 & ISO 45001"
+      },
+      "body": {
+        "zh": "课程结业证书｜BCA Academy，2023.08.18。通过基于质量、环境及职业健康安全标准的内部质量审核课程考核。",
+        "en": "Certificate of Successful Completion · BCA Academy, 18 August 2023. Passed the coursework assessments for internal quality auditing based on quality, environmental and health and safety standards."
+      },
+      "link": {
+        "url": "assets/certificates/bca-iso-internal-audit.pdf",
+        "label": {
+          "zh": "查看证书 PDF",
+          "en": "View certificate PDF"
+        }
+      }
+    },
+    {
+      "title": {
+        "zh": "新加坡—剑桥 GCE O-Level 强化预备课程结业证书",
+        "en": "Singapore-Cambridge GCE O-Level Preparatory Course (Intensive)"
+      },
+      "body": {
+        "zh": "课程结业证书｜Furen International School，2020.10.02。",
+        "en": "Certificate of Completion · Furen International School, 2 October 2020."
+      },
+      "link": {
+        "url": "assets/certificates/gce-o-level-preparatory-course.pdf",
+        "label": { "zh": "查看证书 PDF", "en": "View certificate PDF" }
+      }
+    },
+    {
+      "title": {
+        "zh": "Virtual Design & Construction Boot Camp Competition 季军",
+        "en": "Virtual Design & Construction Boot Camp Competition — 2nd Runner-up"
+      },
+      "body": {
+        "zh": "竞赛奖项｜BIMAGE Virtual Design & Construction Boot Camp Competition，四人团队，2023。",
+        "en": "Competition award · BIMAGE Virtual Design & Construction Boot Camp Competition, four-person team, 2023."
+      },
+      "link": {
+        "url": "assets/certificates/vdc-boot-camp-award.pdf",
+        "label": { "zh": "查看奖项 PDF", "en": "View award PDF" }
       }
     }
   ],
@@ -1102,8 +1201,8 @@ const DATA = {
     "en": "Updated 15 October 2026"
   },
   "summary": {
-    "zh": "詹姆斯库克大学新加坡校区信息技术本科生，2027 届，GPA 5.85/7.00。具备 Android 与 Python 开发、数据库设计、机器学习实验和敏捷项目协作实践。曾在新加坡 Basilos 参与 AI 工具工程化与内部评测，在四人团队中担任产品负责人，独立开发反诈骗 Android 应用。现居新加坡，英语可作为工作语言。",
-    "en": "Information Technology undergraduate at James Cook University Singapore, graduating in 2027 with a GPA of 5.85/7.00. My work spans Android and Python development, database design, machine learning experiments and agile delivery. At Basilos in Singapore, I worked on AI tooling and internal evaluation; I also served as product owner in a four-person team and independently developed an anti-scam Android app. Based in Singapore and comfortable working in English."
+    "zh": "詹姆斯库克大学新加坡校区信息技术专业 2027 届本科生，GPA 5.85/7.00。在 Basilos 参与 AI 人脸一致性连接器开发、内部部署与测试；独立开发反诈骗 Android 应用，编写 102 项自动化测试。曾任四人团队产品负责人，将需求整理为用户故事与验收标准，推进 3 轮迭代，团队按期交付 10 个用户故事。此前的质量与运营工作积累了数据维护、材料审核和跨团队沟通经验。现居新加坡，英语可作为工作语言。",
+    "en": "Information Technology undergraduate at James Cook University Singapore, graduating in 2027 with a GPA of 5.85/7.00. At Basilos, I contributed to an AI face-consistency connector from development through internal deployment and testing. I independently built an anti-scam Android app with 102 automated tests. As product owner in a four-person team, I translated requirements into user stories and acceptance criteria across three iterations; the team delivered 10 user stories on time. Earlier quality and operations roles developed my experience in data maintenance, document review and cross-team coordination. Based in Singapore and comfortable working in English."
   },
   "availability": {
     "zh": "2026 年 12 月下旬可全职到岗 · 预计 2027 年 3 月毕业",
@@ -1112,8 +1211,8 @@ const DATA = {
   "resumes": [
     {
       "file": "general",
-      "zh": "通用岗位版",
-      "en": "General résumé"
+      "zh": "标准个人简历",
+      "en": "Standard résumé"
     },
     {
       "file": "software-development",
@@ -1142,17 +1241,12 @@ const DATA = {
     }
   ],
   "hero": {
-    "zh": "软件开发、数据分析\n与团队交付。",
-    "en": "Software, data\nand team delivery."
+    "zh": "个人简介",
+    "en": "Professional profile"
   },
   "featured": [
     "scamwise",
     "wildlife",
     "recommendation"
-  ],
-  "englishResume": {
-    "file": "general-en",
-    "zh": "英文通用版",
-    "en": "English general résumé"
-  }
+  ]
 };

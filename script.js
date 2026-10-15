@@ -2,11 +2,11 @@
 const UI = {
   skip:['跳至正文','Skip to content'], location:['新加坡','Singapore'], moreContact:['更多联系方式','More contact details'],
   sideNote:['软件开发 · 数据与 AI · 项目协作','Software · Data & AI · Collaboration'],
-  heroEyebrow:['个人作品与经历 / 2026','PROJECTS & EXPERIENCE / 2026'], viewProjects:['浏览项目 ↓','Explore projects ↓'], viewExperience:['查看实习经历 ↓','View experience ↓'], contactMe:['邮件联系 ↗','Get in touch ↗'],
+  heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewProjects:['浏览项目 ↓','Explore projects ↓'], viewExperience:['查看工作经历 ↓','View work experience ↓'], contactMe:['邮件联系 ↗','Get in touch ↗'],
   projects:['精选项目','Selected projects'], projectsIntro:['从目标到实现，关注我的具体贡献与验证方式。','The problem, my contribution and how the work was validated.'],
-  experience:['实习经历','Experience'], education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['校园贡献与荣誉','Mentoring & recognition'],
+  experience:['工作经历','Work experience'], education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
   contactTitle:['进一步交流','Get in touch'], contactIntro:['欢迎就项目、实习与工作机会联系我。','Open to conversations about projects, internships and graduate opportunities.'],
-  print:['打印详细网页','Print detailed webpage'], generalDownload:['下载中文通用版 · PDF','Download English CV · PDF'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['简历下载 · 中文与英文','Download CVs · Chinese & English'], downloadIntro:['六份中文一页简历与英文通用版。PDF 适合直接投递；Word 保留可编辑版本，网页保留完整项目细节。','Six Chinese one-page CVs and an English general CV. PDFs are ready to submit; Word files are editable. This website retains the full project details.'], backTop:['回到顶部 ↑','Back to top ↑'],
+  print:['打印详细网页','Print detailed webpage'], generalDownload:['下载标准个人简历 · PDF','Download standard résumé · PDF'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['简历下载 · 中文与英文','Download CVs · Chinese & English'], downloadIntro:['六个版本均提供中文 PDF、可编辑 Word 和对应英文 PDF。按投递方向选择，网页保留完整项目细节。','Each of the six versions has a Chinese PDF, an editable Chinese Word file and a corresponding English PDF. Choose a version for your application; the website retains the full project details.'], englishDownload:['英文版 ↓','English PDF ↓'], backTop:['回到顶部 ↑','Back to top ↑'],
   problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], delivery:['实现与交付','Implementation & delivery'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['工程方法、验证与复盘','Methods, validation & reflection'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps'], directory:['项目目录','Project directory']
 };
 const MOBILE_NAV = {about:['概览','About'],projects:['项目','Projects'],experience:['经历','Career'],education:['背景','Study'],resources:['联系','Contact']};
@@ -44,17 +44,15 @@ function renderTimeline(id,items){
   $(id).innerHTML=items.map(p=>`<article class="timeline-item"><p class="timeline-date">${tx(p.date)}</p><div><h3>${tx(p.title)}</h3><p class="timeline-org">${tx(p.org)}</p>${p.bullets.length?`<ul>${p.bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul>`:''}</div></article>`).join('');
 }
 function renderDownloads(){
-  const resumes=DATA.englishResume?[...DATA.resumes,DATA.englishResume]:DATA.resumes;
-  $('downloads-list').innerHTML=resumes.map(p=>{
-    const isEnglish=p.file===DATA.englishResume?.file;
-    const name=isEnglish?'Junjie_Chu_General_CV':`褚俊杰_${p.zh}`;
-    const format=isEnglish?(lang==='zh'?'英文 · 一页':'English · One page'):(lang==='zh'?'中文 · 一页':'Chinese · One page');
-    return `<article class="resume-option"><h4>${tx(p)}</h4><p>${format}</p><div><a class="download-pdf" href="assets/resumes/${escapeHTML(p.file)}.pdf" download="${escapeHTML(name)}.pdf">PDF ↓</a><a href="assets/resumes/${escapeHTML(p.file)}.docx" download="${escapeHTML(name)}.docx">Word ↓</a></div></article>`;
+  $('downloads-list').innerHTML=DATA.resumes.map(p=>{
+    const name=`褚俊杰_${p.zh}`;
+    const format=lang==='zh'?'中文 / English · 一页':'Chinese / English · One page';
+    return `<article class="resume-option"><h4>${tx(p)}</h4><p>${format}</p><div><a class="download-pdf" href="assets/resumes/${escapeHTML(p.file)}.pdf" download="${escapeHTML(name)}.pdf">PDF ↓</a><a href="assets/resumes/${escapeHTML(p.file)}.docx" download="${escapeHTML(name)}.docx">Word ↓</a><a class="download-english" href="assets/resumes/${escapeHTML(p.file)}-en.pdf" download="Junjie_Chu_${escapeHTML(p.file)}_EN.pdf">${ui('englishDownload')}</a></div></article>`;
   }).join('');
-  const isEnglish=lang==='en'&&DATA.englishResume;
+  const isEnglish=lang==='en';
   document.querySelectorAll('[data-ui="generalDownload"]').forEach(a=>{
-    a.href=`assets/resumes/${isEnglish?DATA.englishResume.file:'general'}.pdf`;
-    a.download=isEnglish?'Junjie_Chu_General_CV.pdf':'褚俊杰_通用岗位版.pdf';
+    a.href=`assets/resumes/${isEnglish?'general-en':'general'}.pdf`;
+    a.download=isEnglish?'Junjie_Chu_Standard_Resume_EN.pdf':'褚俊杰_标准个人简历.pdf';
   });
 }
 function renderContacts(){
@@ -86,7 +84,7 @@ function render(){
   document.querySelector('meta[name="description"]').content=t(DATA.summary);
   renderProjects(); renderTimeline('experience-list',DATA.experience); renderTimeline('education-list',DATA.education);
   $('skills-list').innerHTML=DATA.skills.map(p=>`<div class="skill-group"><h4>${tx(p.label)}</h4><p>${p.items.map(escapeHTML).join(' · ')}</p></div>`).join('');
-  $('leadership-list').innerHTML=DATA.leadership.map(p=>`<article class="lead-item"><h4>${tx(p.title)}</h4><p>${tx(p.body)}</p></article>`).join('');
+  $('leadership-list').innerHTML=DATA.leadership.map(p=>`<article class="lead-item"><h4>${tx(p.title)}</h4><p>${tx(p.body)}</p>${p.link?`<a class="text-link certificate-link" href="${escapeHTML(p.link.url)}" target="_blank" rel="noopener">${tx(p.link.label)} ↗</a>`:''}</article>`).join('');
   renderDownloads(); renderContacts();
   $('footer-text').textContent=t(DATA.footer);
   document.dispatchEvent(new Event('portfolio:render'));
