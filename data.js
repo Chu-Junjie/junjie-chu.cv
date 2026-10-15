@@ -36,6 +36,12 @@ const DATA = {
       "zh": "github.com/Chu-Junjie",
       "en": "github.com/Chu-Junjie",
       "href": "https://github.com/Chu-Junjie"
+    },
+    {
+      "key": "mail-alt",
+      "zh": "备用邮箱 2903442978@qq.com",
+      "en": "Alternative email: 2903442978@qq.com",
+      "href": "mailto:2903442978@qq.com"
     }
   ],
   "nav": {
@@ -81,8 +87,8 @@ const DATA = {
       "current": true,
       "bullets": [
         {
-          "zh": "GPA 5.85/7.00｜专业前 5%",
-          "en": "GPA 5.85/7.00 · Top 5% of cohort"
+          "zh": "GPA 5.85/7.00",
+          "en": "GPA 5.85/7.00"
         },
         {
           "zh": "相关课程：高级软件工程、移动计算、数据库建模、机器学习与数据科学、深度学习、网络安全应用。",
@@ -157,9 +163,10 @@ const DATA = {
         "MySQL Workbench",
         "PostgreSQL",
         "ER/EER",
-        "3NF",
+        "3NF Review",
         "JOIN / GROUP BY",
-        "CTE / Window Functions",
+        "HAVING / COUNT DISTINCT",
+        "AVG / DATEDIFF",
         "Excel"
       ]
     },
@@ -289,10 +296,31 @@ const DATA = {
       "links": [
         {
           "label": {
+            "zh": "在线演示",
+            "en": "Interactive demo"
+          },
+          "url": "https://appetize.io/app/b_zaghpmz5tqtsqoha5lhosmofcm"
+        },
+        {
+          "label": {
             "zh": "GitHub",
             "en": "GitHub"
           },
           "url": "https://github.com/Chu-Junjie/CP3406_ScamwiseCampus_JunjieChu"
+        },
+        {
+          "label": {
+            "zh": "单元测试源码",
+            "en": "Unit test source"
+          },
+          "url": "https://github.com/Chu-Junjie/CP3406_ScamwiseCampus_JunjieChu/tree/master/app/src/test"
+        },
+        {
+          "label": {
+            "zh": "UI 测试源码",
+            "en": "UI test source"
+          },
+          "url": "https://github.com/Chu-Junjie/CP3406_ScamwiseCampus_JunjieChu/tree/master/app/src/androidTest"
         }
       ],
       "stack": [
@@ -375,8 +403,8 @@ const DATA = {
         "en": "79 unit tests and 23 UI tests cover business logic and screen flows. Moved key configuration out of source code, cleaned Git history and rotated exposed API keys."
       },
       "reflection": {
-        "zh": "反思中识别出自动化测试无法替代发布审查：测试没有发现密钥暴露、备份配置假设和大屏适配问题。下一步计划提前梳理数据流与威胁模型，并把备份规则、导航一致性、无障碍和最终打包文件检查纳入发布清单。",
-        "en": "The reflection identified gaps beyond automated tests: credential exposure, assumptions about backup configuration and large-screen layouts. Planned improvements include earlier data-flow and threat modelling, and release checks for backup rules, navigation consistency, accessibility and packaged files."
+        "zh": "反思中识别出自动化测试无法替代发布审查：测试没有发现密钥暴露、备份配置假设和大屏适配问题。发现原 API Key 暴露后，撤销旧密钥、创建替代密钥并重建应用；下一步计划提前梳理数据流与威胁模型，并把备份规则、导航一致性、无障碍和最终打包文件检查纳入发布清单。",
+        "en": "The reflection identified gaps beyond automated tests: credential exposure, assumptions about backup configuration and large-screen layouts. Revoked the exposed API key, created a replacement and rebuilt the application. Planned improvements include earlier data-flow and threat modelling, and release checks for backup rules, navigation consistency, accessibility and packaged files."
       }
     },
     {
@@ -503,8 +531,8 @@ const DATA = {
         "en": "Wildlife Conservation Image Classification"
       },
       "role": {
-        "zh": "数据处理与训练协作｜5 人团队｜DrivenData 公开榜 42/797",
-        "en": "Data processing & training contributor · Five-person team · DrivenData public rank 42/797"
+        "zh": "数据处理与训练协作｜5 人团队｜DrivenData 练习榜记录 48/810",
+        "en": "Data processing & training contributor · Five-person team · DrivenData practice leaderboard record 48/810"
       },
       "meta": {
         "zh": "2026.05 – 2026.08",
@@ -528,8 +556,8 @@ const DATA = {
           "en": "Contributed to 19 team experiments, developed/debugged ResNet and ConvNeXt training and Optuna search code, and compared resolution, augmentation and training settings. The team selected ConvNeXt-Small at 320×320."
         },
         {
-          "zh": "参与 4× TTA、五折集成与 logit 融合；团队公开榜排名 42/797，Log Loss 从 2.5453 降至 1.0136，降低约 60%。",
-          "en": "Participated in 4× TTA, five-fold ensembles and logit blending. The team placed 42/797 on the public leaderboard and reduced log loss from 2.5453 to 1.0136, approximately 60%."
+          "zh": "参与 4× TTA、五折集成与 logit 融合；团队公开榜排名 48/810，Log Loss 从 2.5453 降至 1.0136，降低约 60%。",
+          "en": "Participated in 4× TTA, five-fold ensembles and logit blending. The team placed 48/810 on the public leaderboard and reduced log loss from 2.5453 to 1.0136, approximately 60%."
         }
       ],
       "id": "wildlife",
@@ -550,16 +578,84 @@ const DATA = {
         "en": "Handled data loading, EDA, preprocessing and baseline training. Contributed to 19 team experiments, developed/debugged ResNet/ConvNeXt training and Optuna search code, and participated in TTA, ensembles and blending."
       },
       "result": {
-        "zh": "公开榜 Log Loss：2.5453 → 1.0136",
-        "en": "Public leaderboard log loss: 2.5453 → 1.0136"
+        "zh": "公开练习榜记录 48/810 · Log Loss 1.0136",
+        "en": "Public practice leaderboard record 48/810 · Log loss 1.0136"
       },
       "decision": {
         "zh": "定位随机划分造成的地理站点数据泄漏，改用 Stratified Group K-Fold 按站点分组，实现训练与验证站点零重叠。",
         "en": "Identified geographic site leakage in random splits and adopted Stratified Group K-Fold, with no site overlap between training and validation."
       },
       "validation": {
-        "zh": "团队公开榜排名 42/797，Log Loss 为 1.0136；相对初始 2.5453 降低约 60%。个人承担数据处理与训练协作，排名及最终融合结果为团队成果；公开榜指标不能代表生产环境表现。",
-        "en": "The team placed 42/797 on the public leaderboard with log loss 1.0136, approximately 60% below the initial 2.5453. My role covered data processing and training collaboration; the rank and final ensemble are team outcomes, and public leaderboard scores do not establish production performance."
+        "zh": "公开榜单截图显示 ChuJunjie 位列第 48 名，Log Loss 为 1.0136；末页截图显示第 810 名。相对初始 Log Loss 2.5453 降低约 60%。可通过原始截图、官方赛事页面、公开榜单与实验 Notebook 复核。",
+        "en": "The public-leaderboard screenshots show ChuJunjie ranked 48 with log loss 1.0136 and a last ranked entry of 810, approximately 60% below the initial loss of 2.5453. Original screenshots, the official challenge, public leaderboard and experiment notebook support review."
+      },
+      "links": [
+        {
+          "label": {
+            "zh": "实验 Notebook",
+            "en": "Experiment notebook"
+          },
+          "url": "https://www.kaggle.com/code/chujunjie/cp3501-master-notebook-group-07"
+        },
+        {
+          "label": {
+            "zh": "赛事与数据说明",
+            "en": "Challenge & dataset"
+          },
+          "url": "https://www.drivendata.org/competitions/87/competition-image-classification-wildlife-conservation/"
+        },
+        {
+          "label": {
+            "zh": "公开榜单",
+            "en": "Public leaderboard"
+          },
+          "url": "https://www.drivendata.org/competitions/87/competition-image-classification-wildlife-conservation/leaderboard/"
+        }
+      ],
+      "evidence": [
+        {
+          "src": "assets/evidence/leaderboard-rank.png",
+          "width": 2559,
+          "height": 1285,
+          "caption": {
+            "zh": "ChuJunjie：第 48 名，Log Loss 1.0136",
+            "en": "ChuJunjie: rank 48, log loss 1.0136"
+          },
+          "source": {
+            "zh": "公开榜单截图 · 2026-10-15 收录",
+            "en": "Public leaderboard screenshot · Added 15 Oct 2026"
+          }
+        },
+        {
+          "src": "assets/evidence/leaderboard-total.png",
+          "width": 2559,
+          "height": 1285,
+          "caption": {
+            "zh": "榜单末页：第 810 名",
+            "en": "Last leaderboard page: rank 810"
+          },
+          "source": {
+            "zh": "公开榜单截图 · 排名分母依据",
+            "en": "Public leaderboard screenshot · Evidence for ranked-entry count"
+          }
+        },
+        {
+          "src": "assets/evidence/leaderboard-overview.png",
+          "width": 2559,
+          "height": 1285,
+          "caption": {
+            "zh": "Conser-vision Practice Area: Image Classification",
+            "en": "Conser-vision Practice Area: Image Classification"
+          },
+          "source": {
+            "zh": "DrivenData 练习赛 · 赛事页面截图",
+            "en": "DrivenData practice challenge · Challenge page screenshot"
+          }
+        }
+      ],
+      "boundary": {
+        "zh": "成绩为公开练习榜截图记录，2026-10-15 收录，提交账户为 ChuJunjie；48/810 指截图中的上榜名次／末位名次，榜单仍会变化。模型与融合结果来自五人团队项目，个人职责为数据处理与训练协作。",
+        "en": "This is a public practice-leaderboard record from leaderboard screenshots added on 15 October 2026, under the ChuJunjie submission account. 48/810 refers to the visible rank and last ranked entry; the leaderboard can change. Models and ensembles were team outcomes; my role covered data processing and training collaboration."
       }
     },
     {
@@ -661,7 +757,11 @@ const DATA = {
             "en": "A1-Junjie-Chu.docx · Q9, Run C configuration"
           }
         }
-      ]
+      ],
+      "reflection": {
+        "zh": "J48 的根节点和特征分布共同显示，“第二学期通过课程数”是区分辍学与毕业学生的重要信号。Run C 混淆矩阵中，1,421 名辍学学生有 1,172 名被识别、249 名漏识别；这说明评价时应同时关注辍学召回率与漏识别数量，不能只看总体准确率。该发现属于在校阶段关联，不作因果或入学前预测解释。",
+        "en": "The J48 root split and feature distributions identify second-semester course completions as an important signal separating dropout and graduate records. Run C identified 1,172 of 1,421 dropout records and missed 249. Evaluation should therefore consider dropout recall and missed cases as well as overall accuracy. This is an in-course association, not a causal or pre-enrolment prediction claim."
+      }
     },
     {
       "title": {
@@ -677,6 +777,13 @@ const DATA = {
         "en": "Sep 2025 – Dec 2025"
       },
       "links": [
+        {
+          "label": {
+            "zh": "在线演示",
+            "en": "Interactive demo"
+          },
+          "url": "https://chu-junjie.github.io/CP3405-TR3-2025-P1T5/"
+        },
         {
           "label": {
             "zh": "GitHub",
@@ -775,12 +882,12 @@ const DATA = {
     {
       "id": "flyhigh",
       "title": {
-        "zh": "FlyHigh 航空数据库设计与 SQL 分析",
-        "en": "FlyHigh Airline Database Design & SQL Analysis"
+        "zh": "FlyHigh 航空数据库设计",
+        "en": "FlyHigh Airline Database Design"
       },
       "role": {
-        "zh": "个人课程项目｜数据库建模与业务查询",
-        "en": "Individual course project · Database modelling & business queries"
+        "zh": "个人课程项目｜ER/EER 建模与关系约束",
+        "en": "Individual course project · ER/EER modelling & relationship constraints"
       },
       "meta": {
         "zh": "2025.06–2025.09",
@@ -791,43 +898,181 @@ const DATA = {
         "en": "DATABASE DESIGN / SQL ANALYSIS"
       },
       "problem": {
-        "zh": "为机队、订票、员工、财务和资源五个航空业务域设计可查询、可汇总的关系数据库。",
-        "en": "Design a relational database supporting retrieval and aggregation across fleet, bookings, staff, finance and resources."
+        "zh": "为机队、行程／订票、员工、财务和资源五个航空业务域建立关系模型，表达业务实体、关系基数和约束。",
+        "en": "Model fleet, trips/bookings, staff, finance and resources through business entities, relationship cardinalities and constraints."
       },
       "contribution": {
-        "zh": "独立完成 22 实体 ER/EER 模型、关系约束、3NF 检查、MySQL 建库与数据准备，并编写业务查询及解释结果。",
-        "en": "Independently designed a 22-entity ER/EER model, relationship constraints and 3NF checks, prepared a MySQL database/data and wrote and interpreted business queries."
+        "zh": "独立设计 MySQL Workbench ER/EER 模型，原始 .mwb 包含 22 张表；定义主外键和关系基数，并记录模型假设及后续需校验的规则。",
+        "en": "Independently designed a MySQL Workbench ER/EER model; the original .mwb contains 22 tables. Defined keys and cardinalities and documented modelling assumptions and rules requiring further validation."
       },
       "result": {
-        "zh": "22 个实体 · 5 个业务域 · 3NF",
-        "en": "22 entities · Five business domains · 3NF"
+        "zh": "22 个实体／表 · 5 个业务域 · 原始 ER 图",
+        "en": "22 entities/tables · Five business domains · Original ER diagram"
       },
       "stack": [
-        "SQL",
         "MySQL Workbench",
         "ER/EER",
-        "3NF",
-        "JOIN",
-        "GROUP BY"
+        "Primary / Foreign Keys",
+        "Cardinality",
+        "Schema Review"
       ],
       "bullets": [
         {
-          "zh": "定义主键、外键与关系基数，将机队、订票、员工、财务和资源需求映射到 22 个实体，检查第三范式并消除传递依赖。",
-          "en": "Mapped five business domains to 22 entities, defined primary/foreign keys and cardinalities and checked third normal form to remove transitive dependencies."
+          "zh": "将 Aircraft、CharterTrip、Customer、Employee、Bill、Payment 和 Resource 等业务对象映射到 22 张表，定义主键、外键和关系基数，覆盖五个业务域。",
+          "en": "Mapped business objects including Aircraft, CharterTrip, Customer, Employee, Bill, Payment and Resource to 22 tables, with keys and cardinalities across five business domains."
         },
         {
-          "zh": "使用 MySQL Workbench 完成建库和数据准备，编写多表 JOIN 与 GROUP BY 聚合，输出查询结果并解释业务关系，验证结构可支持检索与汇总。",
-          "en": "Built and populated the database in MySQL Workbench, wrote multi-table joins and GROUP BY aggregations, and interpreted outputs to verify business retrieval and summary needs."
+          "zh": "拆分 Aircraft 与 AircraftType，采用员工／资源子类层次表达不同角色与属性；以 Bill 的最终金额快照和账单—行程关系表达财务记录。",
+          "en": "Separated Aircraft from AircraftType and used employee/resource subtype hierarchies for role-specific attributes. Represented financial records with Bill final-amount snapshots and bill-to-trip relationships."
+        },
+        {
+          "zh": "在模型说明中记录排班重叠、会员历史和实时库存等限制，将概念模型与后续需要执行验证的跨记录业务规则区分。实际 SQL 查询证据另列于图书馆课程实践。",
+          "en": "Documented limitations around overlapping schedules, membership history and real-time inventory, distinguishing the conceptual model from cross-record rules needing executable validation. Actual SQL query evidence is shown separately in the library practical."
         }
       ],
       "decision": {
-        "zh": "先明确五个业务域的实体与关系，再定义关系基数和主外键，并以 3NF 检查冗余及传递依赖，使数据库结构能够支撑后续业务查询。",
-        "en": "Defined entities and relationships across the five business domains before setting cardinalities and keys, then checked 3NF redundancy and transitive dependencies to support business queries."
+        "zh": "通过类型表与子类层次表达不同对象的共同属性和差异，利用主外键、关系基数与唯一约束表达基础业务关系。涉及人数、时间重叠等跨记录规则时，在报告中提出进一步校验需求。",
+        "en": "Used type tables and subtype hierarchies to represent shared and specialised attributes, and keys, cardinalities and uniqueness for basic business relationships. The report identifies further validation needs for cross-record constraints such as staffing counts and overlapping schedules."
       },
       "validation": {
-        "zh": "通过建库、数据准备、多表关联和聚合查询输出，检查数据库结构与业务需求的对应关系，并解释查询结果。",
-        "en": "Checked the mapping between schema and business requirements through database creation, sample data, joins and aggregation outputs, and interpreted the query results."
-      }
+        "zh": "原始 ER 图与 MySQL Workbench .mwb 文件支持 22 表建模成果，模型说明记录了设计假设及排班、会员历史和库存方面的限制。交付范围为课程数据库设计；复杂业务约束仍需在后续实现中验证。",
+        "en": "The original ER diagram and MySQL Workbench .mwb support the 22-table design. The modelling report documents assumptions and limitations involving scheduling, membership history and inventory. The deliverable is course database design; complex business constraints require further implementation and validation."
+      },
+      "evidence": [
+        {
+          "src": "assets/evidence/flyhigh-original-erd.png",
+          "width": 1760,
+          "height": 1160,
+          "caption": {
+            "zh": "FlyHigh 原始 ER/EER 模型",
+            "en": "Original FlyHigh ER/EER model"
+          },
+          "source": {
+            "zh": "CP2404 Assignment 1 · JunjieChu - A1.png",
+            "en": "CP2404 Assignment 1 · JunjieChu - A1.png"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": {
+            "zh": "查看原始 ER 图",
+            "en": "View original ER diagram"
+          },
+          "url": "assets/evidence/flyhigh-original-erd.png"
+        }
+      ]
+    },
+    {
+      "id": "library-sql",
+      "title": {
+        "zh": "图书馆 SQL 查询与借阅行为分析",
+        "en": "Library SQL Queries & Borrowing Analysis"
+      },
+      "category": {
+        "zh": "SQL 分析 / 数据口径",
+        "en": "SQL ANALYSIS / METRIC DEFINITIONS"
+      },
+      "role": {
+        "zh": "个人课程实践｜MySQL 查询与结果解释",
+        "en": "Individual course practical · MySQL queries & interpretation"
+      },
+      "meta": {
+        "zh": "",
+        "en": ""
+      },
+      "stack": [
+        "MySQL",
+        "JOIN",
+        "GROUP BY",
+        "HAVING",
+        "COUNT DISTINCT",
+        "AVG / DATEDIFF"
+      ],
+      "result": {
+        "zh": "3 条原始查询与结果截图 · 频次、重复借阅与周期",
+        "en": "Three original queries & result grids · Frequency, repeat borrowing & duration"
+      },
+      "problem": {
+        "zh": "用课程图书馆数据识别高频书目，区分重复借阅与阅读范围，并比较多次借阅者的归还周期。",
+        "en": "Use library course data to identify high-frequency titles, distinguish repeat borrowing from title breadth and compare return durations among repeat borrowers."
+      },
+      "contribution": {
+        "zh": "编写多表关联、分组聚合和 HAVING 筛选，保留原始 SQL 与 MySQL 结果截图，并从结果中解释业务指标的含义。",
+        "en": "Wrote joins, grouped aggregations and HAVING filters, retained the original SQL and MySQL result screenshots and interpreted the meaning of the business metrics."
+      },
+      "bullets": [
+        {
+          "zh": "SQL-10 按 Book_Num 聚合并排序借阅次数，发现书目 5236 借出 12 次，5235 为 9 次、5240 为 7 次；结果可作为热门书目资源配置的观察线索。",
+          "en": "SQL-10 groups and ranks checkout frequency by Book_Num: title 5236 has 12 checkouts, 5235 has nine and 5240 has seven. The output can inform observation of demand for title-level resource planning."
+        },
+        {
+          "zh": "SQL-21 关联 PATRON 与 CHECKOUT，筛选至少 3 次借阅者，同时计算借阅次数和不同书目数；例如读者 1183 为 3 次借阅、1 种书，说明高频不等同于覆盖更多书目。",
+          "en": "SQL-21 joins PATRON and CHECKOUT and filters borrowers with at least three checkouts, counting both loans and distinct titles. Patron 1183 has three checkouts of one title, showing that frequency does not imply broader title coverage."
+        },
+        {
+          "zh": "SQL-23 对至少 3 条借阅记录的读者计算已归还记录的平均借阅天数，所示结果为 2.00–7.00 天；利用 DATEDIFF、AVG 和 HAVING 明确筛选与统计口径。",
+          "en": "SQL-23 calculates average duration for returned loans among patrons with at least three checkout records, with displayed results from 2.00 to 7.00 days. Uses DATEDIFF, AVG and HAVING to define selection and aggregation precisely."
+        }
+      ],
+      "decision": {
+        "zh": "分别展示 COUNT(Check_Num) 和 COUNT(DISTINCT Book_Num)，避免把重复借阅误解为阅读广度。周期查询的 HAVING 按总借阅次数筛选，AVG(DATEDIFF(...)) 忽略未归还日期形成的 NULL；解释结果时保留这一区别。",
+        "en": "Shows COUNT(Check_Num) and COUNT(DISTINCT Book_Num) separately to avoid treating repeat loans as breadth. The duration query filters on total checkouts while AVG(DATEDIFF(...)) ignores NULL durations for unreturned loans; this distinction is retained in the interpretation."
+      },
+      "validation": {
+        "zh": "三条查询及结果网格均提取自本人 CP2404 Practical 8 原始提交，保留 SQL-10、SQL-21、SQL-23 题号。本次未重新执行数据库；结论仅对应课程数据与原始截图，不宣称实际图书馆运营改善。",
+        "en": "The three queries and result grids come from the original CP2404 Practical 8 submission, preserving SQL-10, SQL-21 and SQL-23 labels. The database was not rerun here; findings describe the course data and original screenshots, not measured operational improvements."
+      },
+      "links": [
+        {
+          "label": {
+            "zh": "原始 SQL 查询",
+            "en": "Original SQL queries"
+          },
+          "url": "assets/evidence/sql-library-practical8-queries.sql"
+        }
+      ],
+      "evidence": [
+        {
+          "src": "assets/evidence/sql-library-checkout-frequency.png",
+          "width": 420,
+          "height": 502,
+          "caption": {
+            "zh": "书目借阅频次：5236 借出 12 次",
+            "en": "Title frequency: 12 checkouts for 5236"
+          },
+          "source": {
+            "zh": "CP2404 Practical 8 · SQL-10",
+            "en": "CP2404 Practical 8 · SQL-10"
+          }
+        },
+        {
+          "src": "assets/evidence/sql-library-repeat-vs-distinct.png",
+          "width": 712,
+          "height": 483,
+          "caption": {
+            "zh": "借阅次数与不同书目数",
+            "en": "Checkout count versus distinct titles"
+          },
+          "source": {
+            "zh": "CP2404 Practical 8 · SQL-21",
+            "en": "CP2404 Practical 8 · SQL-21"
+          }
+        },
+        {
+          "src": "assets/evidence/sql-library-average-loan-days.png",
+          "width": 408,
+          "height": 478,
+          "caption": {
+            "zh": "平均已归还借阅周期：2.00–7.00 天",
+            "en": "Average returned-loan duration: 2.00–7.00 days"
+          },
+          "source": {
+            "zh": "CP2404 Practical 8 · SQL-23",
+            "en": "CP2404 Practical 8 · SQL-23"
+          }
+        }
+      ]
     }
   ],
   "leadership": [
@@ -904,5 +1149,10 @@ const DATA = {
     "scamwise",
     "wildlife",
     "recommendation"
-  ]
+  ],
+  "englishResume": {
+    "file": "general-en",
+    "zh": "英文通用版",
+    "en": "English general résumé"
+  }
 };

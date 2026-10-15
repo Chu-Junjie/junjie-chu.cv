@@ -1,0 +1,16 @@
+{
+  "challenge": "Conser-vision Practice Area: Image Classification",
+  "platform": "DrivenData",
+  "account": "ChuJunjie",
+  "rank": 48,
+  "lastRankedEntry": 810,
+  "publicLogLoss": 1.0136,
+  "evidenceAdded": "2026-10-15",
+  "captureDate": null,
+  "source": "User-supplied screenshots; rank is a dated evidence record, not live standings",
+  "screenshots": [
+    "leaderboard-rank.png",
+    "leaderboard-total.png",
+    "leaderboard-overview.png"
+  ]
+}

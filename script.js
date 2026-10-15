@@ -2,13 +2,14 @@
 const UI = {
   skip:['跳至正文','Skip to content'], location:['新加坡','Singapore'], moreContact:['更多联系方式','More contact details'],
   sideNote:['软件开发 · 数据与 AI · 项目协作','Software · Data & AI · Collaboration'],
-  heroEyebrow:['个人作品与经历 / 2026','PROJECTS & EXPERIENCE / 2026'], viewProjects:['浏览项目 ↓','Explore projects ↓'], contactMe:['邮件联系 ↗','Get in touch ↗'],
+  heroEyebrow:['个人作品与经历 / 2026','PROJECTS & EXPERIENCE / 2026'], viewProjects:['浏览项目 ↓','Explore projects ↓'], viewExperience:['查看实习经历 ↓','View experience ↓'], contactMe:['邮件联系 ↗','Get in touch ↗'],
   projects:['精选项目','Selected projects'], projectsIntro:['从目标到实现，关注我的具体贡献与验证方式。','The problem, my contribution and how the work was validated.'],
   experience:['实习经历','Experience'], education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['校园贡献与荣誉','Mentoring & recognition'],
   contactTitle:['进一步交流','Get in touch'], contactIntro:['欢迎就项目、实习与工作机会联系我。','Open to conversations about projects, internships and graduate opportunities.'],
-  print:['打印详细网页','Print detailed webpage'], generalDownload:['下载通用简历 · PDF','Download general CV · PDF'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['简历下载 · 六个中文版本','Download CVs · Six Chinese versions'], downloadIntro:['PDF 适合直接投递；Word 保留可编辑版本。下载文件为一页简历，网页保留完整项目细节。','PDFs are ready to submit; Word files are editable. Downloads are one-page CVs; this website retains the full project details.'], backTop:['回到顶部 ↑','Back to top ↑'],
+  print:['打印详细网页','Print detailed webpage'], generalDownload:['下载中文通用版 · PDF','Download English CV · PDF'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['简历下载 · 中文与英文','Download CVs · Chinese & English'], downloadIntro:['六份中文一页简历与英文通用版。PDF 适合直接投递；Word 保留可编辑版本，网页保留完整项目细节。','Six Chinese one-page CVs and an English general CV. PDFs are ready to submit; Word files are editable. This website retains the full project details.'], backTop:['回到顶部 ↑','Back to top ↑'],
   problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], delivery:['实现与交付','Implementation & delivery'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['工程方法、验证与复盘','Methods, validation & reflection'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps'], directory:['项目目录','Project directory']
 };
+const MOBILE_NAV = {about:['概览','About'],projects:['项目','Projects'],experience:['经历','Career'],education:['背景','Study'],resources:['联系','Contact']};
 let lang='zh';
 const t = value => value?.[lang] ?? value?.zh ?? '';
 const ui = key => UI[key][lang==='en'?1:0];
@@ -19,6 +20,8 @@ const $ = id => document.getElementById(id);
 function renderProjects(){
   $('project-directory').innerHTML=DATA.projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
   $('project-directory').setAttribute('aria-label',ui('directory'));
+  $('mobile-project-links').innerHTML=DATA.projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
+  $('mobile-project-links').setAttribute('aria-label',ui('directory'));
   $('featured-list').innerHTML=DATA.featured.map((id,i)=>{
     const p=DATA.projects.find(p=>p.id===id);
     return `<a class="feature-card" href="#${p.id}"><span class="feature-top"><span>0${i+1}</span><span aria-hidden="true">↗</span></span><span class="feature-category">${tx(p.category)}</span><strong>${tx(p.title)}</strong><span class="feature-result">${tx(p.result)}</span></a>`;
@@ -31,7 +34,7 @@ function renderProjects(){
     ${p.bullets?.length?`<div class="project-delivery"><h4>${ui('delivery')}</h4><ul>${p.bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul></div>`:''}
     <p class="project-stack">${p.stack.map(escapeHTML).join(' · ')}</p>
     ${p.screenshots?`<div class="project-gallery">${p.screenshots.map(shot=>`<figure><a href="assets/scamwise/${shot.file}.jpg" target="_blank" rel="noopener" aria-label="${tx(shot)} — ${ui('original')}"><img src="assets/scamwise/${shot.file}.jpg" alt="ScamWise Campus — ${tx(shot)}" loading="lazy" decoding="async" width="474" height="1001"></a><figcaption>${tx(shot)}</figcaption></figure>`).join('')}</div>`:''}
-    ${p.evidence?`<div class="evidence-gallery">${p.evidence.map(shot=>`<figure><a href="${escapeHTML(shot.src)}" target="_blank" rel="noopener" aria-label="${tx(shot.caption)} — ${ui('original')}"><img src="${escapeHTML(shot.src)}" alt="${tx(shot.caption)}" loading="lazy" decoding="async" width="${shot.width}" height="${shot.height}"></a><figcaption>${tx(shot.caption)}<span>${tx(shot.source)}</span></figcaption></figure>`).join('')}</div>`:''}
+    ${p.evidence?`<div class="evidence-gallery${p.evidence.length===3?' evidence-gallery-three':''}">${p.evidence.map(shot=>`<figure><a href="${escapeHTML(shot.src)}" target="_blank" rel="noopener" aria-label="${tx(shot.caption)} — ${ui('original')}"><img src="${escapeHTML(shot.src)}" alt="${tx(shot.caption)}" loading="lazy" decoding="async" width="${shot.width}" height="${shot.height}"></a><figcaption>${tx(shot.caption)}<span>${tx(shot.source)}</span></figcaption></figure>`).join('')}</div>`:''}
     ${p.boundary?`<p class="project-boundary">${tx(p.boundary)}</p>`:''}
     <div class="project-links">${(p.links||[]).map(link=>`<a class="text-link" href="${escapeHTML(link.url)}" target="_blank" rel="noopener">${t(link.label)==='GitHub'?ui('code'):tx(link.label)+' ↗'}</a>`).join('')}</div>
     <details class="case-details" id="${p.id}-details" open><summary>${ui('details')}</summary><div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p>${p.reflection?`<h4>${ui('lesson')}</h4><p>${tx(p.reflection)}</p>`:''}</div></details>
@@ -40,24 +43,51 @@ function renderProjects(){
 function renderTimeline(id,items){
   $(id).innerHTML=items.map(p=>`<article class="timeline-item"><p class="timeline-date">${tx(p.date)}</p><div><h3>${tx(p.title)}</h3><p class="timeline-org">${tx(p.org)}</p>${p.bullets.length?`<ul>${p.bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul>`:''}</div></article>`).join('');
 }
+function renderDownloads(){
+  const resumes=DATA.englishResume?[...DATA.resumes,DATA.englishResume]:DATA.resumes;
+  $('downloads-list').innerHTML=resumes.map(p=>{
+    const isEnglish=p.file===DATA.englishResume?.file;
+    const name=isEnglish?'Junjie_Chu_General_CV':`褚俊杰_${p.zh}`;
+    const format=isEnglish?(lang==='zh'?'英文 · 一页':'English · One page'):(lang==='zh'?'中文 · 一页':'Chinese · One page');
+    return `<article class="resume-option"><h4>${tx(p)}</h4><p>${format}</p><div><a class="download-pdf" href="assets/resumes/${escapeHTML(p.file)}.pdf" download="${escapeHTML(name)}.pdf">PDF ↓</a><a href="assets/resumes/${escapeHTML(p.file)}.docx" download="${escapeHTML(name)}.docx">Word ↓</a></div></article>`;
+  }).join('');
+  const isEnglish=lang==='en'&&DATA.englishResume;
+  document.querySelectorAll('[data-ui="generalDownload"]').forEach(a=>{
+    a.href=`assets/resumes/${isEnglish?DATA.englishResume.file:'general'}.pdf`;
+    a.download=isEnglish?'Junjie_Chu_General_CV.pdf':'褚俊杰_通用岗位版.pdf';
+  });
+}
+function renderContacts(){
+  if(!Array.isArray(DATA.contact))return;
+  const contacts=DATA.contact.filter(p=>['phone','wechat','mail-alt'].includes(p.key));
+  const details=document.querySelector('.more-contact');
+  details.innerHTML=`<summary data-ui="moreContact">${ui('moreContact')}</summary>${contacts.map(p=>p.href?`<a href="${escapeHTML(p.href)}">${tx(p)}</a>`:`<p>${tx(p)}</p>`).join('')}`;
+  const mail=DATA.contact.find(p=>p.key==='mail');
+  if(mail){
+    document.querySelectorAll('.primary-contact a[href^="mailto:"],.contact-email').forEach(a=>a.href=mail.href);
+    document.querySelector('.contact-email').textContent=`${t(mail)} ↗`;
+  }
+}
 function render(){
   document.documentElement.lang=lang==='en'?'en':'zh-CN';
   document.body.classList.toggle('lang-en',lang==='en');
   document.querySelectorAll('[data-ui]').forEach(el=>el.textContent=ui(el.dataset.ui));
   document.querySelectorAll('[data-nav]').forEach(el=>el.textContent=t(DATA.nav[el.dataset.nav]));
+  document.querySelectorAll('[data-mobile-nav]').forEach(el=>el.textContent=MOBILE_NAV[el.dataset.mobileNav][lang==='en'?1:0]);
   $('name').textContent=lang==='en'?'Junjie Chu':'褚俊杰';
   $('role-text').textContent=t(DATA.role); $('degree-text').textContent=t(DATA.degree);
   $('hero-title').textContent=t(DATA.hero); $('summary-text').textContent=t(DATA.summary); $('availability-text').textContent=t(DATA.availability);
   $('lang-toggle').setAttribute('aria-label',lang==='zh'?'Switch to English':'切换为中文');
   $('lang-toggle').setAttribute('aria-pressed',String(lang==='en'));
   $('side-nav').setAttribute('aria-label',lang==='zh'?'页面导航':'Page navigation');
+  $('mobile-chapters').setAttribute('aria-label',lang==='zh'?'章节导航':'Section navigation');
   $('featured-list').setAttribute('aria-label',lang==='zh'?'代表项目':'Featured projects');
   document.title=lang==='zh'?'褚俊杰 Junjie Chu — 项目与经历':'Junjie Chu — Projects & Experience';
   document.querySelector('meta[name="description"]').content=t(DATA.summary);
   renderProjects(); renderTimeline('experience-list',DATA.experience); renderTimeline('education-list',DATA.education);
   $('skills-list').innerHTML=DATA.skills.map(p=>`<div class="skill-group"><h4>${tx(p.label)}</h4><p>${p.items.map(escapeHTML).join(' · ')}</p></div>`).join('');
   $('leadership-list').innerHTML=DATA.leadership.map(p=>`<article class="lead-item"><h4>${tx(p.title)}</h4><p>${tx(p.body)}</p></article>`).join('');
-  $('downloads-list').innerHTML=DATA.resumes.map(p=>`<article class="resume-option"><h4>${tx(p)}</h4><p>${lang==='zh'?'中文 · 一页':'Chinese · One page'}</p><div><a class="download-pdf" href="assets/resumes/${p.file}.pdf" download="褚俊杰_${p.zh}.pdf">PDF ↓</a><a href="assets/resumes/${p.file}.docx" download="褚俊杰_${p.zh}.docx">Word ↓</a></div></article>`).join('');
+  renderDownloads(); renderContacts();
   $('footer-text').textContent=t(DATA.footer);
   document.dispatchEvent(new Event('portfolio:render'));
 }
@@ -79,15 +109,27 @@ function revealHash(scroll=true){
 }
 function updateNavigation(){
   const links=[...document.querySelectorAll('#side-nav a')];
+  const threshold=innerWidth<=900?$('mobile-navigation').getBoundingClientRect().bottom+32:160;
   let active=links[0];
-  for(const link of links){if($(link.hash.slice(1)).getBoundingClientRect().top<=160)active=link}
+  for(const link of links){if($(link.hash.slice(1)).getBoundingClientRect().top<=threshold)active=link}
   if(window.scrollY+innerHeight>=document.documentElement.scrollHeight-4)active=links.at(-1);
-  for(const link of links){if(link===active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')}
+  for(const link of document.querySelectorAll('#side-nav a,#mobile-chapters a')){if(link.hash===active?.hash)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')}
 }
 let pending=false;
 window.addEventListener('scroll',()=>{if(!pending){pending=true;requestAnimationFrame(()=>{updateNavigation();pending=false})}},{passive:true});
-window.addEventListener('resize',updateNavigation);
+window.addEventListener('resize',()=>{updateNavigation();if(innerWidth>900)$('mobile-project-menu').open=false});
 window.addEventListener('hashchange',()=>revealHash());
+const projectMenu=$('mobile-project-menu');
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&projectMenu.open){event.preventDefault();projectMenu.open=false;projectMenu.querySelector('summary').focus()}
+});
+document.addEventListener('pointerdown',event=>{if(projectMenu.open&&!projectMenu.contains(event.target))projectMenu.open=false});
+document.addEventListener('focusin',event=>{if(projectMenu.open&&!projectMenu.contains(event.target))projectMenu.open=false});
+$('mobile-navigation').addEventListener('click',event=>{
+  const link=event.target.closest('a[href^="#"]');if(!link)return;
+  projectMenu.open=false;
+  requestAnimationFrame(()=>{const target=$(link.hash.slice(1));if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true})}});
+});
 $('lang-toggle').addEventListener('click',()=>setLang(lang==='zh'?'en':'zh'));
 $('print-button').addEventListener('click',()=>window.print());
 let printStates=[];
