@@ -1,62 +1,53 @@
 # Junjie Chu — 通用个人作品与经历
 
-纯静态中英文网站，可从软件开发、技术项目管理、数据分析、测试开发、算法工程五个方向的简历链接进入。
-首页突出代表项目；案例区区分目标、个人贡献、关键决策与验证结果。
+纯静态中英文网站，支持从六份一页简历进入。网页保留完整经历、项目实现、方法、验证、复盘与截图，不受一页简历篇幅限制。
+首页保持通用定位，提供三个代表项目入口；六项目目录可跳转到各案例，方法与复盘默认展开，也可自行收起。
 
 ## 文件与维护
 
-- `data.js`：中英文经历与项目数据。修改内容后同步静态正文。
-- `script.js`：渲染、语言切换、导航和项目深链。
-- `index.html`：中文预渲染内容；禁用 JavaScript 时仍能阅读、展开案例和下载文件。
-- `style.css`：桌面、移动端及 A4 打印样式。
-- `photo.png`：用户指定证件照，原始比例。
-- `assets/scamwise/`：从 PDF 提取的四张实际截图，可打开原图。
-- `assets/resumes/`：五份原始中文 Word 简历；入口收纳在底部联系区。
-- `assets/favicon.svg`、`assets/social-card.png`：网站图标与分享预览。
+- `data.js`：中英文个人背景、经历、六个项目与六份下载版本。
+- `script.js`：页面渲染、语言切换、导航、项目深链与打印。
+- `index.html`：同步的中文静态内容，禁用 JavaScript 仍可阅读和下载。
+- `style.css`：桌面、手机与详细网页打印样式。
+- `motion.js`：可选动效，支持减少动态效果设置。
+- `photo.png`：用户指定证件照。
+- `assets/resumes/`：新版六份一页 Word 原件及相应 PDF，主入口为通用岗位版 PDF。
+- `assets/scamwise/`、`assets/evidence/`：用户材料中提取的真实界面及实验截图。
+- `scripts/sync-static.cjs`：修改数据后同步静态正文的开发工具。
 
-在已安装 Playwright 的开发环境运行 `node scripts/sync-static.cjs`，同步中文静态正文。
-工具默认使用 Edge，可通过 `RESUME_BROWSER` 指定 Chromium 路径。网站运行无需 Node 或 Playwright。
-直接打开 `index.html`，或从本目录启动任意静态文件服务器。
+在安装 Playwright 的环境运行 `node scripts/sync-static.cjs`。默认使用 Edge，可通过 `RESUME_BROWSER` 指定 Chromium 路径。
+网站无需构建或运行时依赖。可直接打开 `index.html`，或使用任意静态文件服务器。
 
-## 五份简历的链接
+## 下载与打印
 
-网站发布后可使用以下地址；这些锚点也是稳定的项目标识，不应随文案改名。
+2026-10-15 更新的输入为用户提供的 `六份一页简历_细节增强版.zip`，内含六份 DOCX。
+Word 原件保持内容和字节不变；由 Microsoft Word 导出六份独立 PDF，经逐页视觉检查。
+六版本：通用岗位、软件开发、技术项目管理、数据分析、测试开发、算法工程。
+PDF 适合直接投递，Word 为可编辑副本。打印网页是单独操作，保留展开的详细方法与项目成果，不冒充一页下载简历。
 
-| 方向 | 建议链接 |
+## 稳定链接
+
+| 方向 | 项目入口 |
 | --- | --- |
 | 通用首页 | https://chu-junjie.github.io/junjie-chu.cv/ |
 | 软件开发 | https://chu-junjie.github.io/junjie-chu.cv/#scamwise |
 | 技术项目管理 | https://chu-junjie.github.io/junjie-chu.cv/#recommendation |
-| 数据分析 | https://chu-junjie.github.io/junjie-chu.cv/#dropout |
+| 数据分析 | https://chu-junjie.github.io/junjie-chu.cv/#flyhigh |
+| 数据建模 | https://chu-junjie.github.io/junjie-chu.cv/#dropout |
 | 测试开发 | https://chu-junjie.github.io/junjie-chu.cv/#scamwise-quality |
 | 算法工程 | https://chu-junjie.github.io/junjie-chu.cv/#wildlife |
+| 下载区 | https://chu-junjie.github.io/junjie-chu.cv/#downloads |
 
-测试开发链接会自动展开方法与验证区域。英文链接在锚点前加 `?lang=en`，例如 `?lang=en#wildlife`。
-语言切换保留项目锚点与案例展开状态。旧的 `#downloads`、`#skills`、`#leadership` 链接仍可定位。
+英文链接在锚点前加 `?lang=en`。语言切换保留锚点与展开／收起状态；旧的 `#skills` 和 `#leadership` 仍可定位。
 
-## 内容边界
+## 内容与证据
 
-全部经历与数字来自用户提供的简历和截图材料，没有新编造比赛链接或认证。
-学生辍学预测项目日期在材料中存在冲突，暂不展示。实习结束时间保留“至今”，未推断两家单位关系。
-SmartSeat 明确为模拟数据流原型；人脸识别明确为小规模验证集；模型指标说明公开榜或交叉验证口径。
+- 最新简历补充 Basilos 工程化、54 项内部测试、23 组身份比对、30 次同输入运行、P50/P95，以及 FlyHigh 22 实体数据库设计；不同验证阶段与指标不混用。
+- 野生动物项目按最新材料写为数据处理与训练协作，团队公开榜准确排名为 42/797；不将团队结果归为个人独立成果。
+- SmartSeat 的前端、结对编程、曾任 SM，以及独立 16 屏原型／3 轮累计 60 人次测试，均已由用户明确确认；保留课程演示与模拟数据边界。
+- 推荐平台截图来自用户指南第 1 页图 1、第 10 页图 8，价格与库存为公开／教学数据场景。
+- ScamWise 复盘来自 `A3 reflection.pdf`，明确区分已完成工作与后续改进计划。
+- CP1407 实验截图来自 `A1-Junjie-Chu.docx` Q9 Run C，核实 F1 0.893、MCC 0.776、ROC-AUC 0.933。普通 MLP 的 66% 划分实验单独说明。
+- 学生辍学预测日期仍无统一依据，暂不展示。按用户要求不加入 FarmLink、Bega。
 
-## 打印与部署
-
-底部联系区可打印或保存通用简历；选择 A4，关闭浏览器页眉页脚。打印保留项目摘要，隐藏截图、案例展开细节、导航及下载控件。
-Word 下载文件为原件，没有改写内容。发布需包含 `data.js`、`assets` 和照片等全部站点资源。
-
-## 动效
-
-`motion.js` 为可选的渐进增强：首屏分层淡入、章节进入视口时轻微上移、顶部阅读进度线。
-卡片、按钮、截图和链接的悬停反馈由 CSS 提供，仅在支持鼠标悬停时使用位移。
-动画不循环，不预先隐藏正文；支持 `prefers-reduced-motion`，设置变更后立即取消正在播放的动画。
-键盘焦点、锚点定位及打印不会等待动画。发布时请包含 `motion.js`。
-
-## 新增材料证据
-
-- 推荐平台截图提取自 `CP3407_Web_Application_User_Guide_Group8.pdf` 第 1 页图 1、第 10 页图 8；保留原图比例并注明教学原型和数据边界。
-- ScamWise 的隐私、同意、无障碍和发布复盘来自 `A3 reflection.pdf`；“下一步计划”明确为反思中的改进计划，不写成已完成措施。
-- `CP1407-Assignment-final.pdf` 为作业要求和教学示例，不作为个人实验成果证明。
-- SmartSeat 根据个人反思与用户澄清，改为前端开发、后端结对编程及曾任 Scrum Master；移除未确认的个人 16 屏设计及 60 人次测试归属。截图来自反思附录的讲师、学生页面。
-- CP1407 实际成果来自 `A1-Junjie-Chu.docx` Q9 的 Run C；原始结果截图与参数截图一致支持 F1 0.893、MCC 0.776、ROC-AUC 0.933，以及 10 折交叉验证口径。普通 MLP 的 66% 划分结果另行说明，不混同比较。
-- 按用户要求，不加入 FarmLink 或 Bega 项目。
+发布应包含 `data.js`、`motion.js`、所有 `assets` 和照片。

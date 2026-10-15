@@ -52,3 +52,33 @@
 .project-boundary{font-size:.78rem;line-height:1.75;color:var(--muted);padding:10px 14px;border-left:2px solid var(--line)}
 @media(max-width:600px){.evidence-gallery{grid-template-columns:1fr}}
 @media print{.evidence-gallery{display:none}.project-boundary{font-size:8pt;padding:4px 8px}}
+
+/* Detailed portfolio: readable achievements and explicit file downloads. */
+.project-directory{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;margin:24px 0 36px;padding:18px;border:1px solid var(--line);border-radius:5px}
+.project-directory a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;min-height:44px;font-size:.87rem;color:var(--accent);text-decoration:none}
+.project-directory a:hover{text-decoration:underline}
+.project-delivery{margin:24px 0}
+.project-delivery h4{font-size:.95rem;margin-bottom:12px}
+.project-delivery ul{margin:0;padding-left:20px}
+.project-delivery li{font-size:.95rem;line-height:1.9;margin-bottom:13px}
+.project-stack{font-size:.81rem;line-height:1.85;color:var(--accent);margin:20px 0}
+.case-details{border-top:1px solid var(--line);padding-top:10px;margin-top:22px}
+.detail-body p{font-size:.95rem;line-height:1.9}
+.detail-body h4{font-size:.9rem}
+.resume-downloads h3{font-size:1.1rem;font-weight:500;margin:10px 0}
+.download-intro{font-size:.85rem;color:var(--muted);margin:0 0 20px}
+#downloads-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-top:0}
+.resume-option{padding:18px 14px;border:1px solid var(--line);border-radius:4px;background:var(--paper)}
+.resume-option h4{font-size:.91rem;margin-bottom:8px}
+.resume-option p{font-size:.74rem;color:var(--muted);margin-bottom:10px}
+.resume-option>div{display:flex;gap:16px;flex-wrap:wrap}
+#downloads-list .resume-option a{display:inline-flex;padding:8px 0;min-height:44px;font-size:.85rem;color:var(--accent)}
+#downloads-list .download-pdf{font-weight:600}
+.print-secondary{border:1px solid var(--line);border-radius:4px;color:var(--accent);background:transparent;min-height:46px;padding:10px 16px;font-size:.86rem}
+.print-secondary:hover{border-color:var(--accent)}
+@media(max-width:1100px){#downloads-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.project-directory{grid-template-columns:1fr;padding:12px 16px}.project-delivery li{font-size:.94rem}.detail-body p{font-size:.94rem}.case-summary dd{font-size:.94rem}#downloads-list{grid-template-columns:1fr}.resume-option{padding:16px}}
+@media print{.project-directory{display:none}.case-details{display:block!important;border:0;margin:6px 0;padding:0}.project{break-inside:auto}.project h3,.project-delivery h4,.detail-body h4{break-after:avoid}.project-delivery{margin:12px 0}.project-delivery li{font-size:9pt;line-height:1.65;break-inside:avoid;margin-bottom:8px}.project-stack{font-size:8pt;margin:10px 0}.detail-body p{font-size:9pt;line-height:1.65}.detail-body h4{font-size:9pt}}
+
+@media print{.case-details summary{display:none!important}}
+@media(max-width:540px){.feature-top span:last-child{display:none}}

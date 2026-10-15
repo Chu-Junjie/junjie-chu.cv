@@ -6,8 +6,8 @@ const UI = {
   projects:['精选项目','Selected projects'], projectsIntro:['从目标到实现，关注我的具体贡献与验证方式。','The problem, my contribution and how the work was validated.'],
   experience:['实习经历','Experience'], education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['校园贡献与荣誉','Mentoring & recognition'],
   contactTitle:['进一步交流','Get in touch'], contactIntro:['欢迎就项目、实习与工作机会联系我。','Open to conversations about projects, internships and graduate opportunities.'],
-  print:['打印 / 保存通用简历','Print / Save general résumé'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['按岗位查看简历 · 中文 Word','Role-specific CVs · Chinese Word files'], backTop:['回到顶部 ↑','Back to top ↑'],
-  problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['展开方法与验证','Methods & validation'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps']
+  print:['打印详细网页','Print detailed webpage'], generalDownload:['下载通用简历 · PDF','Download general CV · PDF'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['简历下载 · 六个中文版本','Download CVs · Six Chinese versions'], downloadIntro:['PDF 适合直接投递；Word 保留可编辑版本。下载文件为一页简历，网页保留完整项目细节。','PDFs are ready to submit; Word files are editable. Downloads are one-page CVs; this website retains the full project details.'], backTop:['回到顶部 ↑','Back to top ↑'],
+  problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], delivery:['实现与交付','Implementation & delivery'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['工程方法、验证与复盘','Methods, validation & reflection'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps'], directory:['项目目录','Project directory']
 };
 let lang='zh';
 const t = value => value?.[lang] ?? value?.zh ?? '';
@@ -17,6 +17,8 @@ const tx = value => escapeHTML(t(value));
 const $ = id => document.getElementById(id);
 
 function renderProjects(){
+  $('project-directory').innerHTML=DATA.projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
+  $('project-directory').setAttribute('aria-label',ui('directory'));
   $('featured-list').innerHTML=DATA.featured.map((id,i)=>{
     const p=DATA.projects.find(p=>p.id===id);
     return `<a class="feature-card" href="#${p.id}"><span class="feature-top"><span>0${i+1}</span><span aria-hidden="true">↗</span></span><span class="feature-category">${tx(p.category)}</span><strong>${tx(p.title)}</strong><span class="feature-result">${tx(p.result)}</span></a>`;
@@ -26,11 +28,13 @@ function renderProjects(){
     <h3 id="${p.id}-title">${tx(p.title)}</h3><p class="project-role">${tx(p.role)}</p>
     <p class="project-result">${tx(p.result)}</p>
     <dl class="case-summary"><div><dt>${ui('problem')}</dt><dd>${tx(p.problem)}</dd></div><div><dt>${ui('contribution')}</dt><dd>${tx(p.contribution)}</dd></div></dl>
+    ${p.bullets?.length?`<div class="project-delivery"><h4>${ui('delivery')}</h4><ul>${p.bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul></div>`:''}
+    <p class="project-stack">${p.stack.map(escapeHTML).join(' · ')}</p>
     ${p.screenshots?`<div class="project-gallery">${p.screenshots.map(shot=>`<figure><a href="assets/scamwise/${shot.file}.jpg" target="_blank" rel="noopener" aria-label="${tx(shot)} — ${ui('original')}"><img src="assets/scamwise/${shot.file}.jpg" alt="ScamWise Campus — ${tx(shot)}" loading="lazy" decoding="async" width="474" height="1001"></a><figcaption>${tx(shot)}</figcaption></figure>`).join('')}</div>`:''}
     ${p.evidence?`<div class="evidence-gallery">${p.evidence.map(shot=>`<figure><a href="${escapeHTML(shot.src)}" target="_blank" rel="noopener" aria-label="${tx(shot.caption)} — ${ui('original')}"><img src="${escapeHTML(shot.src)}" alt="${tx(shot.caption)}" loading="lazy" decoding="async" width="${shot.width}" height="${shot.height}"></a><figcaption>${tx(shot.caption)}<span>${tx(shot.source)}</span></figcaption></figure>`).join('')}</div>`:''}
     ${p.boundary?`<p class="project-boundary">${tx(p.boundary)}</p>`:''}
     <div class="project-links">${(p.links||[]).map(link=>`<a class="text-link" href="${escapeHTML(link.url)}" target="_blank" rel="noopener">${t(link.label)==='GitHub'?ui('code'):tx(link.label)+' ↗'}</a>`).join('')}</div>
-    <details class="case-details" id="${p.id}-details"><summary>${ui('details')}</summary><div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p>${p.reflection?`<h4>${ui('lesson')}</h4><p>${tx(p.reflection)}</p>`:''}<p class="stack">${p.stack.map(escapeHTML).join(' · ')}</p></div></details>
+    <details class="case-details" id="${p.id}-details" open><summary>${ui('details')}</summary><div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p>${p.reflection?`<h4>${ui('lesson')}</h4><p>${tx(p.reflection)}</p>`:''}</div></details>
   </article>`).join('');
 }
 function renderTimeline(id,items){
@@ -53,17 +57,17 @@ function render(){
   renderProjects(); renderTimeline('experience-list',DATA.experience); renderTimeline('education-list',DATA.education);
   $('skills-list').innerHTML=DATA.skills.map(p=>`<div class="skill-group"><h4>${tx(p.label)}</h4><p>${p.items.map(escapeHTML).join(' · ')}</p></div>`).join('');
   $('leadership-list').innerHTML=DATA.leadership.map(p=>`<article class="lead-item"><h4>${tx(p.title)}</h4><p>${tx(p.body)}</p></article>`).join('');
-  $('downloads-list').innerHTML=DATA.resumes.map(p=>`<a href="assets/resumes/${p.file}.docx" download="褚俊杰_${p.zh}.docx"><span>${tx(p)}</span><small>DOCX ↓</small></a>`).join('');
+  $('downloads-list').innerHTML=DATA.resumes.map(p=>`<article class="resume-option"><h4>${tx(p)}</h4><p>${lang==='zh'?'中文 · 一页':'Chinese · One page'}</p><div><a class="download-pdf" href="assets/resumes/${p.file}.pdf" download="褚俊杰_${p.zh}.pdf">PDF ↓</a><a href="assets/resumes/${p.file}.docx" download="褚俊杰_${p.zh}.docx">Word ↓</a></div></article>`).join('');
   $('footer-text').textContent=t(DATA.footer);
   document.dispatchEvent(new Event('portfolio:render'));
 }
 function setLang(next){
-  const openIds=[...document.querySelectorAll('.case-details[open]')].map(el=>el.id);
+  const detailStates=[...document.querySelectorAll('.case-details')].map(el=>[el.id,el.open]);
   lang=next==='en'?'en':'zh';
   try{localStorage.setItem('site-lang',lang)}catch{}
   const url=new URL(location.href); url.searchParams.set('lang',lang);
   try{history.replaceState(null,'',url)}catch{}
-  render(); openIds.forEach(id=>$(id).open=true); revealHash(false); updateNavigation();
+  render(); detailStates.forEach(([id,open])=>{if($(id))$(id).open=open}); revealHash(false); updateNavigation();
 }
 function revealHash(scroll=true){
   let id; try{id=decodeURIComponent(location.hash.slice(1))}catch{return}
@@ -86,6 +90,9 @@ window.addEventListener('resize',updateNavigation);
 window.addEventListener('hashchange',()=>revealHash());
 $('lang-toggle').addEventListener('click',()=>setLang(lang==='zh'?'en':'zh'));
 $('print-button').addEventListener('click',()=>window.print());
+let printStates=[];
+window.addEventListener('beforeprint',()=>{printStates=[...document.querySelectorAll('.case-details')].map(el=>[el,el.open]);printStates.forEach(([el])=>el.open=true)});
+window.addEventListener('afterprint',()=>printStates.forEach(([el,open])=>el.open=open));
 let saved;try{saved=localStorage.getItem('site-lang')}catch{}
 const query=new URLSearchParams(location.search).get('lang');
 lang=(query==='zh'||query==='en')?query:(saved==='en'?'en':'zh');

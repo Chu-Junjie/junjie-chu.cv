@@ -85,8 +85,8 @@ const DATA = {
           "en": "GPA 5.85/7.00 · Top 5% of cohort"
         },
         {
-          "zh": "高级软件工程、移动计算、数据库建模、机器学习与数据科学、网络安全应用",
-          "en": "Advanced Software Engineering, Mobile Computing, Database Modelling, Machine Learning & Data Science, Cybersecurity Applications"
+          "zh": "相关课程：高级软件工程、移动计算、数据库建模、机器学习与数据科学、深度学习、网络安全应用。",
+          "en": "Relevant coursework: Advanced Software Engineering, Mobile Computing, Database Modelling, Machine Learning & Data Science, Deep Learning and Cybersecurity Applications."
         }
       ]
     },
@@ -118,16 +118,16 @@ const DATA = {
       },
       "items": [
         "Kotlin",
-        "Python",
-        "JavaScript",
-        "SQL",
-        "C++",
         "Jetpack Compose",
         "MVVM",
         "Room",
         "Retrofit",
+        "Python",
+        "FastAPI",
         "Flask",
-        "PostgreSQL"
+        "JavaScript",
+        "HTML/CSS",
+        "REST API"
       ]
     },
     {
@@ -149,6 +149,22 @@ const DATA = {
     },
     {
       "label": {
+        "zh": "数据库与业务分析",
+        "en": "Databases & business analysis"
+      },
+      "items": [
+        "SQL",
+        "MySQL Workbench",
+        "PostgreSQL",
+        "ER/EER",
+        "3NF",
+        "JOIN / GROUP BY",
+        "CTE / Window Functions",
+        "Excel"
+      ]
+    },
+    {
+      "label": {
         "zh": "测试与工程实践",
         "en": "Testing & engineering"
       },
@@ -160,7 +176,11 @@ const DATA = {
         "GitHub Actions",
         "CI/CD",
         "OOF",
-        "Group K-Fold"
+        "Group K-Fold",
+        "ONNX Runtime",
+        "Linux offline deployment",
+        "JSON validation",
+        "P50 / P95"
       ]
     },
     {
@@ -181,50 +201,73 @@ const DATA = {
   "experience": [
     {
       "date": {
-        "zh": "2026.07 – 至今",
-        "en": "Jul 2026 – Present"
+        "zh": "2026.07–2026.10",
+        "en": "July–October 2026"
       },
       "title": {
         "zh": "AI 工程师实习生",
         "en": "AI Engineer Intern"
       },
       "org": {
-        "zh": "上海意言科技有限公司（TYRION.AI）+ 新加坡 Basilos Pte. Ltd.",
-        "en": "TYRION.AI (Shanghai Yiyan Tech) + Basilos Pte. Ltd., Singapore"
+        "zh": "Basilos Pte. Ltd.｜新加坡",
+        "en": "Basilos Pte. Ltd. · Singapore"
       },
-      "current": true,
       "bullets": [
         {
-          "zh": "完成 InsightFace、CompreFace、DeepFace 等方案选型与开放集测试，推动 Workbench Connector 集成；在小规模验证集中实现 13/13 已知样本匹配、10/10 陌生样本拒识，并稳定处理 6 类异常输入。",
-          "en": "Evaluated InsightFace, CompreFace and DeepFace through open-set testing to drive Workbench Connector integration — 13/13 known-sample matches and 10/10 unknown-sample rejections in a small validation set, and stable handling of 6 exception input types."
+          "zh": "人脸方案选型：针对 AIGC 模特生成图的身份漂移，对比 InsightFace、DeepFace 等 5 种方案；在 3 身份参考库中开展 1:N 开放集验证，13 张已知样本正确识别、10 张陌生样本正确拒识。",
+          "en": "Face-recognition evaluation: compared five approaches including InsightFace and DeepFace for identity drift in generated model images. In a three-identity reference library, 1:N open-set checks correctly identified 13 known samples and rejected 10 unknown samples."
         },
         {
-          "zh": "完成 PNG-to-SVG 与 Traced Paths 工程验证，测试 36 张黑白技术图、60 张彩色插画及 3 组混合方案，为产品选型形成可复现实验依据。",
-          "en": "Ran PNG-to-SVG and Traced Paths engineering validation across 36 black-and-white technical drawings, 60 colour illustrations and 3 hybrid schemes, forming a reproducible basis for product selection."
+          "zh": "连接器工程化：将选型结果落实为 1:1 一致性连接器，基于 buffalo_l 完成人脸检测、对齐、特征提取和余弦比对；封装 Python / ONNX Runtime 离线推理，打包 Linux 依赖、校验模型哈希并部署至 Workbench。",
+          "en": "Connector engineering: implemented a 1:1 consistency connector with buffalo_l for detection, alignment, embeddings and cosine comparison. Packaged offline Python / ONNX Runtime inference, Linux dependencies and model-hash checks for Workbench deployment."
         },
         {
-          "zh": "调研 20 个主流海外 AI 模型，并评估 Lark CLI 9 个模块的自动化能力，解决 Scope 授权与身份切换问题，沉淀团队复用操作规范。",
-          "en": "Researched 20 mainstream overseas AI models and assessed automation coverage of 9 Lark CLI modules; resolved Scope authorization and identity-switching issues and documented reusable team playbooks."
+          "zh": "内部测试与可靠性：整理 54 项记录（23 项身份比对、31 项场景），23 组身份比对均判定正确；同一输入连续运行 30 次均成功。端到端 P50 / P95 为 2.691 / 2.996 秒，记录首次运行异常、质量提示问题和未验证项。",
+          "en": "Internal testing: maintained 54 records comprising 23 identity comparisons and 31 scenario checks. All 23 identity comparisons were correct, and 30 consecutive runs of the same input succeeded. End-to-end P50/P95 were 2.691/2.996 seconds; logged first-run errors, quality-warning issues and unverified cases."
+        },
+        {
+          "zh": "异常与结果契约：检查无人脸、多脸、坏图、低清、遮挡及阈值边界，输出含分数、阈值、原因码及人工复核状态的 JSON；区分上传层拦截与连接器处理，避免把拦截结果计作功能通过。",
+          "en": "Exception handling and result contracts: checked no-face, multiple-face, damaged-image, low-resolution, occlusion and threshold-edge scenarios. Returned JSON scores, thresholds, reason codes and review states, distinguishing upload rejection from connector-level processing."
+        },
+        {
+          "zh": "图像矢量化：为 Potrace / VTracer 封装 FastAPI 本地接口，完成 99 组实验（36 组黑白、60 组彩色、3 组混合）；结合嵌入位图、路径数量、颜色误差及人工视觉复核评估可编辑性，建议简单黑白线稿优先，记录复杂彩图的路径碎片问题。",
+          "en": "Image vectorisation: wrapped Potrace/VTracer in a local FastAPI service and ran 99 experiments: 36 monochrome, 60 colour and three hybrid. Evaluated embedded bitmaps, path counts, colour error and visual quality; recommended simple monochrome line art and documented fragmentation in complex colour images."
+        },
+        {
+          "zh": "工具调研与工作流：按官方资料更新 20 款海外大模型对比表；评估飞书 CLI 9 个模块，验证 Markdown 导入、多维表格与日历／任务流程，排查 Scope 授权和 User/Bot 身份问题，形成可复用操作指南。",
+          "en": "Research and workflows: updated an official-source comparison of 20 AI models. Evaluated nine Lark CLI modules, tested Markdown import, Bitable and calendar/task flows, resolved scope and user/bot identity issues and wrote reusable operating guides."
+        },
+        {
+          "zh": "客户需求分析：参与 Golden Travel 实地调研，梳理护照／GeBIZ 标书信息提取、项目截止提醒及行程规划；将信息提取与截止提醒列为优先方向，记录敏感资料处理限制并输出实施建议。",
+          "en": "Customer discovery: joined field research with Golden Travel, covering passport/GeBIZ tender extraction, deadline reminders and itinerary planning. Prioritised extraction and deadline reminders, recorded sensitive-data constraints and prepared implementation recommendations."
         }
       ]
     },
     {
       "date": {
-        "zh": "2024.04 – 2024.09",
-        "en": "Apr 2024 – Sep 2024"
+        "zh": "2024.04–2024.09",
+        "en": "April–September 2024"
       },
       "title": {
-        "zh": "运营与项目协调实习生",
-        "en": "Operations & Project Coordination Intern"
+        "zh": "运营与行政实习生",
+        "en": "Operations & Administration Intern"
       },
       "org": {
-        "zh": "新加坡 Specialists Trade Alliance of Singapore（STAS）",
-        "en": "Specialists Trade Alliance of Singapore (STAS)"
+        "zh": "Specialists Trade Alliance of Singapore（STAS）｜新加坡",
+        "en": "Specialists Trade Alliance of Singapore (STAS) · Singapore"
       },
       "bullets": [
         {
-          "zh": "支持认证材料、供应商调研及空间参数测试，并维护 3 场行业展会的付款、参展商与市场研究数据。",
-          "en": "Supported certification materials, vendor research and spatial parameter testing; maintained payment, exhibitor and market-research data across 3 industry trade shows."
+          "zh": "对照评审标准核验预制 MEP 厂商申请材料，整理在办／已结案件及审核要点笔记，支持认证相关行政工作。",
+          "en": "Checked prefabricated MEP vendor application materials against assessment criteria and organised open/closed cases and review notes for certification administration."
+        },
+        {
+          "zh": "以 Excel 维护 3 场展会的双阶段付款、参展商和业务记录，整理分类供应商清单；独立完成中国区建材展会调研，输出结构化信息供业务筛选。",
+          "en": "Maintained two-stage payment, exhibitor and business records for three trade shows in Excel; organised supplier categories and independently researched building-materials exhibitions in China for business screening."
+        },
+        {
+          "zh": "拓展管道供应商资源，调整空间参数参与 MEP 配置工具基础模块测试，将供应商、参展商及付款信息整理为可检索的业务资料。",
+          "en": "Expanded piping-supplier resources and adjusted spatial parameters in basic MEP configuration-tool testing; organised supplier, exhibitor and payment information for retrieval."
         }
       ]
     }
@@ -264,12 +307,20 @@ const DATA = {
       ],
       "bullets": [
         {
-          "zh": "基于 MVVM + Use Case + Repository 构建 5 页面应用，实现 18 个诈骗训练场景、URL 威胁检测和学习统计。",
-          "en": "Built a 5-screen app on an MVVM + Use Case + Repository architecture, delivering 18 scam-training scenarios, URL threat detection and learning statistics."
+          "zh": "独立完成 5 个核心页面与 18 个情境训练案例，串联风险判断、警示信号识别、安全行动选择和信心评分，再提供反馈、统计与后续练习建议。",
+          "en": "Independently delivered five core screens and 18 scenarios covering risk assessment, warning signs, safe actions and confidence ratings, followed by feedback, statistics and practice recommendations."
         },
         {
-          "zh": "编写 102 个自动化测试（79 单元、23 UI），将密钥配置迁出源码，并清理 Git 历史、重置曾暴露的 API Key。",
-          "en": "Wrote 102 automated tests (79 unit, 23 UI), moved key configuration out of source code, cleaned Git history and rotated exposed API keys."
+          "zh": "采用 MVVM + Use Case + Repository 分层，将 Compose 页面、ViewModel / StateFlow、业务规则和数据访问解耦；以 Room 保存训练记录，通过 Retrofit 接入 Google Safe Browsing。",
+          "en": "Separated Compose UI, ViewModel/StateFlow, business rules and data access with MVVM, use cases and repositories. Persisted training records in Room and integrated Google Safe Browsing through Retrofit."
+        },
+        {
+          "zh": "围绕输入校验、训练判分、统计计算、持久化和网络异常编写 102 项测试：79 项单元测试使用 JUnit、Mockito 和内存 Room，23 项 UI 测试使用 Espresso 检查页面流程。",
+          "en": "Wrote 102 tests for input validation, scoring, statistics, persistence and network failures: 79 unit tests with JUnit, Mockito and in-memory Room, plus 23 Espresso UI tests for screen flows."
+        },
+        {
+          "zh": "在链接发送至外部服务前取得用户同意；提供清除历史与可理解的状态提示。发现密钥暴露后移除源码配置、清理 Git 历史并轮换密钥，同时在反思中提出备份规则和发布包检查的后续改进。",
+          "en": "Requested consent before sending links to an external service and provided history deletion and clear status messages. After finding exposed credentials, moved configuration out of source, cleaned Git history and rotated keys; documented backup and release-package checks as further improvements."
         }
       ],
       "screenshots": [
@@ -334,8 +385,8 @@ const DATA = {
         "en": "Smart Digital Product Recommendation Platform"
       },
       "role": {
-        "zh": "项目经理兼全栈开发｜4 人团队",
-        "en": "Project Manager & Full-stack Developer · Team of 4"
+        "zh": "产品负责人（PO）／前端开发协作｜4 人团队",
+        "en": "Product Owner / frontend contributor · Four-person team"
       },
       "meta": {
         "zh": "2026.05 – 2026.08",
@@ -368,12 +419,20 @@ const DATA = {
       ],
       "bullets": [
         {
-          "zh": "带领 4 人团队完成 3 次敏捷迭代，交付覆盖 5 类产品的推荐平台，10 个用户故事全部按期完成。",
-          "en": "Led a 4-person team through 3 agile sprints to deliver a recommendation platform covering 5 product categories, completing all 10 user stories on schedule."
+          "zh": "将需求整理为 10 个用户故事，明确验收标准与需求—实现—测试映射，推进 3 轮 Scrum 迭代；团队交付覆盖 5 类数码产品的推荐平台。",
+          "en": "Defined ten user stories, acceptance criteria and requirements-to-implementation/test traceability across three Scrum sprints. The team delivered recommendations for five product categories."
         },
         {
-          "zh": "参与前端、API 联调与部署，独立实现分享结果功能；统筹需求追踪、PR 合并与发布验收，候选版本 12/12 项测试通过。",
-          "en": "Contributed to frontend/API integration and deployment, independently built the share-results feature, and managed requirement tracking, PR merges and release acceptance — the release candidate passed 12/12 tests."
+          "zh": "负责需求冻结和变更控制，在估算偏差出现时组织范围调整；协调前端、数据与接口协作，维护 PR 审核顺序和发布检查清单。",
+          "en": "Managed requirement freezes and change control, coordinated scope adjustments when estimates diverged, aligned frontend/data/API work and maintained PR review order and release checklists."
+        },
+        {
+          "zh": "协调整合约 11,000 条产品目录记录，其中约 2,000 条可用于推荐；参与前端调试、Flask API 联调和部署，独立实现推荐结果分享。",
+          "en": "Coordinated integration of approximately 11,000 catalogue records, around 2,000 usable for recommendations. Contributed to frontend debugging, Flask API integration and deployment, and independently built result sharing."
+        },
+        {
+          "zh": "核对 GitHub Actions 执行结果与需求一致性，确认团队 12 项自动化验收测试通过后冻结版本。用户端支持匿名搜索、收藏／历史、最多三产品对比及 Helpful / Not Helpful 反馈。",
+          "en": "Checked GitHub Actions results against requirements and froze releases after all 12 team acceptance tests passed. The delivered UI supports anonymous search, favorites/history, up to three-product comparison and helpfulness feedback."
         }
       ],
       "id": "recommendation",
@@ -390,8 +449,8 @@ const DATA = {
         "en": "Build a recommendation platform spanning five digital-product categories, with result display and sharing."
       },
       "contribution": {
-        "zh": "担任四人团队项目经理兼全栈开发，参与前端、API 联调与部署，独立实现结果分享功能。",
-        "en": "Project manager and full-stack contributor in a four-person team; contributed to frontend/API integration and deployment, and independently implemented result sharing."
+        "zh": "担任四人团队 PO，负责用户故事、验收标准、范围与发布协调；修改、调试 HTML/CSS/JavaScript，参与 Flask API 联调和部署，独立实现结果分享功能。",
+        "en": "Served as PO in a four-person team, owning user stories, acceptance criteria, scope and release coordination. Modified and debugged HTML/CSS/JavaScript, contributed to Flask API integration and deployment, and independently implemented result sharing."
       },
       "result": {
         "zh": "3 次迭代 · 10 个用户故事按期交付",
@@ -444,8 +503,8 @@ const DATA = {
         "en": "Wildlife Conservation Image Classification"
       },
       "role": {
-        "zh": "五人团队组长｜DrivenData 国际竞赛 · 公开榜前 5%",
-        "en": "Team lead · 5 members · DrivenData public leaderboard top 5%"
+        "zh": "数据处理与训练协作｜5 人团队｜DrivenData 公开榜 42/797",
+        "en": "Data processing & training contributor · Five-person team · DrivenData public rank 42/797"
       },
       "meta": {
         "zh": "2026.05 – 2026.08",
@@ -461,12 +520,16 @@ const DATA = {
       ],
       "bullets": [
         {
-          "zh": "针对 8 类、16,488 张图像搭建训练与验证流程；定位地理站点数据泄漏，采用按站点分组的交叉验证，实现训练与验证站点零重叠。",
-          "en": "Built a training and validation pipeline for 16,488 images across 8 classes. Identified site leakage and adopted grouped cross-validation with no site overlap between training and validation."
+          "zh": "面向 8 类、16,488 张图像完成加载、类别／站点／尺寸分析和预处理；按拍摄站点实施 Stratified Group K-Fold，避免训练与验证站点重叠，并检查 OOF 覆盖。",
+          "en": "Loaded and preprocessed 16,488 images across eight classes, analysing labels, sites and dimensions. Implemented site-grouped stratified folds to avoid train/validation site overlap and checked OOF coverage."
         },
         {
-          "zh": "主导 19 组控制变量实验，结合 TTA、五折集成与 logit 融合，将公开榜 Log Loss 从 2.5453 降至 1.0136，降低约 60%。",
-          "en": "Led 19 controlled experiments; combined TTA, five-fold ensembles and logit blending to reduce public leaderboard log loss from 2.5453 to 1.0136, a reduction of about 60%."
+          "zh": "参与团队 19 组实验，开发、调试 ResNet 与 ConvNeXt 训练及 Optuna 搜索代码，对比分辨率、数据增强和训练配置；团队选用 ConvNeXt-Small 320×320。",
+          "en": "Contributed to 19 team experiments, developed/debugged ResNet and ConvNeXt training and Optuna search code, and compared resolution, augmentation and training settings. The team selected ConvNeXt-Small at 320×320."
+        },
+        {
+          "zh": "参与 4× TTA、五折集成与 logit 融合；团队公开榜排名 42/797，Log Loss 从 2.5453 降至 1.0136，降低约 60%。",
+          "en": "Participated in 4× TTA, five-fold ensembles and logit blending. The team placed 42/797 on the public leaderboard and reduced log loss from 2.5453 to 1.0136, approximately 60%."
         }
       ],
       "id": "wildlife",
@@ -483,8 +546,8 @@ const DATA = {
         "en": "Classify 16,488 wildlife images across eight classes and evaluate performance across sites."
       },
       "contribution": {
-        "zh": "担任五人团队组长，搭建训练与验证流程，主导 19 组控制变量实验及模型调优。",
-        "en": "Led a five-person team, built the training and validation pipeline and led 19 controlled experiments and model tuning."
+        "zh": "承担数据加载、EDA、预处理与基础训练，参与团队 19 组实验，开发与调试 ResNet / ConvNeXt 训练及 Optuna 搜索代码，并参与 TTA、集成与融合。",
+        "en": "Handled data loading, EDA, preprocessing and baseline training. Contributed to 19 team experiments, developed/debugged ResNet/ConvNeXt training and Optuna search code, and participated in TTA, ensembles and blending."
       },
       "result": {
         "zh": "公开榜 Log Loss：2.5453 → 1.0136",
@@ -495,8 +558,8 @@ const DATA = {
         "en": "Identified geographic site leakage in random splits and adopted Stratified Group K-Fold, with no site overlap between training and validation."
       },
       "validation": {
-        "zh": "结合 TTA、五折集成与 logit 融合，公开榜 Log Loss 降低约 60%。该指标来自公开榜，不等同于独立生产环境表现。",
-        "en": "Combined TTA, five-fold ensembles and logit blending to reduce public leaderboard log loss by about 60%. This is a public leaderboard result, not a measurement of production performance."
+        "zh": "团队公开榜排名 42/797，Log Loss 为 1.0136；相对初始 2.5453 降低约 60%。个人承担数据处理与训练协作，排名及最终融合结果为团队成果；公开榜指标不能代表生产环境表现。",
+        "en": "The team placed 42/797 on the public leaderboard with log loss 1.0136, approximately 60% below the initial 2.5453. My role covered data processing and training collaboration; the rank and final ensemble are team outcomes, and public leaderboard scores do not establish production performance."
       }
     },
     {
@@ -522,12 +585,20 @@ const DATA = {
       ],
       "bullets": [
         {
-          "zh": "分析 3,630 条学生记录与 36 项特征，完成探索性分析、特征处理、聚类与多模型比较，识别第二学期通过课程数为关键预测特征。",
-          "en": "Analysed 3,630 student records and 36 features through EDA, feature processing, clustering and model comparison; identified second-semester course completions as a key predictor."
+          "zh": "对 3,630 条学生记录、36 项特征完成 EDA、编码字段处理与 K-means 聚类，分析在校阶段的学业表现和辍学结果之间的关联。",
+          "en": "Performed EDA, coded-feature processing and K-means clustering on 3,630 records and 36 features, analysing associations between in-course academic performance and dropout outcomes."
         },
         {
-          "zh": "通过 10 折交叉验证调优 MLP，取得加权 F1 0.893、MCC 0.776、ROC-AUC 0.933、辍学召回率 0.825。",
-          "en": "Tuned an MLP using 10-fold cross-validation, achieving weighted F1 0.893, MCC 0.776, ROC-AUC 0.933 and dropout recall 0.825."
+          "zh": "以 ZeroR 准确率 60.854% 为基线，比较 J48、Naive Bayes、IBk 与 DL4J MLP 的 10 折交叉验证结果；普通 MLP 的 66% 划分实验单独说明。",
+          "en": "Used ZeroR accuracy of 60.854% as the baseline and compared J48, Naive Bayes, IBk and DL4J MLP with ten-fold cross-validation. Documented the standard MLP 66% split experiment separately."
+        },
+        {
+          "zh": "比较 DL4J MLP 的四组配置，Run C 使用 100 epochs、batch size 64、learning rate 0.005 和 8% 早停验证比例，得到加权 F1 0.893、MCC 0.776、ROC-AUC 0.933。",
+          "en": "Compared four DL4J MLP configurations. Run C used 100 epochs, batch size 64, learning rate 0.005 and an 8% early-stopping validation split, achieving weighted F1 0.893, MCC 0.776 and ROC-AUC 0.933."
+        },
+        {
+          "zh": "结合辍学类别召回率 0.825 和混淆矩阵分析模型取舍；第二学期通过课程数属于在校阶段信息，结论限定为该数据场景，避免将其表述为入学前风险预测。",
+          "en": "Analysed tradeoffs with dropout recall 0.825 and the confusion matrix. Second-semester completions are in-course information, so conclusions apply to this setting rather than pre-enrolment risk prediction."
         }
       ],
       "id": "dropout",
@@ -598,8 +669,8 @@ const DATA = {
         "en": "SmartSeat"
       },
       "role": {
-        "zh": "课堂座位管理课程项目｜前端开发 · 曾任 Scrum Master",
-        "en": "Classroom seating course project · Frontend developer; also served as Scrum Master"
+        "zh": "前端与 UI 交互开发｜曾任 Scrum Master｜7 人团队",
+        "en": "Frontend & UI/interaction development · Also served as Scrum Master · Seven-person team"
       },
       "meta": {
         "zh": "2025.09 – 2025.12",
@@ -623,12 +694,16 @@ const DATA = {
       ],
       "bullets": [
         {
-          "zh": "负责前端开发，参与登录与选座页面实现；与后端开展结对编程和接口联调，并曾担任 Scrum Master。",
-          "en": "Owned frontend development, including login and seat-selection screens; paired with the backend developer on implementation and integration, and also served as Scrum Master."
+          "zh": "面向课堂选座、预约及座位状态展示参与用户研究与需求分析，独立设计 16 屏高保真原型和交互规范，参与 3 轮可用性测试，累计 60 人次。",
+          "en": "Contributed to user research and requirements for seat selection, reservations and seat-status displays; independently designed 16 high-fidelity screens and interaction specifications and participated in three usability rounds totaling 60 sessions."
         },
         {
-          "zh": "选座页面出现座位位置偏移后，与后端联合排查，定位双方对坐标原点的约定不一致。登录模块进度受阻时，与后端结对编程，交替进行编码和检查，推进界面交付。",
-          "en": "When seats rendered outside the intended area, investigated with the backend developer and identified inconsistent assumptions about the coordinate origin. Paired on coding and review when login-page development fell behind, helping the team complete the interface."
+          "zh": "负责登录、选座等前端页面，与后端约定数据格式和展示逻辑，通过模拟数据演示座位状态、使用率和推荐座位；使用 GitHub Issues 记录反馈并支持迭代。",
+          "en": "Implemented frontend screens including login and seat selection, agreed data/display contracts with the backend and demonstrated seat status, utilisation and recommendations with simulated data. Logged feedback in GitHub Issues for iteration."
+        },
+        {
+          "zh": "选座集成出现位置偏移时，与后端共同排查坐标原点约定；登录模块进度受阻时开展结对编程，交替编码和检查，推动交付。曾在七人、六次迭代的团队中担任 Scrum Master。",
+          "en": "Investigated coordinate-origin mismatches with the backend when seat placement failed. Used pair programming with alternating coding/review to recover delayed login work, and served as Scrum Master within the seven-person, six-sprint team."
         }
       ],
       "id": "smartseat",
@@ -645,20 +720,20 @@ const DATA = {
         "en": "Build student reservation, lecturer and administrator interfaces for a classroom seating management demonstration."
       },
       "contribution": {
-        "zh": "负责前端开发，参与登录与选座页面实现；与后端开展结对编程和接口联调，并曾担任 Scrum Master。",
-        "en": "Owned frontend development, including login and seat-selection screens; paired with the backend developer on implementation and integration, and also served as Scrum Master."
+        "zh": "负责前端实现与 UI 交互工作，独立设计 16 屏高保真原型，参与三轮可用性测试；与后端结对编程和接口联调，并在项目中担任过 Scrum Master。",
+        "en": "Owned frontend implementation and UI/interaction work, independently designed 16 high-fidelity screens and participated in three usability-test rounds. Paired with the backend developer on implementation/integration and served as Scrum Master during the project."
       },
       "result": {
-        "zh": "七人团队 · 6 次 Scrum 迭代",
-        "en": "7-person team · 6 Scrum sprints"
+        "zh": "16 屏高保真原型 · 3 轮测试（累计 60 人次）· 6 次 Scrum 迭代",
+        "en": "16 prototype screens · Three test rounds (60 participant sessions) · Six Scrum sprints"
       },
       "decision": {
         "zh": "选座页面出现座位位置偏移后，与后端联合排查，定位双方对坐标原点的约定不一致。登录模块进度受阻时，与后端结对编程，交替进行编码和检查，推进界面交付。",
         "en": "When seats rendered outside the intended area, investigated with the backend developer and identified inconsistent assumptions about the coordinate origin. Paired on coding and review when login-page development fell behind, helping the team complete the interface."
       },
       "validation": {
-        "zh": "项目反思记录了六次迭代中的前后端集成过程，并附学生预约、讲师与管理员界面截图。展示的是课程演示系统，不代表已经在校园生产环境部署。",
-        "en": "The reflection documents frontend/backend integration across six sprints and includes student reservation, lecturer and administrator screenshots. This is a course demonstration system, not a claim of production deployment on campus."
+        "zh": "独立设计 16 屏原型并参与三轮可用性测试，累计 60 人次；反思附录保留学生预约、讲师及管理员界面。项目完成课程演示与模拟数据流集成。",
+        "en": "Independently designed 16 prototype screens and participated in three usability-test rounds totaling 60 sessions. The reflection appendix includes reservation, lecturer and administrator interfaces. The course project delivered a demonstration with simulated-data integration."
       },
       "reflection": {
         "zh": "联调问题暴露了口头接口约定的不足。后续改进计划是在迭代规划时明确坐标原点、参数范围和示例数据，并提前验证跨角色依赖；对设计歧义和进度风险更早提出阻碍。",
@@ -696,13 +771,70 @@ const DATA = {
           }
         }
       ]
+    },
+    {
+      "id": "flyhigh",
+      "title": {
+        "zh": "FlyHigh 航空数据库设计与 SQL 分析",
+        "en": "FlyHigh Airline Database Design & SQL Analysis"
+      },
+      "role": {
+        "zh": "个人课程项目｜数据库建模与业务查询",
+        "en": "Individual course project · Database modelling & business queries"
+      },
+      "meta": {
+        "zh": "2025.06–2025.09",
+        "en": "June–September 2025"
+      },
+      "category": {
+        "zh": "数据库设计 / SQL 分析",
+        "en": "DATABASE DESIGN / SQL ANALYSIS"
+      },
+      "problem": {
+        "zh": "为机队、订票、员工、财务和资源五个航空业务域设计可查询、可汇总的关系数据库。",
+        "en": "Design a relational database supporting retrieval and aggregation across fleet, bookings, staff, finance and resources."
+      },
+      "contribution": {
+        "zh": "独立完成 22 实体 ER/EER 模型、关系约束、3NF 检查、MySQL 建库与数据准备，并编写业务查询及解释结果。",
+        "en": "Independently designed a 22-entity ER/EER model, relationship constraints and 3NF checks, prepared a MySQL database/data and wrote and interpreted business queries."
+      },
+      "result": {
+        "zh": "22 个实体 · 5 个业务域 · 3NF",
+        "en": "22 entities · Five business domains · 3NF"
+      },
+      "stack": [
+        "SQL",
+        "MySQL Workbench",
+        "ER/EER",
+        "3NF",
+        "JOIN",
+        "GROUP BY"
+      ],
+      "bullets": [
+        {
+          "zh": "定义主键、外键与关系基数，将机队、订票、员工、财务和资源需求映射到 22 个实体，检查第三范式并消除传递依赖。",
+          "en": "Mapped five business domains to 22 entities, defined primary/foreign keys and cardinalities and checked third normal form to remove transitive dependencies."
+        },
+        {
+          "zh": "使用 MySQL Workbench 完成建库和数据准备，编写多表 JOIN 与 GROUP BY 聚合，输出查询结果并解释业务关系，验证结构可支持检索与汇总。",
+          "en": "Built and populated the database in MySQL Workbench, wrote multi-table joins and GROUP BY aggregations, and interpreted outputs to verify business retrieval and summary needs."
+        }
+      ],
+      "decision": {
+        "zh": "先明确五个业务域的实体与关系，再定义关系基数和主外键，并以 3NF 检查冗余及传递依赖，使数据库结构能够支撑后续业务查询。",
+        "en": "Defined entities and relationships across the five business domains before setting cardinalities and keys, then checked 3NF redundancy and transitive dependencies to support business queries."
+      },
+      "validation": {
+        "zh": "通过建库、数据准备、多表关联和聚合查询输出，检查数据库结构与业务需求的对应关系，并解释查询结果。",
+        "en": "Checked the mapping between schema and business requirements through database creation, sample data, joins and aggregation outputs, and interpreted the query results."
+      }
     }
   ],
   "leadership": [
     {
       "title": {
-        "zh": "JCU Learning Centre｜EMAS IT 同伴导师（2026.05 – 至今）",
-        "en": "JCU Learning Centre — EMAS IT Peer Mentor (May 2026 – Present)"
+        "zh": "JCU Learning Centre｜EMAS Peer Tutor（2026.05–2026.08）",
+        "en": "JCU Learning Centre — EMAS Peer Tutor (May–August 2026)"
       },
       "body": {
         "zh": "为 50 余名学生提供编程及核心 IT 课程辅导，并与项目顾问跟踪学习进展。",
@@ -721,18 +853,23 @@ const DATA = {
     }
   ],
   "footer": {
-    "zh": "更新于 2026 年 9 月",
-    "en": "Updated September 2026"
+    "zh": "更新于 2026 年 10 月 15 日",
+    "en": "Updated 15 October 2026"
   },
   "summary": {
-    "zh": "信息技术本科生，具备软件开发、机器学习与数据分析实践。从独立开发 Android 应用，到组织团队交付推荐平台，我关注需求、实现与验证之间的衔接。现居新加坡，英语可作为工作语言。",
-    "en": "Information Technology undergraduate with experience in software development, machine learning and data analysis. From building an Android app independently to leading a recommendation-platform team, I connect requirements with implementation and validation. Based in Singapore; comfortable working in English."
+    "zh": "詹姆斯库克大学新加坡校区信息技术本科生，2027 届，GPA 5.85/7.00。具备 Android 与 Python 开发、数据库设计、机器学习实验和敏捷项目协作实践。曾在新加坡 Basilos 参与 AI 工具工程化与内部评测，在四人团队中担任产品负责人，独立开发反诈骗 Android 应用。现居新加坡，英语可作为工作语言。",
+    "en": "Information Technology undergraduate at James Cook University Singapore, graduating in 2027 with a GPA of 5.85/7.00. My work spans Android and Python development, database design, machine learning experiments and agile delivery. At Basilos in Singapore, I worked on AI tooling and internal evaluation; I also served as product owner in a four-person team and independently developed an anti-scam Android app. Based in Singapore and comfortable working in English."
   },
   "availability": {
-    "zh": "2026 年 12 月下旬可到岗 · 2027 年 3 月毕业后可全职",
-    "en": "Available from late December 2026 · Full-time after graduation in March 2027"
+    "zh": "2026 年 12 月下旬可全职到岗 · 预计 2027 年 3 月毕业",
+    "en": "Available full-time from late December 2026 · Expected graduation March 2027"
   },
   "resumes": [
+    {
+      "file": "general",
+      "zh": "通用岗位版",
+      "en": "General résumé"
+    },
     {
       "file": "software-development",
       "zh": "软件开发工程师",
