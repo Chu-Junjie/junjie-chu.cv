@@ -81,8 +81,8 @@ const DATA = {
       "en": "Background"
     },
     "personal": {
-      "zh": "工作之外",
-      "en": "Beyond work"
+      "zh": "生活",
+      "en": "Life"
     },
     "resources": {
       "zh": "联系",
@@ -92,16 +92,16 @@ const DATA = {
   "education": [
     {
       "date": {
-        "zh": "2027 届",
-        "en": "Class of 2027"
+        "zh": "2025.01–2027.02",
+        "en": "Jan 2025–Feb 2027"
       },
       "title": {
         "zh": "詹姆斯库克大学新加坡校区",
         "en": "James Cook University, Singapore"
       },
       "org": {
-        "zh": "信息技术（本科）",
-        "en": "Information Technology (bachelor's programme)"
+        "zh": "信息技术学士（Information Technology）",
+        "en": "Bachelor of Information Technology"
       },
       "meta": {
         "zh": "新加坡",
@@ -110,12 +110,16 @@ const DATA = {
       "current": true,
       "bullets": [
         {
-          "zh": "GPA 5.85/7.00",
-          "en": "GPA 5.85/7.00"
+          "zh": "GPA 5.85/7.00，系内前 5%。",
+          "en": "GPA 5.85/7.00, top 5% in the department."
         },
         {
-          "zh": "相关课程：高级软件工程、移动计算、数据库建模、机器学习与数据科学、深度学习、网络安全应用。",
-          "en": "Relevant coursework: Advanced Software Engineering, Mobile Computing, Database Modelling, Machine Learning & Data Science, Deep Learning and Cybersecurity Applications."
+          "zh": "课程与实践：Python 与 C++ 编程、深度学习、机器学习与数据科学、数据库建模、移动计算、网络安全应用及高级软件工程；项目协作采用 Scrum。",
+          "en": "Coursework and practice: Python and C++ programming, deep learning, machine learning and data science, database modelling, mobile computing, cybersecurity applications and advanced software engineering. Used Scrum in team projects."
+        },
+        {
+          "zh": "JCU 学习中心同伴导师：为学生提供算法和编程辅导。",
+          "en": "JCU Learning Centre peer tutor: supported students in algorithms and programming."
         }
       ]
     },
@@ -136,7 +140,12 @@ const DATA = {
         "zh": "新加坡",
         "en": "Singapore"
       },
-      "bullets": []
+      "bullets": [
+        {
+          "zh": "相关课程：项目管理、CAD 数字绘图、建筑信息模型（BIM）、技术交流、结构分析。",
+          "en": "Relevant coursework: project management, CAD drafting, building information modelling (BIM), technical communication and structural analysis."
+        }
+      ]
     }
   ],
   "skills": [
@@ -231,18 +240,22 @@ const DATA = {
   "experience": [
     {
       "date": {
-        "zh": "2026.07–2026.10",
-        "en": "July–October 2026"
+        "zh": "2026.07–2026.12",
+        "en": "July–December 2026"
       },
       "title": {
         "zh": "AI 工程师实习生",
         "en": "AI Engineer Intern"
       },
       "org": {
-        "zh": "Basilos Pte. Ltd.｜新加坡",
-        "en": "Basilos Pte. Ltd. · Singapore"
+        "zh": "Basilos Pte. Ltd.｜AI 平台：Tyrion.ai｜新加坡",
+        "en": "Basilos Pte. Ltd. · AI platform: Tyrion.ai · Singapore"
       },
       "bullets": [
+        {
+          "zh": "AI 工作台调研与测试：通过 Google、Kaggle 和 GitHub 查找公开资料与实现，比较可用方案；参与工作台组件开发，使用 PyCharm 和 Codex 辅助测试。",
+          "en": "AI workbench research and testing: compared public approaches and implementations found through Google, Kaggle and GitHub, contributed to workbench components, and used PyCharm and Codex to support testing."
+        },
         {
           "zh": "人脸方案选型：针对 AIGC 模特生成图的身份漂移，对比 InsightFace、DeepFace 等 5 种方案；在 3 身份参考库中开展 1:N 开放集验证，13 张已知样本正确识别、10 张陌生样本正确拒识。",
           "en": "Face-recognition evaluation: compared five approaches including InsightFace and DeepFace for identity drift in generated model images. In a three-identity reference library, 1:N open-set checks correctly identified 13 known samples and rejected 10 unknown samples."
@@ -364,11 +377,29 @@ const DATA = {
       "stack": ["Python", "Flask", "JavaScript", "RAG", "PostgreSQL", "GitHub Pages", "Render"],
       "evidence": [
         {
-          "src": "assets/evidence/sg-navi-home.png",
-          "width": 1440,
-          "height": 1000,
-          "caption": { "zh": "公开演示首页：问题描述和两类示例入口", "en": "Published demo: problem intake and two example scenarios" },
-          "source": { "zh": "SG-Navi 线上页面实拍 · 2026.11.12", "en": "Screenshot of the live SG-Navi page · 12 Nov 2026" }
+          "src": "assets/evidence/sg-navi-mobile-intake.jpg",
+          "width": 1179,
+          "height": 2556,
+          "caption": { "zh": "01 · 描述问题，或从示例进入", "en": "01 · Describe the problem or choose an example" },
+          "source": { "zh": "SG-Navi 手机演示截图", "en": "SG-Navi mobile demo screenshot" }
+        },
+        {
+          "src": "assets/evidence/sg-navi-mobile-confirmation.png",
+          "width": 1179,
+          "height": 2556,
+          "caption": { "zh": "02 · 确认纠纷类型和退款诉求", "en": "02 · Confirm the dispute type and refund request" }
+        },
+        {
+          "src": "assets/evidence/sg-navi-mobile-next-step.png",
+          "width": 1179,
+          "height": 2556,
+          "caption": { "zh": "03 · 查看下一步：准备购买和纠纷记录", "en": "03 · View the next step: gather purchase and dispute records" }
+        },
+        {
+          "src": "assets/evidence/sg-navi-mobile-follow-up.jpg",
+          "width": 1179,
+          "height": 2556,
+          "caption": { "zh": "04 · 查阅后续步骤、官方联系方式和建议依据", "en": "04 · Explore follow-up steps, official contacts and the rationale" }
         }
       ],
       "decision": {
@@ -1277,9 +1308,17 @@ const DATA = {
     "zh": "更新于 2026 年 11 月 12 日",
     "en": "Updated 12 November 2026"
   },
+  "profileLead": {
+    "zh": "褚俊杰｜AI 工程与软件交付",
+    "en": "Junjie Chu · AI engineering & software delivery"
+  },
   "summary": {
-    "zh": "我在新加坡，关注如何把软件需求落实为可验证的成果。SG-Navi 毕业项目中，我担任开发团队产品负责人，负责 RAG、官方来源和技术验收。我也曾在 Basilos 参与 AI 人脸一致性连接器的开发与验证，并独立开发含 102 项自动化测试的 Android 反诈骗应用。",
-    "en": "I focus on turning software requirements into deliverables that teams can verify. For the SG-Navi capstone, I served as Product Owner for the development team and owned RAG, official sources and technical acceptance. I also contributed to an AI face-consistency connector at Basilos and independently built an Android anti-scam app with 102 automated tests. I am based in Singapore."
+    "zh": "JCU 信息技术专业，GPA 5.85/7.00（系内前 5%）。在 Basilos（Tyrion.ai）担任 AI 工程实习生，参与工作台方案调研、连接器开发与测试，整理 54 项测试记录。在 SG-Navi 毕业项目中担任开发团队产品负责人，负责 RAG 与联调验收。曾任 JCU 学习中心同伴导师，为学生提供算法辅导。",
+    "en": "My background is in Information Technology at JCU (GPA 5.85/7.00, top 5% in my department). As an AI Engineering Intern at Basilos (Tyrion.ai), I researched workbench solutions, helped develop and test a connector, and documented 54 test cases and comparisons. As Product Owner for the SG-Navi development team, I was responsible for RAG and integration acceptance. I also tutored students in algorithms at the JCU Learning Centre."
+  },
+  "profileFocus": {
+    "zh": "Python · C++ · 深度学习 · Scrum",
+    "en": "Python · C++ · Deep learning · Scrum"
   },
   "personal": {
     "mbti": "ISFJ",
@@ -1291,6 +1330,10 @@ const DATA = {
       {
         "zh": "相处上，我比较随和，看重真诚、尊重和说到做到。别人提出合理的建议，我愿意听，也愿意调整。我会留时间学习和复盘，也重视工作和生活的平衡。希望自己是一个做事可靠、相处起来也舒服的人。",
         "en": "I am easy to talk to and value sincerity, mutual respect and following through. I listen to constructive suggestions and adjust when they make sense. I make time to learn and reflect, and I value balance between work and life. I want to be someone people can rely on and feel comfortable around."
+      },
+      {
+        "zh": "平时我喜欢钻研新技术，也乐于做团队负责人信得过的副手：把方向拆成任务、补上细节、及时同步进度。",
+        "en": "I enjoy exploring new technologies. On a team, I like being a dependable right hand to the lead: turning priorities into tasks, following through on details and keeping them informed."
       }
     ],
     "growth": {

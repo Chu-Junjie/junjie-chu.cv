@@ -85,9 +85,9 @@
     });
   });
   document.addEventListener('toggle', event => {
-    if (event.target.matches?.('.case-details') && event.target.open) {
-      const body = event.target.querySelector('.detail-body');
-      if (body && !location.hash.includes(event.target.id.replace('-details', '-quality'))) {
+    if (event.target.matches?.('.project-details') && event.target.open) {
+      const body = event.target.querySelector('.project-body');
+      if (body && !body.contains(document.getElementById(location.hash.slice(1)))) {
         enter(body, 0, 4);
       }
     }

@@ -4,8 +4,8 @@ const UI = {
   sideNote:['软件开发 · 数据与 AI · 项目协作','Software · Data & AI · Collaboration'],
   heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewCapstone:['查看毕业项目 ↓','View capstone ↓'], allResumes:['全部简历版本 ↓','All résumé versions ↓'],
   graduatePreview:['毕业后预览 · 模拟 2027 年 2 月','Graduation preview · February 2027 scenario'], exitPreview:['返回公开页','Return to public view'],
-  personal:['工作之外','Beyond work'], growth:['我在练习的事','What I am working on'],
-  projects:['精选项目','Selected projects'], projectsIntro:['从目标到实现，关注我的具体贡献与验证方式。','The problem, my contribution and how the work was validated.'],
+  personal:['生活','Life'], guardian:['守护者','Defender'], growth:['我在练习的事','What I am working on'],
+  projects:['精选项目','Selected projects'], projectsIntro:['选择项目展开，查看我的贡献、验证结果和演示截图。','Open a project to see my contribution, validation results and demo screenshots.'],
   experience:['工作经历','Work experience'], education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
   contactTitle:['进一步交流','Get in touch'], contactIntro:['欢迎就项目合作或工作机会联系我。','Open to conversations about projects and job opportunities.'],
   print:['打印详细网页','Print detailed webpage'], generalDownload:['下载标准个人简历 · PDF','Download standard résumé · PDF'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['简历下载 · 中文与英文','Download CVs · Chinese & English'], downloadIntro:['六个版本均提供中文 PDF、可编辑 Word 和对应英文 PDF。按投递方向选择，网页保留完整项目细节。','Each of the six versions has a Chinese PDF, an editable Chinese Word file and a corresponding English PDF. Choose a version for your application; the website retains the full project details.'], englishDownload:['英文版 ↓','English PDF ↓'], backTop:['回到顶部 ↑','Back to top ↑'],
@@ -20,6 +20,8 @@ const tx = value => escapeHTML(t(value));
 const $ = id => document.getElementById(id);
 
 function renderProjects(){
+  const expandLabel=lang==='en'?'Show details':'展开详情';
+  const collapseLabel=lang==='en'?'Hide details':'收起详情';
   $('project-directory').innerHTML=DATA.projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
   $('project-directory').setAttribute('aria-label',ui('directory'));
   $('mobile-project-links').innerHTML=DATA.projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
@@ -29,17 +31,25 @@ function renderProjects(){
     return `<a class="feature-card${p.kind==='capstone'?' feature-card--capstone':''}" href="#${p.id}"><span class="feature-top"><span>0${i+1}</span><span aria-hidden="true">↘</span></span><span class="feature-category">${tx(p.category)}</span><strong>${tx(p.title)}</strong><span class="feature-result">${tx(p.result)}</span></a>`;
   }).join('');
   $('projects-list').innerHTML=DATA.projects.map(p=>`<article class="project${p.kind==='capstone'?' project--capstone':''}" id="${p.id}" aria-labelledby="${p.id}-title">
-    <div class="project-top"><p class="eyebrow">${tx(p.category)}</p><span class="project-date">${tx(p.meta)}</span></div>
-    <h3 id="${p.id}-title">${tx(p.title)}</h3><p class="project-role">${tx(p.role)}</p>
-    <p class="project-result">${tx(p.result)}</p>
+    <details class="project-details" id="${p.id}-details">
+      <summary class="project-summary" aria-labelledby="${p.id}-title">
+        <span class="project-top"><span class="eyebrow">${tx(p.category)}</span><span class="project-date">${tx(p.meta)}</span></span>
+        <h3 id="${p.id}-title">${tx(p.title)}</h3>
+        <span class="project-toggle" aria-hidden="true"><span class="project-toggle-show">${expandLabel}</span><span class="project-toggle-hide">${collapseLabel}</span></span>
+        <span class="project-role">${tx(p.role)}</span>
+        <span class="project-result">${tx(p.result)}</span>
+      </summary>
+      <div class="project-body">
     <dl class="case-summary"><div><dt>${ui('problem')}</dt><dd>${tx(p.problem)}</dd></div><div><dt>${ui('contribution')}</dt><dd>${tx(p.contribution)}</dd></div></dl>
     ${p.bullets?.length?`<div class="project-delivery"><h4>${ui('delivery')}</h4><ul>${p.bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul></div>`:''}
     <p class="project-stack">${p.stack.map(escapeHTML).join(' · ')}</p>
     ${p.screenshots?`<div class="project-gallery">${p.screenshots.map(shot=>`<figure><a href="assets/scamwise/${shot.file}.jpg" target="_blank" rel="noopener" aria-label="${tx(shot)} — ${ui('original')}"><img src="assets/scamwise/${shot.file}.jpg" alt="ScamWise Campus — ${tx(shot)}" loading="lazy" decoding="async" width="474" height="1001"></a><figcaption>${tx(shot)}</figcaption></figure>`).join('')}</div>`:''}
-    ${p.evidence?`<div class="evidence-gallery${p.evidence.length===3?' evidence-gallery-three':''}">${p.evidence.map(shot=>`<figure><a href="${escapeHTML(shot.src)}" target="_blank" rel="noopener" aria-label="${tx(shot.caption)} — ${ui('original')}"><img src="${escapeHTML(shot.src)}" alt="${tx(shot.caption)}" loading="lazy" decoding="async" width="${shot.width}" height="${shot.height}"></a><figcaption>${tx(shot.caption)}<span>${tx(shot.source)}</span></figcaption></figure>`).join('')}</div>`:''}
+    ${p.evidence?`<div class="evidence-gallery${p.evidence.length===3?' evidence-gallery-three':''}">${p.evidence.map(shot=>`<figure class="${shot.width<shot.height?'evidence-portrait':'evidence-landscape'}"><a href="${escapeHTML(shot.src)}" target="_blank" rel="noopener" aria-label="${tx(shot.caption)} — ${ui('original')}"><img src="${escapeHTML(shot.src)}" alt="${tx(shot.caption)}" loading="lazy" decoding="async" width="${shot.width}" height="${shot.height}"></a><figcaption>${tx(shot.caption)}<span>${tx(shot.source)}</span></figcaption></figure>`).join('')}</div>`:''}
     ${p.boundary?`<p class="project-boundary">${tx(p.boundary)}</p>`:''}
     <div class="project-links">${(p.links||[]).map(link=>`<a class="text-link" href="${escapeHTML(link.url)}" target="_blank" rel="noopener">${t(link.label)==='GitHub'?ui('code'):tx(link.label)+' ↗'}</a>`).join('')}</div>
-    <details class="case-details" id="${p.id}-details"><summary>${ui('details')}</summary><div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p>${p.reflection?`<h4>${ui('lesson')}</h4><p>${tx(p.reflection)}</p>`:''}</div></details>
+    <div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p>${p.reflection?`<h4>${ui('lesson')}</h4><p>${tx(p.reflection)}</p>`:''}</div>
+      </div>
+    </details>
   </article>`).join('');
 }
 function renderTimeline(id,items){
@@ -80,7 +90,8 @@ function render(){
   document.querySelectorAll('[data-mobile-nav]').forEach(el=>el.textContent=MOBILE_NAV[el.dataset.mobileNav][lang==='en'?1:0]);
   $('name').textContent=lang==='en'?'Junjie Chu':'褚俊杰';
   $('role-text').textContent=t(DATA.role); $('degree-text').textContent=t(graduated?DATA.graduation.completedDegree:DATA.degree);
-  $('hero-title').textContent=t(DATA.hero); $('summary-text').textContent=t(DATA.summary);
+  $('hero-title').textContent=t(DATA.hero); $('profile-lead').textContent=t(DATA.profileLead);
+  $('summary-text').textContent=t(DATA.summary); $('profile-focus').textContent=t(DATA.profileFocus);
   $('graduation-text').hidden=!graduated;
   $('graduation-text').textContent=graduated?t(DATA.graduation.completed):'';
   $('graduate-preview').hidden=!preview;
@@ -111,7 +122,7 @@ function setLang(next){
     .filter(element=>element.getBoundingClientRect().top<=guide).at(-1):null;
   const rect=readingTarget?.getBoundingClientRect();
   const progress=rect?.height?Math.min(1,Math.max(0,(guide-rect.top)/rect.height)):0;
-  const detailStates=[...document.querySelectorAll('.case-details')].map(el=>[el.id,el.open]);
+  const detailStates=[...document.querySelectorAll('.project-details')].map(el=>[el.id,el.open]);
   lang=next==='en'?'en':'zh';
   try{localStorage.setItem('site-lang',lang)}catch{}
   const url=new URL(location.href); url.searchParams.set('lang',lang);
@@ -140,11 +151,16 @@ function focusDestination(target){
   }
   target.focus({preventScroll:true});
 }
+function openFragmentDetails(target){
+  const detail=target.closest('details')||target.querySelector(':scope > .project-details');
+  if(detail)detail.open=true;
+  return detail;
+}
 function moveToFragment({target,top},{smooth=false,focus=false}={}){
   const behavior=smooth&&!reducedMotion.matches?'smooth':'instant';
   document.dispatchEvent(new CustomEvent('portfolio:navigate',{detail:{smooth:behavior==='smooth'}}));
-  const detail=target.closest('details');if(detail)detail.open=true;
-  if(focus)focusDestination(target);
+  const detail=openFragmentDetails(target);
+  if(focus)focusDestination(target.matches('.project, .project-details')?detail?.querySelector('summary')||target:target);
   if(top)window.scrollTo({top:0,behavior});
   else target.scrollIntoView({block:'start',behavior});
   updateNavigation();
@@ -152,7 +168,7 @@ function moveToFragment({target,top},{smooth=false,focus=false}={}){
 let fragmentFrame=0;
 function revealHash(scroll=true){
   const destination=fragmentDestination(location.hash);if(!destination)return;
-  const detail=destination.target.closest('details');if(detail)detail.open=true;
+  openFragmentDetails(destination.target);
   if(scroll){
     cancelAnimationFrame(fragmentFrame);
     fragmentFrame=requestAnimationFrame(()=>moveToFragment(destination));
@@ -195,7 +211,7 @@ document.addEventListener('click',event=>{
 $('lang-toggle').addEventListener('click',()=>setLang(lang==='zh'?'en':'zh'));
 $('print-button').addEventListener('click',()=>window.print());
 let printStates=[];
-window.addEventListener('beforeprint',()=>{printStates=[...document.querySelectorAll('.case-details')].map(el=>[el,el.open]);printStates.forEach(([el])=>el.open=true)});
+window.addEventListener('beforeprint',()=>{printStates=[...document.querySelectorAll('.project-details')].map(el=>[el,el.open]);printStates.forEach(([el])=>el.open=true)});
 window.addEventListener('afterprint',()=>printStates.forEach(([el,open])=>el.open=open));
 let saved;try{saved=localStorage.getItem('site-lang')}catch{}
 const query=new URLSearchParams(location.search).get('lang');
