@@ -5,6 +5,8 @@
   const running = new Set();
   let observer;
   let frame = 0;
+  let navigationInProgress = false;
+  let navigationTimer;
   let progress = document.getElementById('reading-progress');
   if (!progress) {
     progress = document.createElement('div');
@@ -13,14 +15,14 @@
     document.body.append(progress);
   }
 
-  function enter(element, delay = 0, distance = 12) {
+  function enter(element, delay = 0, distance = 7) {
     if (revealed.has(element)) return;
     revealed.add(element);
-    if (preference.matches || !element.animate || element.contains(document.activeElement)) return;
+    if (navigationInProgress || preference.matches || !element.animate || element.contains(document.activeElement)) return;
     const animation = element.animate([
-      { opacity: 0.45, transform: `translateY(${distance}px)` },
+      { opacity: 0.72, transform: `translateY(${distance}px)` },
       { opacity: 1, transform: 'translateY(0)' }
-    ], { duration: 460, delay, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'none' });
+    ], { duration: 360, delay, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'none' });
     running.add(animation);
     animation.finished.catch(() => {}).finally(() => running.delete(animation));
   }
@@ -61,6 +63,17 @@
     running.forEach(animation => animation.cancel());
     running.clear();
   }
+  function endNavigation() {
+    navigationInProgress = false;
+    clearTimeout(navigationTimer);
+  }
+  document.addEventListener('portfolio:navigate', event => {
+    stopAnimations();
+    endNavigation();
+    navigationInProgress = event.detail.smooth;
+    // Keep fast navigation through long sections from triggering entry effects.
+    if (navigationInProgress) navigationTimer = setTimeout(endNavigation, 1600);
+  });
   preference.addEventListener('change', () => {
     stopAnimations();
     observeContent();
@@ -81,6 +94,7 @@
     scheduleProgress();
   }, true);
   addEventListener('scroll', scheduleProgress, { passive: true });
+  document.addEventListener('scrollend', endNavigation);
   addEventListener('resize', scheduleProgress);
   addEventListener('load', scheduleProgress);
   addEventListener('hashchange', stopAnimations);

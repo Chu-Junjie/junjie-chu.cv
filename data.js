@@ -8,6 +8,25 @@ const DATA = {
     "zh": "JCU 新加坡 · 本科在读",
     "en": "JCU Singapore · Undergraduate"
   },
+  "graduation": {
+    "confirmed": false,
+    "expected": {
+      "zh": "信息技术学士 · 预计 2027 年 2 月毕业",
+      "en": "Bachelor of Information Technology · Expected February 2027"
+    },
+    "completed": {
+      "zh": "信息技术学士 · 2027 年 2 月已毕业",
+      "en": "Bachelor of Information Technology · Graduated February 2027"
+    },
+    "completedDegree": {
+      "zh": "JCU 新加坡 · 信息技术学士",
+      "en": "JCU Singapore · Bachelor of IT"
+    },
+    "completedDate": {
+      "zh": "2025.01 – 2027.02",
+      "en": "Jan 2025 – Feb 2027"
+    }
+  },
   "contact": [
     {
       "key": "phone",
@@ -61,6 +80,10 @@ const DATA = {
       "zh": "背景",
       "en": "Background"
     },
+    "personal": {
+      "zh": "工作之外",
+      "en": "Beyond work"
+    },
     "resources": {
       "zh": "联系",
       "en": "Contact"
@@ -69,8 +92,8 @@ const DATA = {
   "education": [
     {
       "date": {
-        "zh": "2025.01 – 2027.03",
-        "en": "Jan 2025 – Mar 2027"
+        "zh": "2025.01 – 2027.02（预计）",
+        "en": "Jan 2025 – Feb 2027 (expected)"
       },
       "title": {
         "zh": "詹姆斯库克大学新加坡校区",
@@ -312,6 +335,60 @@ const DATA = {
     }
   ],
   "projects": [
+    {
+      "id": "sg-navi",
+      "kind": "capstone",
+      "title": { "zh": "SG-Navi", "en": "SG-Navi" },
+      "category": { "zh": "本科毕业项目 / 跨学科协作", "en": "Capstone / Cross-disciplinary collaboration" },
+      "role": { "zh": "开发团队产品负责人｜RAG、官方来源与技术验收", "en": "Product Owner for the development team · RAG, official sources and technical acceptance" },
+      "meta": { "zh": "2026 · 团队项目", "en": "2026 · Team project" },
+      "result": { "zh": "英语租房押金与消费投诉 · 两条公开原型流程", "en": "English rental deposit and consumer complaint journeys" },
+      "problem": {
+        "zh": "帮助用户为新加坡租房押金或消费投诉问题整理事实、补齐信息，并查阅相关官方来源。",
+        "en": "Help users in Singapore organise facts, identify missing information and find official sources when preparing a rental deposit or consumer complaint enquiry."
+      },
+      "contribution": {
+        "zh": "担任开发团队产品负责人，负责检索增强生成（RAG）、官方来源整理、共享接口契约与联调技术验收。金融报价等分析由商科组员负责。",
+        "en": "Served as Product Owner for the development team and took responsibility for retrieval-augmented generation (RAG), official source curation, shared interface contracts and integration acceptance. Business students handled the financial analyses, including quotations."
+      },
+      "bullets": [
+        {
+          "zh": "与前后端开发成员协调，将问题输入、事实确认、缺失信息追问和官方来源查看串成可验收的用户流程。",
+          "en": "Worked with frontend and backend teammates to define an acceptance flow from intake and fact confirmation to follow-up questions and official source excerpts."
+        },
+        {
+          "zh": "负责官方资料与检索模块，支持按所选指引显示对应来源摘录，方便用户核对出处。",
+          "en": "Owned source curation and retrieval so that users can inspect the official excerpt tied to a selected guidance item."
+        }
+      ],
+      "stack": ["Python", "Flask", "JavaScript", "RAG", "PostgreSQL", "GitHub Pages", "Render"],
+      "evidence": [
+        {
+          "src": "assets/evidence/sg-navi-home.png",
+          "width": 1440,
+          "height": 1000,
+          "caption": { "zh": "公开演示首页：问题描述和两类示例入口", "en": "Published demo: problem intake and two example scenarios" },
+          "source": { "zh": "SG-Navi 线上页面实拍 · 2026.11.12", "en": "Screenshot of the live SG-Navi page · 12 Nov 2026" }
+        }
+      ],
+      "decision": {
+        "zh": "先让用户确认事实，再显示相关的准备事项、求助渠道与官方出处。原型不判断法律资格，也不代为提交案件。",
+        "en": "The flow asks users to confirm facts before showing preparation steps, support channels and official sources. The prototype does not assess legal eligibility or file cases."
+      },
+      "validation": {
+        "zh": "项目仓库记录：2026 年 11 月 6 日验收覆盖两条已发布的浏览器流程；固定路由样例 39/40 通过，仍保留一项已知未命中记录。",
+        "en": "The repository records acceptance of two published browser journeys on 6 November 2026. The fixed routing suite passed 39 of 40 cases, with the known miss documented."
+      },
+      "boundary": {
+        "zh": "跨学科团队原型。页面和测试结果属于团队交付；公开演示仅用于资料研究与准备。",
+        "en": "Cross-disciplinary team prototype. The published interface and test results reflect team delivery. The demo supports research and preparation."
+      },
+      "links": [
+        { "label": { "zh": "在线演示", "en": "Live demo" }, "url": "https://chu-junjie.github.io/SG-Navi/" },
+        { "label": { "zh": "GitHub", "en": "GitHub" }, "url": "https://github.com/Chu-Junjie/SG-Navi" },
+        { "label": { "zh": "联调验收记录", "en": "Integration acceptance" }, "url": "https://github.com/Chu-Junjie/SG-Navi/blob/main/docs/task15-acceptance.md" }
+      ]
+    },
     {
       "title": {
         "zh": "ScamWise Campus",
@@ -1197,16 +1274,29 @@ const DATA = {
     }
   ],
   "footer": {
-    "zh": "更新于 2026 年 10 月 15 日",
-    "en": "Updated 15 October 2026"
+    "zh": "更新于 2026 年 11 月 12 日",
+    "en": "Updated 12 November 2026"
   },
   "summary": {
-    "zh": "詹姆斯库克大学新加坡校区信息技术专业 2027 届本科生，GPA 5.85/7.00。在 Basilos 参与 AI 人脸一致性连接器开发、内部部署与测试；独立开发反诈骗 Android 应用，编写 102 项自动化测试。曾任四人团队产品负责人，将需求整理为用户故事与验收标准，推进 3 轮迭代，团队按期交付 10 个用户故事。此前的质量与运营工作积累了数据维护、材料审核和跨团队沟通经验。现居新加坡，英语可作为工作语言。",
-    "en": "Information Technology undergraduate at James Cook University Singapore, graduating in 2027 with a GPA of 5.85/7.00. At Basilos, I contributed to an AI face-consistency connector from development through internal deployment and testing. I independently built an anti-scam Android app with 102 automated tests. As product owner in a four-person team, I translated requirements into user stories and acceptance criteria across three iterations; the team delivered 10 user stories on time. Earlier quality and operations roles developed my experience in data maintenance, document review and cross-team coordination. Based in Singapore and comfortable working in English."
+    "zh": "我在新加坡，关注如何把软件需求落实为可验证的成果。SG-Navi 毕业项目中，我担任开发团队产品负责人，负责 RAG、官方来源和技术验收。我也曾在 Basilos 参与 AI 人脸一致性连接器的开发与验证，并独立开发含 102 项自动化测试的 Android 反诈骗应用。",
+    "en": "I focus on turning software requirements into deliverables that teams can verify. For the SG-Navi capstone, I served as Product Owner for the development team and owned RAG, official sources and technical acceptance. I also contributed to an AI face-consistency connector at Basilos and independently built an Android anti-scam app with 102 automated tests. I am based in Singapore."
   },
-  "availability": {
-    "zh": "2026 年 12 月下旬可全职到岗 · 预计 2027 年 3 月毕业",
-    "en": "Available full-time from late December 2026 · Expected graduation March 2027"
+  "personal": {
+    "mbti": "ISFJ",
+    "paragraphs": [
+      {
+        "zh": "我做事比较务实，目标明确后会提前规划，留出时间把细节做好。遇到问题时，我习惯先弄清原因，再想怎么解决。比起赶在最后交付，我更喜欢按自己的节奏稳步推进。",
+        "en": "I am practical and like to plan once I know what I am aiming for. I leave time for the details and try to understand the cause of a problem before deciding what to do. I prefer steady progress to a last-minute rush."
+      },
+      {
+        "zh": "相处上，我比较随和，看重真诚、尊重和说到做到。别人提出合理的建议，我愿意听，也愿意调整。我会留时间学习和复盘，也重视工作和生活的平衡。希望自己是一个做事可靠、相处起来也舒服的人。",
+        "en": "I am easy to talk to and value sincerity, mutual respect and following through. I listen to constructive suggestions and adjust when they make sense. I make time to learn and reflect, and I value balance between work and life. I want to be someone people can rely on and feel comfortable around."
+      }
+    ],
+    "growth": {
+      "zh": "我有时会因为想把成果打磨得更完整，分享进度晚了一些。现在我会早点拿出阶段成果、主动征求反馈。看到优秀的同伴也会激励我，但我更想用自己的长期进步来衡量成长。",
+      "en": "My standards sometimes make me wait too long before sharing work in progress. I am practising sharing drafts earlier and asking for feedback. Seeing others do well motivates me, and I am learning to measure growth against my own longer-term progress."
+    }
   },
   "resumes": [
     {
@@ -1245,8 +1335,8 @@ const DATA = {
     "en": "Professional profile"
   },
   "featured": [
+    "sg-navi",
     "scamwise",
-    "wildlife",
-    "recommendation"
+    "wildlife"
   ]
 };

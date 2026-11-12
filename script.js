@@ -2,14 +2,16 @@
 const UI = {
   skip:['跳至正文','Skip to content'], location:['新加坡','Singapore'], moreContact:['更多联系方式','More contact details'],
   sideNote:['软件开发 · 数据与 AI · 项目协作','Software · Data & AI · Collaboration'],
-  heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewProjects:['浏览项目 ↓','Explore projects ↓'], viewExperience:['查看工作经历 ↓','View work experience ↓'], contactMe:['邮件联系 ↗','Get in touch ↗'],
+  heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewCapstone:['查看毕业项目 ↓','View capstone ↓'], allResumes:['全部简历版本 ↓','All résumé versions ↓'],
+  graduatePreview:['毕业后预览 · 模拟 2027 年 2 月','Graduation preview · February 2027 scenario'], exitPreview:['返回公开页','Return to public view'],
+  personal:['工作之外','Beyond work'], growth:['我在练习的事','What I am working on'],
   projects:['精选项目','Selected projects'], projectsIntro:['从目标到实现，关注我的具体贡献与验证方式。','The problem, my contribution and how the work was validated.'],
   experience:['工作经历','Work experience'], education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
-  contactTitle:['进一步交流','Get in touch'], contactIntro:['欢迎就项目、实习与工作机会联系我。','Open to conversations about projects, internships and graduate opportunities.'],
+  contactTitle:['进一步交流','Get in touch'], contactIntro:['欢迎就项目合作或工作机会联系我。','Open to conversations about projects and job opportunities.'],
   print:['打印详细网页','Print detailed webpage'], generalDownload:['下载标准个人简历 · PDF','Download standard résumé · PDF'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['简历下载 · 中文与英文','Download CVs · Chinese & English'], downloadIntro:['六个版本均提供中文 PDF、可编辑 Word 和对应英文 PDF。按投递方向选择，网页保留完整项目细节。','Each of the six versions has a Chinese PDF, an editable Chinese Word file and a corresponding English PDF. Choose a version for your application; the website retains the full project details.'], englishDownload:['英文版 ↓','English PDF ↓'], backTop:['回到顶部 ↑','Back to top ↑'],
   problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], delivery:['实现与交付','Implementation & delivery'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['工程方法、验证与复盘','Methods, validation & reflection'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps'], directory:['项目目录','Project directory']
 };
-const MOBILE_NAV = {about:['概览','About'],projects:['项目','Projects'],experience:['经历','Career'],education:['背景','Study'],resources:['联系','Contact']};
+const MOBILE_NAV = {about:['概览','Intro'],projects:['项目','Projects'],experience:['经历','Work'],education:['背景','Study'],personal:['生活','Life'],resources:['联系','Contact']};
 let lang='zh';
 const t = value => value?.[lang] ?? value?.zh ?? '';
 const ui = key => UI[key][lang==='en'?1:0];
@@ -24,9 +26,9 @@ function renderProjects(){
   $('mobile-project-links').setAttribute('aria-label',ui('directory'));
   $('featured-list').innerHTML=DATA.featured.map((id,i)=>{
     const p=DATA.projects.find(p=>p.id===id);
-    return `<a class="feature-card" href="#${p.id}"><span class="feature-top"><span>0${i+1}</span><span aria-hidden="true">↗</span></span><span class="feature-category">${tx(p.category)}</span><strong>${tx(p.title)}</strong><span class="feature-result">${tx(p.result)}</span></a>`;
+    return `<a class="feature-card${p.kind==='capstone'?' feature-card--capstone':''}" href="#${p.id}"><span class="feature-top"><span>0${i+1}</span><span aria-hidden="true">↘</span></span><span class="feature-category">${tx(p.category)}</span><strong>${tx(p.title)}</strong><span class="feature-result">${tx(p.result)}</span></a>`;
   }).join('');
-  $('projects-list').innerHTML=DATA.projects.map((p,i)=>`<article class="project" id="${p.id}" aria-labelledby="${p.id}-title">
+  $('projects-list').innerHTML=DATA.projects.map(p=>`<article class="project${p.kind==='capstone'?' project--capstone':''}" id="${p.id}" aria-labelledby="${p.id}-title">
     <div class="project-top"><p class="eyebrow">${tx(p.category)}</p><span class="project-date">${tx(p.meta)}</span></div>
     <h3 id="${p.id}-title">${tx(p.title)}</h3><p class="project-role">${tx(p.role)}</p>
     <p class="project-result">${tx(p.result)}</p>
@@ -37,7 +39,7 @@ function renderProjects(){
     ${p.evidence?`<div class="evidence-gallery${p.evidence.length===3?' evidence-gallery-three':''}">${p.evidence.map(shot=>`<figure><a href="${escapeHTML(shot.src)}" target="_blank" rel="noopener" aria-label="${tx(shot.caption)} — ${ui('original')}"><img src="${escapeHTML(shot.src)}" alt="${tx(shot.caption)}" loading="lazy" decoding="async" width="${shot.width}" height="${shot.height}"></a><figcaption>${tx(shot.caption)}<span>${tx(shot.source)}</span></figcaption></figure>`).join('')}</div>`:''}
     ${p.boundary?`<p class="project-boundary">${tx(p.boundary)}</p>`:''}
     <div class="project-links">${(p.links||[]).map(link=>`<a class="text-link" href="${escapeHTML(link.url)}" target="_blank" rel="noopener">${t(link.label)==='GitHub'?ui('code'):tx(link.label)+' ↗'}</a>`).join('')}</div>
-    <details class="case-details" id="${p.id}-details" open><summary>${ui('details')}</summary><div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p>${p.reflection?`<h4>${ui('lesson')}</h4><p>${tx(p.reflection)}</p>`:''}</div></details>
+    <details class="case-details" id="${p.id}-details"><summary>${ui('details')}</summary><div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p>${p.reflection?`<h4>${ui('lesson')}</h4><p>${tx(p.reflection)}</p>`:''}</div></details>
   </article>`).join('');
 }
 function renderTimeline(id,items){
@@ -47,7 +49,9 @@ function renderDownloads(){
   $('downloads-list').innerHTML=DATA.resumes.map(p=>{
     const name=`褚俊杰_${p.zh}`;
     const format=lang==='zh'?'中文 / English · 一页':'Chinese / English · One page';
-    return `<article class="resume-option"><h4>${tx(p)}</h4><p>${format}</p><div><a class="download-pdf" href="assets/resumes/${escapeHTML(p.file)}.pdf" download="${escapeHTML(name)}.pdf">PDF ↓</a><a href="assets/resumes/${escapeHTML(p.file)}.docx" download="${escapeHTML(name)}.docx">Word ↓</a><a class="download-english" href="assets/resumes/${escapeHTML(p.file)}-en.pdf" download="Junjie_Chu_${escapeHTML(p.file)}_EN.pdf">${ui('englishDownload')}</a></div></article>`;
+    const chinese=lang==='zh'?'中文版':'Chinese version';
+    const english=lang==='zh'?'英文版':'English version';
+    return `<article class="resume-option"><h4>${tx(p)}</h4><p>${format}</p><div><a class="download-pdf" aria-label="${tx(p)} · ${chinese} PDF" href="assets/resumes/${escapeHTML(p.file)}.pdf" download="${escapeHTML(name)}.pdf">PDF ↓</a><a aria-label="${tx(p)} · ${chinese} Word" href="assets/resumes/${escapeHTML(p.file)}.docx" download="${escapeHTML(name)}.docx">Word ↓</a><a class="download-english" aria-label="${tx(p)} · ${english} PDF" href="assets/resumes/${escapeHTML(p.file)}-en.pdf" download="Junjie_Chu_${escapeHTML(p.file)}_EN.pdf">${ui('englishDownload')}</a></div></article>`;
   }).join('');
   const isEnglish=lang==='en';
   document.querySelectorAll('[data-ui="generalDownload"]').forEach(a=>{
@@ -67,14 +71,24 @@ function renderContacts(){
   }
 }
 function render(){
+  const preview=new URLSearchParams(location.search).get('preview')==='graduate'&&!DATA.graduation.confirmed;
+  const graduated=preview||DATA.graduation.confirmed;
   document.documentElement.lang=lang==='en'?'en':'zh-CN';
   document.body.classList.toggle('lang-en',lang==='en');
   document.querySelectorAll('[data-ui]').forEach(el=>el.textContent=ui(el.dataset.ui));
   document.querySelectorAll('[data-nav]').forEach(el=>el.textContent=t(DATA.nav[el.dataset.nav]));
   document.querySelectorAll('[data-mobile-nav]').forEach(el=>el.textContent=MOBILE_NAV[el.dataset.mobileNav][lang==='en'?1:0]);
   $('name').textContent=lang==='en'?'Junjie Chu':'褚俊杰';
-  $('role-text').textContent=t(DATA.role); $('degree-text').textContent=t(DATA.degree);
-  $('hero-title').textContent=t(DATA.hero); $('summary-text').textContent=t(DATA.summary); $('availability-text').textContent=t(DATA.availability);
+  $('role-text').textContent=t(DATA.role); $('degree-text').textContent=t(graduated?DATA.graduation.completedDegree:DATA.degree);
+  $('hero-title').textContent=t(DATA.hero); $('summary-text').textContent=t(DATA.summary);
+  $('graduation-text').textContent=t(graduated?DATA.graduation.completed:DATA.graduation.expected);
+  $('graduate-preview').hidden=!preview;
+  const publicUrl=new URL(location.href);
+  publicUrl.searchParams.delete('preview');
+  $('exit-graduate-preview').setAttribute('href',(publicUrl.pathname.split('/').at(-1)||'./')+publicUrl.search+publicUrl.hash);
+  $('personal-type').textContent=DATA.personal.mbti;
+  $('personal-story').innerHTML=DATA.personal.paragraphs.map(p=>`<p>${tx(p)}</p>`).join('');
+  $('personal-growth-text').textContent=t(DATA.personal.growth);
   $('lang-toggle').setAttribute('aria-label',lang==='zh'?'Switch to English':'切换为中文');
   $('lang-toggle').setAttribute('aria-pressed',String(lang==='en'));
   $('side-nav').setAttribute('aria-label',lang==='zh'?'页面导航':'Page navigation');
@@ -82,7 +96,8 @@ function render(){
   $('featured-list').setAttribute('aria-label',lang==='zh'?'代表项目':'Featured projects');
   document.title=lang==='zh'?'褚俊杰 Junjie Chu — 项目与经历':'Junjie Chu — Projects & Experience';
   document.querySelector('meta[name="description"]').content=t(DATA.summary);
-  renderProjects(); renderTimeline('experience-list',DATA.experience); renderTimeline('education-list',DATA.education);
+  renderProjects(); renderTimeline('experience-list',DATA.experience);
+  renderTimeline('education-list',graduated?DATA.education.map(item=>item.current?{...item,date:DATA.graduation.completedDate}:item):DATA.education);
   $('skills-list').innerHTML=DATA.skills.map(p=>`<div class="skill-group"><h4>${tx(p.label)}</h4><p>${p.items.map(escapeHTML).join(' · ')}</p></div>`).join('');
   $('leadership-list').innerHTML=DATA.leadership.map(p=>`<article class="lead-item"><h4>${tx(p.title)}</h4><p>${tx(p.body)}</p>${p.link?`<a class="text-link certificate-link" href="${escapeHTML(p.link.url)}" target="_blank" rel="noopener">${tx(p.link.label)} ↗</a>`:''}</article>`).join('');
   renderDownloads(); renderContacts();
@@ -90,26 +105,66 @@ function render(){
   document.dispatchEvent(new Event('portfolio:render'));
 }
 function setLang(next){
+  const guide=(parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0)+1;
+  const readingTarget=scrollY>guide?[...document.querySelectorAll('.section, .project, #downloads')]
+    .filter(element=>element.getBoundingClientRect().top<=guide).at(-1):null;
+  const rect=readingTarget?.getBoundingClientRect();
+  const progress=rect?.height?Math.min(1,Math.max(0,(guide-rect.top)/rect.height)):0;
   const detailStates=[...document.querySelectorAll('.case-details')].map(el=>[el.id,el.open]);
   lang=next==='en'?'en':'zh';
   try{localStorage.setItem('site-lang',lang)}catch{}
   const url=new URL(location.href); url.searchParams.set('lang',lang);
   try{history.replaceState(null,'',url)}catch{}
-  render(); detailStates.forEach(([id,open])=>{if($(id))$(id).open=open}); revealHash(false); updateNavigation();
+  render(); detailStates.forEach(([id,open])=>{if($(id))$(id).open=open});
+  const translatedTarget=readingTarget&&$(readingTarget.id);
+  if(translatedTarget){
+    const translated=translatedTarget.getBoundingClientRect();
+    window.scrollBy({top:translated.top+translated.height*progress-guide,behavior:'instant'});
+  }
+  updateNavigation();
 }
+const fragmentAliases=new Map([['skills','skills-list'],['leadership','leadership-list']]);
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+function fragmentDestination(hash){
+  let id;try{id=decodeURIComponent(hash.slice(1))}catch{return null}
+  if(!id)return null;
+  const top=id==='top';
+  const target=top?$('name'):$(fragmentAliases.get(id)||id);
+  return target?{target,top}:null;
+}
+function focusDestination(target){
+  if(!target.hasAttribute('tabindex')&&target.tabIndex<0){
+    target.tabIndex=-1;
+    target.addEventListener('blur',()=>target.removeAttribute('tabindex'),{once:true});
+  }
+  target.focus({preventScroll:true});
+}
+function moveToFragment({target,top},{smooth=false,focus=false}={}){
+  const behavior=smooth&&!reducedMotion.matches?'smooth':'instant';
+  document.dispatchEvent(new CustomEvent('portfolio:navigate',{detail:{smooth:behavior==='smooth'}}));
+  const detail=target.closest('details');if(detail)detail.open=true;
+  if(focus)focusDestination(target);
+  if(top)window.scrollTo({top:0,behavior});
+  else target.scrollIntoView({block:'start',behavior});
+  updateNavigation();
+}
+let fragmentFrame=0;
 function revealHash(scroll=true){
-  let id; try{id=decodeURIComponent(location.hash.slice(1))}catch{return}
-  // Legacy section links remain valid after reorganising the page.
-  const aliases={skills:'skills-list',leadership:'leadership-list'};
-  const target=$(aliases[id]||id); if(!target)return;
-  const detail=target.closest('details'); if(detail)detail.open=true;
-  if(scroll)requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:'instant'}));
+  const destination=fragmentDestination(location.hash);if(!destination)return;
+  const detail=destination.target.closest('details');if(detail)detail.open=true;
+  if(scroll){
+    cancelAnimationFrame(fragmentFrame);
+    fragmentFrame=requestAnimationFrame(()=>moveToFragment(destination));
+  }
 }
 function updateNavigation(){
   const links=[...document.querySelectorAll('#side-nav a')];
   const threshold=innerWidth<=900?$('mobile-navigation').getBoundingClientRect().bottom+32:160;
   let active=links[0];
-  for(const link of links){if($(link.hash.slice(1)).getBoundingClientRect().top<=threshold)active=link}
+  for(const link of links){
+    const destination=fragmentDestination(link.hash);
+    if(destination&&destination.target.getBoundingClientRect().top<=threshold)active=link;
+  }
   if(window.scrollY+innerHeight>=document.documentElement.scrollHeight-4)active=links.at(-1);
   for(const link of document.querySelectorAll('#side-nav a,#mobile-chapters a')){if(link.hash===active?.hash)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')}
 }
@@ -123,10 +178,18 @@ document.addEventListener('keydown',event=>{
 });
 document.addEventListener('pointerdown',event=>{if(projectMenu.open&&!projectMenu.contains(event.target))projectMenu.open=false});
 document.addEventListener('focusin',event=>{if(projectMenu.open&&!projectMenu.contains(event.target))projectMenu.open=false});
-$('mobile-navigation').addEventListener('click',event=>{
-  const link=event.target.closest('a[href^="#"]');if(!link)return;
+document.addEventListener('click',event=>{
+  if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+  const link=event.target.closest?.('a[href^="#"]');
+  if(!link||link.hasAttribute('download')||(link.target&&link.target!=='_self'))return;
+  const hash=link.hash;
+  const destination=fragmentDestination(hash);if(!destination)return;
+  // Changing the address with History avoids a second native fragment jump.
+  try{if(hash!==location.hash)history.pushState(null,'',hash)}catch{return}
+  event.preventDefault();
+  cancelAnimationFrame(fragmentFrame);
   projectMenu.open=false;
-  requestAnimationFrame(()=>{const target=$(link.hash.slice(1));if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true})}});
+  moveToFragment(destination,{smooth:!link.classList.contains('skip-link'),focus:true});
 });
 $('lang-toggle').addEventListener('click',()=>setLang(lang==='zh'?'en':'zh'));
 $('print-button').addEventListener('click',()=>window.print());
