@@ -5,18 +5,14 @@ const DATA = {
     "en": "Information Technology · Class of 2027"
   },
   "degree": {
-    "zh": "JCU 新加坡 · 本科在读",
-    "en": "JCU Singapore · Undergraduate"
+    "zh": "JCU 新加坡 · 本科",
+    "en": "JCU Singapore · Bachelor's programme"
   },
   "graduation": {
     "confirmed": false,
-    "expected": {
-      "zh": "信息技术学士 · 预计 2027 年 2 月毕业",
-      "en": "Bachelor of Information Technology · Expected February 2027"
-    },
     "completed": {
-      "zh": "信息技术学士 · 2027 年 2 月已毕业",
-      "en": "Bachelor of Information Technology · Graduated February 2027"
+      "zh": "已取得信息技术学士学位 · 2027 年 2 月",
+      "en": "Bachelor of Information Technology awarded · February 2027"
     },
     "completedDegree": {
       "zh": "JCU 新加坡 · 信息技术学士",
@@ -25,6 +21,10 @@ const DATA = {
     "completedDate": {
       "zh": "2025.01 – 2027.02",
       "en": "Jan 2025 – Feb 2027"
+    },
+    "completedProgramme": {
+      "zh": "信息技术学士",
+      "en": "Bachelor of Information Technology"
     }
   },
   "contact": [
@@ -92,16 +92,16 @@ const DATA = {
   "education": [
     {
       "date": {
-        "zh": "2025.01 – 2027.02（预计）",
-        "en": "Jan 2025 – Feb 2027 (expected)"
+        "zh": "2027 届",
+        "en": "Class of 2027"
       },
       "title": {
         "zh": "詹姆斯库克大学新加坡校区",
         "en": "James Cook University, Singapore"
       },
       "org": {
-        "zh": "信息技术学士 Bachelor of Information Technology",
-        "en": "Bachelor of Information Technology"
+        "zh": "信息技术（本科）",
+        "en": "Information Technology (bachelor's programme)"
       },
       "meta": {
         "zh": "新加坡",

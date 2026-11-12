@@ -81,7 +81,8 @@ function render(){
   $('name').textContent=lang==='en'?'Junjie Chu':'褚俊杰';
   $('role-text').textContent=t(DATA.role); $('degree-text').textContent=t(graduated?DATA.graduation.completedDegree:DATA.degree);
   $('hero-title').textContent=t(DATA.hero); $('summary-text').textContent=t(DATA.summary);
-  $('graduation-text').textContent=t(graduated?DATA.graduation.completed:DATA.graduation.expected);
+  $('graduation-text').hidden=!graduated;
+  $('graduation-text').textContent=graduated?t(DATA.graduation.completed):'';
   $('graduate-preview').hidden=!preview;
   const publicUrl=new URL(location.href);
   publicUrl.searchParams.delete('preview');
@@ -97,7 +98,7 @@ function render(){
   document.title=lang==='zh'?'褚俊杰 Junjie Chu — 项目与经历':'Junjie Chu — Projects & Experience';
   document.querySelector('meta[name="description"]').content=t(DATA.summary);
   renderProjects(); renderTimeline('experience-list',DATA.experience);
-  renderTimeline('education-list',graduated?DATA.education.map(item=>item.current?{...item,date:DATA.graduation.completedDate}:item):DATA.education);
+  renderTimeline('education-list',graduated?DATA.education.map(item=>item.current?{...item,date:DATA.graduation.completedDate,org:DATA.graduation.completedProgramme}:item):DATA.education);
   $('skills-list').innerHTML=DATA.skills.map(p=>`<div class="skill-group"><h4>${tx(p.label)}</h4><p>${p.items.map(escapeHTML).join(' · ')}</p></div>`).join('');
   $('leadership-list').innerHTML=DATA.leadership.map(p=>`<article class="lead-item"><h4>${tx(p.title)}</h4><p>${tx(p.body)}</p>${p.link?`<a class="text-link certificate-link" href="${escapeHTML(p.link.url)}" target="_blank" rel="noopener">${tx(p.link.label)} ↗</a>`:''}</article>`).join('');
   renderDownloads(); renderContacts();
