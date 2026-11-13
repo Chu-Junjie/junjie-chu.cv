@@ -409,9 +409,6 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; padding:
 .skill-detail h3, .skill-detail p { margin: 0; }
 .skill-detail h3 { font-size: 16px; }
 .skill-detail p, .skill-detail li { color: var(--muted); font-size: 14px; }
-.skill-dialog .dialog-actions { background: var(--panel); }
-.skill-chooser { display: flex; align-items: center; gap: 10px; width: 100%; color: var(--muted); font-size: 13px; font-weight: 600; }
-.skill-dialog .skill-chooser select { flex: 1; min-width: 0; padding: 7px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); color: var(--ink); font: inherit; font-size: 16px; }
 .skill-tools, .skill-references, .skill-evidence { margin: 0; padding: 0; list-style: none; }
 .skill-tools { display: flex; flex-wrap: wrap; gap: 5px; }
 .skill-tools li { padding: 3px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }

@@ -13,7 +13,7 @@ const UI = {
   skillFilters:['技能分类','Skill categories'], skillPractice:['工程实践','Engineering Practices'],
   skillUse:['实际使用场景','How I used it'], skillTools:['相关工具与技术','Tools & technologies'],
   skillRelated:['相关经历与项目','Related experience & projects'], skillEvidence:['公开证据','Public evidence'],
-  skillChoose:['切换技能','Switch skill'], skillProject:['查看相关项目','View related project'],
+  skillProject:['查看相关项目','View related project'],
   skillWork:['查看相关经历','View related experience'], skillEducation:['查看教育背景','View education'],
   contactTitle:['联系方式','Contact details'], contactDomestic:['国内','China'], contactInternational:['国外 · 新加坡','International · Singapore'], roleResumes:['简历下载','Résumé downloads'], resumePreview:['预览','Preview'],
   resumeLanguage:['简历语言','Résumé language'], downloadPdf:['下载 PDF','Download PDF'], downloadWord:['下载 Word','Download Word'], closeDialog:['关闭弹窗','Close dialog'],
@@ -289,7 +289,7 @@ function openDialog(title,label,content,trigger,{pdf=false,action=null,logo=null
   dialogContent.scrollTo(0,0);
   return true;
 }
-function showSkill(skill,trigger,keepChooserFocus=false){
+function showSkill(skill,trigger){
   const content=document.createElement('div');
   content.className='skill-detail';
   const references=skill.references.map(id=>{
@@ -309,15 +309,7 @@ function showSkill(skill,trigger,keepChooserFocus=false){
   const logo=$('skill-'+skill.id).querySelector('img')?.cloneNode();
   if(logo)logo.loading='eager';
   const category=DATA.skillCategories.find(item=>item.id===skill.category);
-  if(!openDialog(skill.name,t(category),content,trigger,{skill:true,logo}))return false;
-  dialogActions.innerHTML=`<label class="skill-chooser">${ui('skillChoose')}<select>${DATA.skillCategories.filter(item=>item.id!=='core').map(group=>`
-    <optgroup label="${tx(group)}">${skillsInDisplayOrder.filter(item=>item.category===group.id).map(item=>`
-      <option value="${item.id}"${item.id===skill.id?' selected':''}>${escapeHTML(item.name)}</option>`).join('')}</optgroup>`).join('')}</select></label>`;
-  dialogActions.hidden=false;
-  const chooser=dialogActions.querySelector('select');
-  chooser.addEventListener('change',()=>showSkill(skillsById.get(chooser.value),trigger,true));
-  if(keepChooserFocus)chooser.focus({preventScroll:true});
-  return true;
+  return openDialog(skill.name,t(category),content,trigger,{skill:true,logo});
 }
 function showProject(project,trigger,target){
   const body=project.querySelector('.project-body').cloneNode(true);
