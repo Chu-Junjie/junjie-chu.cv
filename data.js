@@ -259,7 +259,7 @@ const DATA = {
         "en": "Basilos Pte. Ltd. · AI platform: Tyrion.ai · Singapore"
       },
       "industry": { "zh": "企业 AI 软件", "en": "Enterprise AI software" },
-      "website": { "name": { "zh": "Tyrion.ai", "en": "Tyrion.ai" }, "url": "https://tyrion.ai/en/", "logo": "tyrion" },
+      "website": { "name": { "zh": "Tyrion.ai", "en": "Tyrion.ai" }, "url": "https://tyrion.ai/en/", "logo": "tyrion", "logoCaption": "Basilos Pte. Ltd." },
       "summary": {
         "zh": "独立调研并评估 5 种人脸比对方案，封装工作台连接器，整理 54 项测试记录。",
         "en": "Independently researched and evaluated five face-matching approaches, packaged a workbench connector and documented 54 test checks."
@@ -375,6 +375,7 @@ const DATA = {
   "projects": [
     {
       "id": "sg-navi",
+      "logo": "sg-navi.webp",
       "kind": "capstone",
       "title": { "zh": "SG-Navi", "en": "SG-Navi" },
       "category": { "zh": "本科毕业项目 / 跨学科协作", "en": "Capstone / Cross-disciplinary collaboration" },
@@ -539,6 +540,7 @@ const DATA = {
         }
       ],
       "id": "scamwise",
+      "logo": "scamwise.png",
       "category": {
         "zh": "应用开发 / 自动化测试",
         "en": "APP DEVELOPMENT / TESTING"
@@ -1231,6 +1233,15 @@ const DATA = {
     }
   ],
   "leadership": [
+    {
+      "title": { "zh": "JCU 导师推荐信", "en": "JCU Academic Reference Letter" },
+      "body": {
+        "zh": "Dr. Dasheng Liu 于 2026 年 10 月 22 日出具的研究生申请推荐信，评价我在机器学习与数据科学、高级软件工程两门课中的技术分析与协作。",
+        "en": "Postgraduate reference from Dr. Dasheng Liu, dated 22 October 2026, on my technical analysis and teamwork in Machine Learning and Data Science and Advanced Software Engineering."
+      },
+      "file": "jcu-academic-reference",
+      "issuer": { "zh": "Dr. Dasheng Liu · 詹姆斯库克大学", "en": "Dr. Dasheng Liu · James Cook University" }
+    },
     {
       "title": {
         "zh": "EMAS Peer Tutor 感谢证书",

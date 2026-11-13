@@ -12,7 +12,8 @@
 - `assets/portrait-224.webp`、`portrait-336.webp`：原比例网页副本，约6.7/12.9KB；`photo.png` 原图保留。
 - `assets/resumes/`：六个版本的中英文 PDF，以及中文 Word。英文 PDF 使用对应文件名的 `-en.pdf` 后缀。
 - `assets/resume-previews/`、`assets/certificate-previews/`：由网站现有 PDF 生成的一页预览图。替换 PDF 后，在已安装 Poppler 的环境运行 `./scripts/render-pdf-previews.ps1` 更新预览。
-- `assets/certificates/`：网站展示和下载的六份证书 PDF。
+- `assets/certificates/`：证书、奖项和 JCU 导师推荐信 PDF。推荐信按原件标明研究生申请用途。
+- `assets/project-logos/`：SG-Navi 与 ScamWise Campus 使用原项目标志，其余六枚图标为作品集设计。
 - `assets/evidence/`：原始项目截图、ERD、SQL 查询与榜单证据。
 
 修改内容后，在具备 Playwright 的开发环境运行 `node scripts/sync-static.cjs`。默认 Edge，`RESUME_BROWSER` 可指定 Chromium 路径。

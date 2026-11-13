@@ -8,6 +8,7 @@ const UI = {
   projects:['作品集','Portfolio'],
   experience:['工作经历','Work experience'], viewDetails:['查看详情','View details'], hideDetails:['收起详情','Hide details'],
   companyWebsite:['访问 {name} 官网','Visit the {name} website'],
+  website:['官网','Website'],
   education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
   contactTitle:['联系方式','Contact details'], contactDomestic:['国内','China'], contactInternational:['国外 · 新加坡','International · Singapore'], roleResumes:['简历下载','Résumé downloads'], resumePreview:['预览','Preview'],
   resumeLanguage:['简历语言','Résumé language'], downloadPdf:['下载 PDF','Download PDF'], downloadWord:['下载 Word','Download Word'], closeDialog:['关闭弹窗','Close dialog'],
@@ -28,6 +29,7 @@ const projectMonth=value=>lang==='zh'?value.replace('-','.'):englishMonth.format
 const projectTeam=size=>size===1
   ? (lang==='zh'?'个人项目':'Solo project')
   : (lang==='zh'?`${size} 人团队项目`:`${size}-person team project`);
+const projectLogo=p=>`<img class="project-logo" data-project-logo="${p.id}" src="assets/project-logos/${escapeHTML(p.logo??p.id+'.svg')}" alt="" width="44" height="44" decoding="async">`;
 
 function renderProjects(){
   const projects=[...DATA.projects].sort((a,b)=>b.period[1].localeCompare(a.period[1])||b.period[0].localeCompare(a.period[0]));
@@ -35,13 +37,13 @@ function renderProjects(){
   $('mobile-project-links').setAttribute('aria-label',ui('directory'));
   $('featured-list').innerHTML=DATA.featured.map(id=>{
     const p=DATA.projects.find(p=>p.id===id);
-    return `<a class="feature-card${p.kind==='capstone'?' feature-card--capstone':''}" href="#${p.id}"><span class="feature-copy"><strong>${tx(p.title)}</strong><span class="feature-result">${tx(p.result)}</span></span><span class="feature-arrow" aria-hidden="true">›</span></a>`;
+    return `<a class="feature-card${p.kind==='capstone'?' feature-card--capstone':''}" href="#${p.id}">${projectLogo(p)}<span class="feature-copy"><strong>${tx(p.title)}</strong><span class="feature-result">${tx(p.result)}</span></span><span class="feature-arrow" aria-hidden="true">›</span></a>`;
   }).join('');
   $('projects-list').innerHTML=projects.map(p=>`<article class="project${p.kind==='capstone'?' project--capstone':''}" id="${p.id}" aria-labelledby="${p.id}-title">
     <details class="project-details" id="${p.id}-details">
       <summary class="project-summary" aria-labelledby="${p.id}-title">
         <span class="project-top"><span class="project-tags"><span class="eyebrow">${tx(p.category)}</span><span class="project-team">${projectTeam(p.teamSize)}</span></span><span class="project-date"><time datetime="${p.period[0]}">${projectMonth(p.period[0])}</time>–<time datetime="${p.period[1]}">${projectMonth(p.period[1])}</time></span></span>
-        <h3 id="${p.id}-title">${tx(p.title)}</h3>
+        <h3 class="project-name" id="${p.id}-title">${projectLogo(p)}<span>${tx(p.title)}</span></h3>
         <span class="project-role">${tx(p.role)}</span>
         <span class="project-result">${tx(p.result)}</span>
         <span class="project-toggle" aria-hidden="true"><span class="project-toggle-show">${ui('viewDetails')}</span><span class="project-toggle-hide">${ui('hideDetails')}</span></span>
@@ -78,11 +80,11 @@ function renderExperience(){
         <span class="work-result">${tx(p.summary)}</span>
         <span class="card-action" aria-hidden="true"><span class="work-show">${ui('viewDetails')} ›</span><span class="work-hide">${ui('hideDetails')}</span></span>
       </summary>
-      <div class="work-body">${timelineBullets(p.bullets)}</div>
+      <div class="work-body">${timelineBullets(p.bullets)}
+        <a class="text-link work-website" href="${escapeHTML(p.website.url)}" target="_blank" rel="noopener" aria-label="${escapeHTML(ui('companyWebsite').replace('{name}',t(p.website.name)))}">${ui('website')} <span aria-hidden="true">↗</span></a>
+      </div>
     </details>
-    <a class="work-website" href="${escapeHTML(p.website.url)}" target="_blank" rel="noopener" aria-label="${escapeHTML(ui('companyWebsite').replace('{name}',t(p.website.name)))}" title="${escapeHTML(ui('companyWebsite').replace('{name}',t(p.website.name)))}">
-      <span class="work-logo" data-brand="${p.website.logo}"><img src="assets/work-logos/${p.website.logo}.png" alt="" decoding="async"></span><span aria-hidden="true">↗</span>
-    </a>
+    <div class="work-logo" data-brand="${p.website.logo}" aria-hidden="true"><img src="assets/work-logos/${p.website.logo}.png" alt="" decoding="async">${p.website.logoCaption?`<span>${escapeHTML(p.website.logoCaption)}</span>`:''}</div>
   </article>`).join('');
 }
 const certificatePdf=certificate=>`assets/certificates/${certificate.file}.pdf`;
@@ -201,10 +203,13 @@ const dialogClose=dialog.querySelector('.dialog-close');
 const supportsDialog=typeof dialog.showModal==='function';
 let dialogTrigger=null;
 document.documentElement.classList.toggle('dialog-ready',supportsDialog);
-function openDialog(title,label,content,trigger,{pdf=false,action=null}={}){
+function openDialog(title,label,content,trigger,{pdf=false,action=null,logo=null}={}){
   if(!supportsDialog)return false;
   dialog.classList.toggle('pdf-dialog',pdf);
-  $('dialog-title').textContent=title;
+  const heading=$('dialog-title');
+  heading.textContent=title;
+  if(logo)heading.prepend(logo);
+  heading.classList.toggle('project-name',Boolean(logo));
   $('dialog-label').textContent=label;
   const titleAction=$('dialog-title-action');
   titleAction.replaceChildren(...(action?[action]:[]));
@@ -224,11 +229,13 @@ function showProject(project,trigger,target){
   const body=project.querySelector('.project-body').cloneNode(true);
   body.querySelectorAll('[id]').forEach(el=>el.id='dialog-'+el.id);
   body.querySelectorAll('img[loading="lazy"]').forEach(image=>image.loading='eager');
-  const title=project.querySelector('h3').textContent;
+  const heading=project.querySelector('.project-name');
+  const title=heading.querySelector('span').textContent;
+  const logo=heading.querySelector('.project-logo').cloneNode(true);
   const label=[project.querySelector('.project-team').textContent,project.querySelector('.project-date').textContent].join(' · ');
   const demo=body.querySelector('.project-demos');
   demo?.remove();
-  if(!openDialog(title,label,body,trigger,{action:demo}))return false;
+  if(!openDialog(title,label,body,trigger,{action:demo,logo}))return false;
   if(target?.id&&target!==project){
     const heading=$('dialog-'+target.id);
     if(heading)dialogContent.scrollTop=heading.getBoundingClientRect().top-dialogContent.getBoundingClientRect().top-16;
@@ -241,7 +248,8 @@ function showWork(summary){
   date.className='work-date';
   date.textContent=summary.querySelector('.work-date').textContent;
   body.prepend(date);
-  const action=summary.closest('.work-card').querySelector('.work-website').cloneNode(true);
+  const action=body.querySelector('.work-website');
+  action.remove();
   const label=[summary.querySelector('.work-org').textContent,summary.querySelector('.work-industry').textContent].join(' · ');
   return openDialog(summary.querySelector('h3').textContent,label,body,summary,{action});
 }
