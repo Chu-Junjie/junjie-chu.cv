@@ -118,10 +118,10 @@ function renderContacts(){
     return p.href?`<a href="${escapeHTML(p.href)}">${tx(p)}</a>`:`<p>${tx(p)}</p>`;
   }).join('')}`;
   document.querySelector('.primary-contact a[href^="mailto:"]').href=contacts.get('mail').href;
-  document.querySelectorAll('[data-contact]').forEach(link=>{
-    const p=contacts.get(link.dataset.contact);
-    link.href=p.href;
-    link.textContent=t(p);
+  document.querySelectorAll('[data-contact]').forEach(element=>{
+    const contact=contacts.get(element.dataset.contact);
+    if(contact.href)element.href=contact.href;
+    element.textContent=t(contact);
   });
 }
 function render(){

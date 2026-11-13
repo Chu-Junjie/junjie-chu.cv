@@ -42,8 +42,8 @@ const DATA = {
     },
     {
       "key": "wechat",
-      "zh": "微信 cjj0908ya",
-      "en": "WeChat cjj0908ya"
+      "zh": "微信：cjj0908ya",
+      "en": "WeChat: cjj0908ya"
     },
     {
       "key": "mail",
@@ -62,6 +62,12 @@ const DATA = {
       "zh": "chujunjie0908@gmail.com",
       "en": "chujunjie0908@gmail.com",
       "href": "mailto:chujunjie0908@gmail.com"
+    },
+    {
+      "key": "instagram",
+      "zh": "Instagram：jiejieya0908",
+      "en": "Instagram: jiejieya0908",
+      "href": "https://www.instagram.com/jiejieya0908/"
     }
   ],
   "nav": {
@@ -1293,16 +1299,16 @@ const DATA = {
     }
   ],
   "profileLead": {
-    "zh": "CHU JUNJIE",
-    "en": "CHU JUNJIE"
+    "zh": "褚俊杰 | CHU JUNJIE",
+    "en": "褚俊杰 | CHU JUNJIE"
   },
   "summary": {
     "zh": "我专注于软件开发与 AI 应用，具备从需求拆解到实现与验证的项目经验。JCU 信息技术专业，GPA 5.85/7.00（系内前 5%）。",
     "en": "I focus on software development and applied AI, with experience taking projects from requirements through implementation and testing. I studied Information Technology at JCU (GPA 5.85/7.00, top 5% in my department)."
   },
   "basilosSummary": {
-    "zh": "实习期间，我为 AI 工作台独立调研并对比 5 种人脸比对方案，从公开资料筛选、方案评估推进到连接器实现和测试。用 Python 与 ONNX Runtime 封装人脸一致性连接器，整理 54 项测试记录，覆盖身份比对和异常场景。",
-    "en": "During my internship, I independently researched and compared five face-matching approaches for the AI workbench. I carried the work from reviewing public sources and evaluating candidates through implementation and testing, packaged a face-consistency connector in Python and ONNX Runtime, and documented 54 identity comparisons and scenario checks."
+    "zh": "在 Basilos（Tyrion.ai）实习期间，我为 AI 工作台独立调研并评估 5 种人脸比对方案，随后用 Python 和 ONNX Runtime 实现人脸一致性连接器，并整理 54 项测试记录，覆盖身份比对和异常场景。",
+    "en": "During my internship at Basilos (Tyrion.ai), I independently researched and evaluated five face-matching approaches for the AI workbench. I then built a face-consistency connector with Python and ONNX Runtime and documented 54 tests covering identity comparisons and edge cases."
   },
   "profileDetails": {
     "zh": "我独立开发了 ScamWise Campus Android 应用，编写 102 项自动化测试，覆盖训练判分、数据保存和界面流程。在 6 人跨学科毕业项目 SG-Navi 中，我担任开发团队产品负责人，负责 RAG、共享接口契约与联调验收。",
