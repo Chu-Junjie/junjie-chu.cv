@@ -29,6 +29,11 @@ const ui = key => UI[key][lang==='en'?1:0];
 const escapeHTML = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const tx = value => escapeHTML(t(value));
 const $ = id => document.getElementById(id);
+const skillsById=new Map(DATA.skillCatalog.map(skill=>[skill.id,skill]));
+const skillsInDisplayOrder=[
+  ...DATA.featuredSkills.map(id=>skillsById.get(id)),
+  ...DATA.skillCatalog.filter(skill=>!DATA.featuredSkills.includes(skill.id))
+];
 const disclosureSelector='.project-details, .work-details';
 const englishMonth=new Intl.DateTimeFormat('en',{month:'short',year:'numeric',timeZone:'UTC'});
 const projectMonth=value=>lang==='zh'?value.replace('-','.'):englishMonth.format(new Date(value+'-01T00:00:00Z'));
@@ -97,9 +102,9 @@ function skillReference(id){
   const project=DATA.projects.find(item=>item.id===id);
   if(project)return {title:t(project.title),body:t(project.role),action:ui('skillProject')};
   const work=DATA.experience.find(item=>item.id===id);
-  if(work)return {title:t(work.org)+' · '+t(work.title),body:t(work.summary),action:ui('skillWork')};
+  if(work)return {title:work.website.logoCaption??t(work.website.name),body:t(work.title),action:ui('skillWork')};
   const education=DATA.education.find(item=>item.id===id);
-  if(education)return {title:t(education.title),body:t(education.org),action:ui('skillEducation')};
+  if(education)return {title:t(education.title),caption:t(education.shortTitle)||t(education.title),body:t(education.org),action:ui('skillEducation')};
   throw new Error('Unknown skill reference: '+id);
 }
 function skillEvidenceLink(id){
@@ -117,11 +122,15 @@ function skillLogo(skill){
 }
 function renderSkills(){
   $('skill-filters').setAttribute('aria-label',ui('skillFilters'));
-  $('skill-filters').innerHTML=DATA.skillCategories.map(category=>`<button type="button" data-skill-category="${category.id}" aria-pressed="${category.id===skillCategory}">${tx(category)}</button>`).join('');
-  $('skills-list').innerHTML=DATA.skillCatalog.map(skill=>`<a id="skill-${skill.id}" class="skill-card" data-skill="${skill.id}" data-category="${skill.category}" href="#${skill.references[0]}">
-    ${skillLogo(skill)}<strong>${escapeHTML(skill.name)}</strong><span>${tx(skill.use)}</span>
-    <span class="skill-context" aria-hidden="true">${escapeHTML(skillReference(skill.references[0]).title)}</span>
-  </a>`).join('');
+  $('skill-filters').innerHTML=DATA.skillCategories.map(category=>`<button type="button" data-skill-category="${category.id}" aria-controls="skills-list" aria-pressed="${category.id===skillCategory}">${tx(category)}</button>`).join('');
+  $('skills-list').innerHTML=skillsInDisplayOrder.map(skill=>{
+    const reference=skillReference(skill.references[0]);
+    return `<a id="skill-${skill.id}" class="skill-card" data-skill="${skill.id}" data-category="${skill.category}" href="#${skill.references[0]}">
+      <span class="skill-card-heading">${skillLogo(skill)}<strong>${escapeHTML(skill.name)}</strong></span>
+      <span class="skill-card-use">${tx(skill.use)}</span>
+      <span class="skill-context">${escapeHTML(reference.caption??reference.title)}</span>
+    </a>`;
+  }).join('');
   const cardNames=new Set(DATA.skillCatalog.map(skill=>skill.name));
   for(const alias of ['Excel','Git/GitHub','MySQL Workbench'])cardNames.add(alias);
   $('skill-practice-list').innerHTML=DATA.skills.map(group=>`<div class="skill-group"><h4>${tx(group.label)}</h4><p>${group.items.filter(item=>!cardNames.has(item)).map(escapeHTML).join(' · ')}</p></div>`).join('');
@@ -282,7 +291,7 @@ function showSkill(skill,trigger,keepChooserFocus=false){
   content.className='skill-detail';
   const references=skill.references.map(id=>{
     const source=skillReference(id);
-    return `<li><strong>${escapeHTML(source.title)}</strong><p>${escapeHTML(source.body)}</p><a class="text-link" href="#${id}">${source.action} <span aria-hidden="true">→</span></a></li>`;
+    return `<li><strong>${escapeHTML(source.title)}</strong><p>${escapeHTML(source.body)}</p><a class="text-link" href="#${id}" aria-label="${escapeHTML(source.action+' · '+source.title)}">${source.action} <span aria-hidden="true">→</span></a></li>`;
   }).join('');
   const evidence=(skill.evidence??[]).map(id=>{
     const source=skillEvidenceLink(id);
@@ -290,19 +299,22 @@ function showSkill(skill,trigger,keepChooserFocus=false){
     return `<li><a class="text-link" href="${escapeHTML(source.url)}"${external?' target="_blank" rel="noopener"':''}>${escapeHTML(source.label)}${external?' ↗':''}</a></li>`;
   }).join('');
   content.innerHTML=`
-    <label class="skill-chooser">${ui('skillChoose')}<select>${DATA.skillCatalog.map(item=>`<option value="${item.id}"${item.id===skill.id?' selected':''}>${escapeHTML(item.name)}</option>`).join('')}</select></label>
     <section><h3>${ui('skillUse')}</h3><p>${tx(skill.detail??skill.use)}</p></section>
-    ${skill.tools.length?`<section><h3>${ui('skillTools')}</h3><ul class="skill-tools">${skill.tools.map(item=>`<li>${escapeHTML(item)}</li>`).join('')}</ul></section>`:''}
+    ${evidence?`<section><h3>${ui('skillEvidence')}</h3><ul class="skill-evidence">${evidence}</ul></section>`:''}
     <section><h3>${ui('skillRelated')}</h3><ul class="skill-references">${references}</ul></section>
-    ${evidence?`<section><h3>${ui('skillEvidence')}</h3><ul class="skill-evidence">${evidence}</ul></section>`:''}`;
-  const chooser=content.querySelector('select');
-  chooser.addEventListener('change',()=>showSkill(DATA.skillCatalog.find(item=>item.id===chooser.value),trigger,true));
+    ${skill.tools.length?`<section><h3>${ui('skillTools')}</h3><ul class="skill-tools">${skill.tools.map(item=>`<li>${escapeHTML(item)}</li>`).join('')}</ul></section>`:''}`;
   const logo=$('skill-'+skill.id).querySelector('img')?.cloneNode();
   if(logo)logo.loading='eager';
   const category=DATA.skillCategories.find(item=>item.id===skill.category);
-  const opened=openDialog(skill.name,t(category),content,trigger,{skill:true,logo});
-  if(opened&&keepChooserFocus)chooser.focus({preventScroll:true});
-  return opened;
+  if(!openDialog(skill.name,t(category),content,trigger,{skill:true,logo}))return false;
+  dialogActions.innerHTML=`<label class="skill-chooser">${ui('skillChoose')}<select>${DATA.skillCategories.filter(item=>item.id!=='all').map(group=>`
+    <optgroup label="${tx(group)}">${skillsInDisplayOrder.filter(item=>item.category===group.id).map(item=>`
+      <option value="${item.id}"${item.id===skill.id?' selected':''}>${escapeHTML(item.name)}</option>`).join('')}</optgroup>`).join('')}</select></label>`;
+  dialogActions.hidden=false;
+  const chooser=dialogActions.querySelector('select');
+  chooser.addEventListener('change',()=>showSkill(skillsById.get(chooser.value),trigger,true));
+  if(keepChooserFocus)chooser.focus({preventScroll:true});
+  return true;
 }
 function showProject(project,trigger,target){
   const body=project.querySelector('.project-body').cloneNode(true);
@@ -489,7 +501,7 @@ function moveToFragment({target,top},{smooth=false,focus=false}={}){
   if(target.dataset.skill&&supportsDialog){
     if(target.hidden)applySkillFilter('all');
     target.scrollIntoView({block:'start',behavior:'instant'});
-    showSkill(DATA.skillCatalog.find(item=>item.id===target.dataset.skill),target);
+    showSkill(skillsById.get(target.dataset.skill),target);
     updateNavigation();
     return;
   }
@@ -553,7 +565,7 @@ document.addEventListener('click',event=>{
   if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
   if(supportsDialog){
     const skillLink=event.target.closest?.('[data-skill]');
-    const skill=skillLink&&DATA.skillCatalog.find(item=>item.id===skillLink.dataset.skill);
+    const skill=skillLink&&skillsById.get(skillLink.dataset.skill);
     if(skill&&showSkill(skill,skillLink)){event.preventDefault();return}
     const preview=event.target.closest?.('[data-resume]');
     const resume=preview&&DATA.resumes.find(item=>item.file===preview.dataset.resume);

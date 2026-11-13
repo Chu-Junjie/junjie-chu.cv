@@ -103,6 +103,7 @@ const DATA = {
   "education": [
     {
       "id": "education-jcu",
+      "shortTitle": { "zh": "JCU 课程与实践", "en": "JCU coursework & practice" },
       "date": {
         "zh": "2025.01–2027.02",
         "en": "Jan 2025–Feb 2027"
@@ -170,6 +171,7 @@ const DATA = {
     { "id": "data", "zh": "数据与云", "en": "Data & Cloud" },
     { "id": "tools", "zh": "测试与工具", "en": "Testing & Tools" }
   ],
+  "featuredSkills": ["python", "kotlin", "sql", "pytorch", "postgresql", "githubactions"],
   "skillCatalog": [
     {
       "id": "python", "name": "Python", "logo": "python", "category": "ai",

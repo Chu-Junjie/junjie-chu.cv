@@ -335,74 +335,96 @@
   </article></div></section>
       <section class="section skills-section" id="skills" aria-labelledby="skills-h">
         <div class="section-heading"><h2 id="skills-h" data-ui="skills">技能</h2></div>
-        <div class="skill-filters" id="skill-filters" role="group" aria-label="技能分类"><button type="button" data-skill-category="all" aria-pressed="true">全部</button><button type="button" data-skill-category="ai" aria-pressed="false">AI 与机器学习</button><button type="button" data-skill-category="software" aria-pressed="false">软件开发</button><button type="button" data-skill-category="data" aria-pressed="false">数据与云</button><button type="button" data-skill-category="tools" aria-pressed="false">测试与工具</button></div>
+        <div class="skill-filters" id="skill-filters" role="group" aria-label="技能分类"><button type="button" data-skill-category="all" aria-controls="skills-list" aria-pressed="true">全部</button><button type="button" data-skill-category="ai" aria-controls="skills-list" aria-pressed="false">AI 与机器学习</button><button type="button" data-skill-category="software" aria-controls="skills-list" aria-pressed="false">软件开发</button><button type="button" data-skill-category="data" aria-controls="skills-list" aria-pressed="false">数据与云</button><button type="button" data-skill-category="tools" aria-controls="skills-list" aria-pressed="false">测试与工具</button></div>
         <div id="skills-list"><a id="skill-python" class="skill-card" data-skill="python" data-category="ai" href="#work-basilos">
-    <img class="skill-logo" src="assets/skill-logos/python.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Python</strong><span>推理连接器、检索接口与模型实验</span>
-    <span class="skill-context" aria-hidden="true">Basilos Pte. Ltd.｜AI 平台：Tyrion.ai｜新加坡 · AI 工程师实习生</span>
-  </a><a id="skill-onnxruntime" class="skill-card" data-skill="onnxruntime" data-category="ai" href="#work-basilos">
-    <img class="skill-logo" src="assets/skill-logos/onnxruntime.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>ONNX Runtime</strong><span>人脸一致性连接器的离线推理与测试</span>
-    <span class="skill-context" aria-hidden="true">Basilos Pte. Ltd.｜AI 平台：Tyrion.ai｜新加坡 · AI 工程师实习生</span>
-  </a><a id="skill-pytorch" class="skill-card" data-skill="pytorch" data-category="ai" href="#wildlife">
-    <img class="skill-logo" src="assets/skill-logos/pytorch.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>PyTorch</strong><span>野生动物图像分类与模型训练</span>
-    <span class="skill-context" aria-hidden="true">野生动物保护图像分类</span>
-  </a><a id="skill-numpy" class="skill-card" data-skill="numpy" data-category="ai" href="#education-jcu">
-    <img class="skill-logo" src="assets/skill-logos/numpy.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>NumPy</strong><span>数据与机器学习课程中的数组处理</span>
-    <span class="skill-context" aria-hidden="true">詹姆斯库克大学新加坡校区 James Cook University</span>
-  </a><a id="skill-pandas" class="skill-card" data-skill="pandas" data-category="data" href="#education-jcu">
-    <img class="skill-logo" src="assets/skill-logos/pandas.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>pandas</strong><span>数据分析课程中的表格整理</span>
-    <span class="skill-context" aria-hidden="true">詹姆斯库克大学新加坡校区 James Cook University</span>
-  </a><a id="skill-opencv" class="skill-card" data-skill="opencv" data-category="ai" href="#education-jcu">
-    <img class="skill-logo" src="assets/skill-logos/opencv.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>OpenCV</strong><span>计算机视觉与图像处理实践</span>
-    <span class="skill-context" aria-hidden="true">詹姆斯库克大学新加坡校区 James Cook University</span>
-  </a><a id="skill-kaggle" class="skill-card" data-skill="kaggle" data-category="ai" href="#wildlife">
-    <img class="skill-logo" src="assets/skill-logos/kaggle.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Kaggle</strong><span>实验笔记本与公开实现调研</span>
-    <span class="skill-context" aria-hidden="true">野生动物保护图像分类</span>
-  </a><a id="skill-kotlin" class="skill-card" data-skill="kotlin" data-category="software" href="#scamwise">
-    <img class="skill-logo" src="assets/skill-logos/kotlin.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Kotlin</strong><span>Android 应用逻辑与功能开发</span>
-    <span class="skill-context" aria-hidden="true">ScamWise Campus</span>
-  </a><a id="skill-jetpackcompose" class="skill-card" data-skill="jetpackcompose" data-category="software" href="#scamwise">
-    <img class="skill-logo" src="assets/skill-logos/jetpackcompose.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Jetpack Compose</strong><span>Android 界面、交互与状态呈现</span>
-    <span class="skill-context" aria-hidden="true">ScamWise Campus</span>
-  </a><a id="skill-javascript" class="skill-card" data-skill="javascript" data-category="software" href="#sg-navi">
-    <img class="skill-logo" src="assets/skill-logos/javascript.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>JavaScript</strong><span>网页交互与前后端接口集成</span>
-    <span class="skill-context" aria-hidden="true">SG-Navi</span>
-  </a><a id="skill-cpp" class="skill-card" data-skill="cpp" data-category="software" href="#education-jcu">
-    <img class="skill-logo" src="assets/skill-logos/cpp.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>C++</strong><span>信息技术课程中的程序设计</span>
-    <span class="skill-context" aria-hidden="true">詹姆斯库克大学新加坡校区 James Cook University</span>
-  </a><a id="skill-flask" class="skill-card" data-skill="flask" data-category="software" href="#sg-navi">
-    <img class="skill-logo" src="assets/skill-logos/flask.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Flask</strong><span>检索与推荐服务的后端接口</span>
-    <span class="skill-context" aria-hidden="true">SG-Navi</span>
-  </a><a id="skill-fastapi" class="skill-card" data-skill="fastapi" data-category="software" href="#work-basilos">
-    <img class="skill-logo" src="assets/skill-logos/fastapi.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>FastAPI</strong><span>图像矢量化工具的本地接口</span>
-    <span class="skill-context" aria-hidden="true">Basilos Pte. Ltd.｜AI 平台：Tyrion.ai｜新加坡 · AI 工程师实习生</span>
-  </a><a id="skill-postgresql" class="skill-card" data-skill="postgresql" data-category="data" href="#recommendation">
-    <img class="skill-logo" src="assets/skill-logos/postgresql.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>PostgreSQL</strong><span>推荐系统与原型数据库</span>
-    <span class="skill-context" aria-hidden="true">智能数码产品推荐平台</span>
-  </a><a id="skill-mysql" class="skill-card" data-skill="mysql" data-category="data" href="#library-sql">
-    <img class="skill-logo" src="assets/skill-logos/mysql.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>MySQL</strong><span>借阅数据查询与航空数据库建模</span>
-    <span class="skill-context" aria-hidden="true">图书馆 SQL 查询与借阅行为分析</span>
-  </a><a id="skill-sql" class="skill-card" data-skill="sql" data-category="data" href="#library-sql">
-    <strong>SQL</strong><span>关联、聚合与借阅行为分析</span>
-    <span class="skill-context" aria-hidden="true">图书馆 SQL 查询与借阅行为分析</span>
-  </a><a id="skill-excel" class="skill-card" data-skill="excel" data-category="data" href="#work-stas">
-    <img class="skill-logo" src="assets/skill-logos/excel.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Microsoft Excel</strong><span>业务数据、质量记录与日常汇总</span>
-    <span class="skill-context" aria-hidden="true">新加坡建筑专业联盟（STAS）｜新加坡 · 运营与行政实习生</span>
-  </a><a id="skill-github" class="skill-card" data-skill="github" data-category="tools" href="#sg-navi">
-    <img class="skill-logo" src="assets/skill-logos/github.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>GitHub</strong><span>版本协作、问题追踪与交付记录</span>
-    <span class="skill-context" aria-hidden="true">SG-Navi</span>
-  </a><a id="skill-githubactions" class="skill-card" data-skill="githubactions" data-category="tools" href="#recommendation">
-    <img class="skill-logo" src="assets/skill-logos/githubactions.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>GitHub Actions</strong><span>推荐平台的自动化验收与发布协作</span>
-    <span class="skill-context" aria-hidden="true">智能数码产品推荐平台</span>
-  </a><a id="skill-linux" class="skill-card" data-skill="linux" data-category="tools" href="#work-basilos">
-    <img class="skill-logo" src="assets/skill-logos/linux.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Linux</strong><span>工作台推理依赖打包与离线部署</span>
-    <span class="skill-context" aria-hidden="true">Basilos Pte. Ltd.｜AI 平台：Tyrion.ai｜新加坡 · AI 工程师实习生</span>
-  </a><a id="skill-junit" class="skill-card" data-skill="junit" data-category="tools" href="#scamwise">
-    <img class="skill-logo" src="assets/skill-logos/junit.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>JUnit</strong><span>Android 应用逻辑的自动化单元测试</span>
-    <span class="skill-context" aria-hidden="true">ScamWise Campus</span>
-  </a><a id="skill-figma" class="skill-card" data-skill="figma" data-category="tools" href="#smartseat">
-    <img class="skill-logo" src="assets/skill-logos/figma.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Figma</strong><span>座位管理的交互原型与可用性验证</span>
-    <span class="skill-context" aria-hidden="true">SmartSeat</span>
-  </a></div>
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/python.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Python</strong></span>
+      <span class="skill-card-use">推理连接器、检索接口与模型实验</span>
+      <span class="skill-context">Basilos Pte. Ltd.</span>
+    </a><a id="skill-kotlin" class="skill-card" data-skill="kotlin" data-category="software" href="#scamwise">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/kotlin.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Kotlin</strong></span>
+      <span class="skill-card-use">Android 应用逻辑与功能开发</span>
+      <span class="skill-context">ScamWise Campus</span>
+    </a><a id="skill-sql" class="skill-card" data-skill="sql" data-category="data" href="#library-sql">
+      <span class="skill-card-heading"><strong>SQL</strong></span>
+      <span class="skill-card-use">关联、聚合与借阅行为分析</span>
+      <span class="skill-context">图书馆 SQL 查询与借阅行为分析</span>
+    </a><a id="skill-pytorch" class="skill-card" data-skill="pytorch" data-category="ai" href="#wildlife">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/pytorch.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>PyTorch</strong></span>
+      <span class="skill-card-use">野生动物图像分类与模型训练</span>
+      <span class="skill-context">野生动物保护图像分类</span>
+    </a><a id="skill-postgresql" class="skill-card" data-skill="postgresql" data-category="data" href="#recommendation">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/postgresql.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>PostgreSQL</strong></span>
+      <span class="skill-card-use">推荐系统与原型数据库</span>
+      <span class="skill-context">智能数码产品推荐平台</span>
+    </a><a id="skill-githubactions" class="skill-card" data-skill="githubactions" data-category="tools" href="#recommendation">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/githubactions.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>GitHub Actions</strong></span>
+      <span class="skill-card-use">推荐平台的自动化验收与发布协作</span>
+      <span class="skill-context">智能数码产品推荐平台</span>
+    </a><a id="skill-onnxruntime" class="skill-card" data-skill="onnxruntime" data-category="ai" href="#work-basilos">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/onnxruntime.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>ONNX Runtime</strong></span>
+      <span class="skill-card-use">人脸一致性连接器的离线推理与测试</span>
+      <span class="skill-context">Basilos Pte. Ltd.</span>
+    </a><a id="skill-numpy" class="skill-card" data-skill="numpy" data-category="ai" href="#education-jcu">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/numpy.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>NumPy</strong></span>
+      <span class="skill-card-use">数据与机器学习课程中的数组处理</span>
+      <span class="skill-context">JCU 课程与实践</span>
+    </a><a id="skill-pandas" class="skill-card" data-skill="pandas" data-category="data" href="#education-jcu">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/pandas.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>pandas</strong></span>
+      <span class="skill-card-use">数据分析课程中的表格整理</span>
+      <span class="skill-context">JCU 课程与实践</span>
+    </a><a id="skill-opencv" class="skill-card" data-skill="opencv" data-category="ai" href="#education-jcu">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/opencv.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>OpenCV</strong></span>
+      <span class="skill-card-use">计算机视觉与图像处理实践</span>
+      <span class="skill-context">JCU 课程与实践</span>
+    </a><a id="skill-kaggle" class="skill-card" data-skill="kaggle" data-category="ai" href="#wildlife">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/kaggle.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Kaggle</strong></span>
+      <span class="skill-card-use">实验笔记本与公开实现调研</span>
+      <span class="skill-context">野生动物保护图像分类</span>
+    </a><a id="skill-jetpackcompose" class="skill-card" data-skill="jetpackcompose" data-category="software" href="#scamwise">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/jetpackcompose.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Jetpack Compose</strong></span>
+      <span class="skill-card-use">Android 界面、交互与状态呈现</span>
+      <span class="skill-context">ScamWise Campus</span>
+    </a><a id="skill-javascript" class="skill-card" data-skill="javascript" data-category="software" href="#sg-navi">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/javascript.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>JavaScript</strong></span>
+      <span class="skill-card-use">网页交互与前后端接口集成</span>
+      <span class="skill-context">SG-Navi</span>
+    </a><a id="skill-cpp" class="skill-card" data-skill="cpp" data-category="software" href="#education-jcu">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/cpp.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>C++</strong></span>
+      <span class="skill-card-use">信息技术课程中的程序设计</span>
+      <span class="skill-context">JCU 课程与实践</span>
+    </a><a id="skill-flask" class="skill-card" data-skill="flask" data-category="software" href="#sg-navi">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/flask.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Flask</strong></span>
+      <span class="skill-card-use">检索与推荐服务的后端接口</span>
+      <span class="skill-context">SG-Navi</span>
+    </a><a id="skill-fastapi" class="skill-card" data-skill="fastapi" data-category="software" href="#work-basilos">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/fastapi.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>FastAPI</strong></span>
+      <span class="skill-card-use">图像矢量化工具的本地接口</span>
+      <span class="skill-context">Basilos Pte. Ltd.</span>
+    </a><a id="skill-mysql" class="skill-card" data-skill="mysql" data-category="data" href="#library-sql">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/mysql.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>MySQL</strong></span>
+      <span class="skill-card-use">借阅数据查询与航空数据库建模</span>
+      <span class="skill-context">图书馆 SQL 查询与借阅行为分析</span>
+    </a><a id="skill-excel" class="skill-card" data-skill="excel" data-category="data" href="#work-stas">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/excel.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Microsoft Excel</strong></span>
+      <span class="skill-card-use">业务数据、质量记录与日常汇总</span>
+      <span class="skill-context">STAS</span>
+    </a><a id="skill-github" class="skill-card" data-skill="github" data-category="tools" href="#sg-navi">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/github.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>GitHub</strong></span>
+      <span class="skill-card-use">版本协作、问题追踪与交付记录</span>
+      <span class="skill-context">SG-Navi</span>
+    </a><a id="skill-linux" class="skill-card" data-skill="linux" data-category="tools" href="#work-basilos">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/linux.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Linux</strong></span>
+      <span class="skill-card-use">工作台推理依赖打包与离线部署</span>
+      <span class="skill-context">Basilos Pte. Ltd.</span>
+    </a><a id="skill-junit" class="skill-card" data-skill="junit" data-category="tools" href="#scamwise">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/junit.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>JUnit</strong></span>
+      <span class="skill-card-use">Android 应用逻辑的自动化单元测试</span>
+      <span class="skill-context">ScamWise Campus</span>
+    </a><a id="skill-figma" class="skill-card" data-skill="figma" data-category="tools" href="#smartseat">
+      <span class="skill-card-heading"><img class="skill-logo" src="assets/skill-logos/figma.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>Figma</strong></span>
+      <span class="skill-card-use">座位管理的交互原型与可用性验证</span>
+      <span class="skill-context">SmartSeat</span>
+    </a></div>
         <h3 class="subheading" data-ui="skillPractice">工程实践</h3>
         <div id="skill-practice-list"><div class="skill-group"><h4>软件开发</h4><p>MVVM · Room · Retrofit · HTML/CSS · REST API</p></div><div class="skill-group"><h4>数据分析与机器学习</h4><p>scikit-learn · FastAI · Weka · EDA · Optuna</p></div><div class="skill-group"><h4>数据库与业务分析</h4><p>ER/EER · 3NF Review · JOIN / GROUP BY · HAVING / COUNT DISTINCT · AVG / DATEDIFF</p></div><div class="skill-group"><h4>测试与工程实践</h4><p>Mockito · Espresso · CI/CD · OOF · Group K-Fold · Linux offline deployment · JSON validation · P50 / P95</p></div><div class="skill-group"><h4>项目协作与用户研究</h4><p>Scrum · User Story · Requirements Traceability · Release Management · Lean UX</p></div></div>
       </section>
