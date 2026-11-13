@@ -15,6 +15,7 @@ const { chromium } = require('playwright');
     await page.evaluate(() => setLang('zh'));
     await page.evaluate(() => {
       document.documentElement.removeAttribute('style');
+      document.documentElement.classList.remove('dialog-ready');
       document.getElementById('reading-progress')?.remove();
       document.querySelectorAll('.is-active').forEach(el => el.classList.remove('is-active'));
       document.querySelectorAll('[aria-current]').forEach(el => el.removeAttribute('aria-current'));

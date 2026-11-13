@@ -40,11 +40,6 @@ const DATA = {
       "en": "WeChat cjj0908ya"
     },
     {
-      "key": "location",
-      "zh": "现居新加坡",
-      "en": "Based in Singapore"
-    },
-    {
       "key": "mail",
       "zh": "2903442978@qq.com",
       "en": "2903442978@qq.com",
@@ -1294,10 +1289,6 @@ const DATA = {
       }
     }
   ],
-  "footer": {
-    "zh": "更新于 2026 年 11 月 12 日",
-    "en": "Updated 12 November 2026"
-  },
   "profileLead": {
     "zh": "褚俊杰｜软件开发与 AI 工程",
     "en": "Junjie Chu · Software Development & AI Engineering"

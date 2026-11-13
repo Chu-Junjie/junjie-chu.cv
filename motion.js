@@ -103,7 +103,7 @@
 
   // Intro runs once per page load; language changes do not replay the hero.
   if (!location.hash && scrollY < 40) {
-    document.querySelectorAll('.hero > .eyebrow, #summary-text, .hero-actions, .feature-card')
+    document.querySelectorAll('.hero-copy > .eyebrow, .profile-lead, #summary-text, .hero-actions, .hero-highlights')
       .forEach((element, index) => enter(element, Math.min(index * 35, 175)));
   }
   observeContent();
