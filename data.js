@@ -165,7 +165,7 @@ const DATA = {
     }
   ],
   "skillCategories": [
-    { "id": "all", "zh": "全部", "en": "All" },
+    { "id": "core", "zh": "核心技能", "en": "Core Skills" },
     { "id": "ai", "zh": "AI 与机器学习", "en": "AI & Machine Learning" },
     { "id": "software", "zh": "软件开发", "en": "Software Development" },
     { "id": "data", "zh": "数据与云", "en": "Data & Cloud" },

@@ -23,18 +23,19 @@ const UI = {
 };
 const MOBILE_NAV = {about:['概览','Intro'],projects:['项目','Projects'],experience:['经历','Work'],education:['背景','Study'],skills:['技能','Skills'],personal:['关于我','About'],resources:['联系','Contact']};
 let lang='zh';
-let skillCategory='all';
+let skillCategory='core';
 const t = value => value?.[lang] ?? value?.zh ?? '';
 const ui = key => UI[key][lang==='en'?1:0];
 const escapeHTML = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const tx = value => escapeHTML(t(value));
 const $ = id => document.getElementById(id);
 const skillsById=new Map(DATA.skillCatalog.map(skill=>[skill.id,skill]));
+const featuredSkillIds=new Set(DATA.featuredSkills);
 const skillsInDisplayOrder=[
   ...DATA.featuredSkills.map(id=>skillsById.get(id)),
-  ...DATA.skillCatalog.filter(skill=>!DATA.featuredSkills.includes(skill.id))
+  ...DATA.skillCatalog.filter(skill=>!featuredSkillIds.has(skill.id))
 ];
-const disclosureSelector='.project-details, .work-details';
+const disclosureSelector='.project-details, .work-details, .skill-practice';
 const englishMonth=new Intl.DateTimeFormat('en',{month:'short',year:'numeric',timeZone:'UTC'});
 const projectMonth=value=>lang==='zh'?value.replace('-','.'):englishMonth.format(new Date(value+'-01T00:00:00Z'));
 const projectTeam=size=>size===1
@@ -139,7 +140,9 @@ function renderSkills(){
 function applySkillFilter(category){
   skillCategory=category;
   $('skill-filters').querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.skillCategory===category)));
-  $('skills-list').querySelectorAll('.skill-card').forEach(card=>card.hidden=category!=='all'&&card.dataset.category!==category);
+  $('skills-list').querySelectorAll('.skill-card').forEach(card=>{
+    card.hidden=category==='core'?!featuredSkillIds.has(card.dataset.skill):card.dataset.category!==category;
+  });
 }
 const certificatePdf=certificate=>`assets/certificates/${certificate.file}.pdf`;
 function renderCertificates(){
@@ -307,7 +310,7 @@ function showSkill(skill,trigger,keepChooserFocus=false){
   if(logo)logo.loading='eager';
   const category=DATA.skillCategories.find(item=>item.id===skill.category);
   if(!openDialog(skill.name,t(category),content,trigger,{skill:true,logo}))return false;
-  dialogActions.innerHTML=`<label class="skill-chooser">${ui('skillChoose')}<select>${DATA.skillCategories.filter(item=>item.id!=='all').map(group=>`
+  dialogActions.innerHTML=`<label class="skill-chooser">${ui('skillChoose')}<select>${DATA.skillCategories.filter(item=>item.id!=='core').map(group=>`
     <optgroup label="${tx(group)}">${skillsInDisplayOrder.filter(item=>item.category===group.id).map(item=>`
       <option value="${item.id}"${item.id===skill.id?' selected':''}>${escapeHTML(item.name)}</option>`).join('')}</optgroup>`).join('')}</select></label>`;
   dialogActions.hidden=false;
@@ -499,7 +502,7 @@ function openFragmentDetails(target){
 }
 function moveToFragment({target,top},{smooth=false,focus=false}={}){
   if(target.dataset.skill&&supportsDialog){
-    if(target.hidden)applySkillFilter('all');
+    if(target.hidden)applySkillFilter(target.dataset.category);
     target.scrollIntoView({block:'start',behavior:'instant'});
     showSkill(skillsById.get(target.dataset.skill),target);
     updateNavigation();
