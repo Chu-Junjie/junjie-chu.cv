@@ -11,8 +11,8 @@
 - `motion.js`：可选克制动效，支持减少动态效果设置。
 - `assets/portrait-224.webp`、`portrait-336.webp`：原比例网页副本，约6.7/12.9KB；`photo.png` 原图保留。
 - `assets/resumes/`：六个版本的中英文 PDF，以及中文 Word。英文 PDF 使用对应文件名的 `-en.pdf` 后缀。
-- `assets/resume-previews/`：由原版 PDF 生成的一页预览图。替换 PDF 后，在已安装 Poppler 的环境运行 `./scripts/render-resume-previews.ps1` 更新预览。
-- `assets/certificates/`：用户提供并授权网页展示的证书原件；ISO 内部质量审核课程结业证书可直接打开 PDF。
+- `assets/resume-previews/`、`assets/certificate-previews/`：由网站现有 PDF 生成的一页预览图。替换 PDF 后，在已安装 Poppler 的环境运行 `./scripts/render-pdf-previews.ps1` 更新预览。
+- `assets/certificates/`：网站展示和下载的六份证书 PDF。
 - `assets/evidence/`：原始项目截图、ERD、SQL 查询与榜单证据。
 
 修改内容后，在具备 Playwright 的开发环境运行 `node scripts/sync-static.cjs`。默认 Edge，`RESUME_BROWSER` 可指定 Chromium 路径。
@@ -21,7 +21,7 @@
 ## 阅读与下载
 
 桌面与手机的页内链接平滑定位，保留可分享锚点、前进后退和键盘焦点。系统启用减少动态效果时直接定位。手机项目目录支持 Escape，选中后自动关闭。
-版式采用白色与深蓝灰、系统无衬线字体；桌面总宽度最多1360px，侧栏252px，正文15–16px。首页简介旁有代表成果。工作经历默认显示重点贡献，作品集按项目结束月份倒序排列。点击详情可在弹窗中滚动查看完整贡献、截图和验证结果，通过关闭按钮、点击遮罩或按 Escape 返回。“生活”卡片包含个人自述及原创 ISFJ 守护者插画。
+版式采用白色与深蓝灰、系统无衬线字体。首页简介旁有五个精选项目。宽屏时，工作经历和证书每行三张卡片，作品集每行两张，作品集按项目结束月份倒序排列。点击详情可在弹窗中滚动查看完整贡献、截图和验证结果。证书可在站内弹窗放大及下载 PDF。“About me” 包含个人自述、原创 ISFJ 守护者插画及两个家庭项目。
 公开页教育栏列出学校、专业及学习时间；`?preview=graduate` 是有明显标识的毕业后页面预览，`?preview=graduate&lang=en` 为英文。实际取得学位后，核对授予年月、将 `DATA.graduation.confirmed` 设为 `true`，再运行静态同步并发布。
 首屏和联系方式卡片的“下载个人简历”按当前语言下载软件开发版（`software-development.pdf` 或 `software-development-en.pdf`）。六个简历版本均可先预览，支持切换语言、放大和下载原始 PDF，中文另可下载 Word。无 JavaScript 时，项目和经历可在页面内展开，简历可直接打开和下载。
 首页使用通用个人简介；主邮箱为 QQ，Gmail 为备用。证书区保留学历、职业培训、竞赛及校园服务认可的具体类别，未知颁发日期不补写。

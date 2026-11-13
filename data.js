@@ -23,7 +23,7 @@ const DATA = {
       "en": "Jan 2025 – Feb 2027"
     },
     "completedProgramme": {
-      "zh": "信息技术学士",
+      "zh": "信息技术学士 Information Technology",
       "en": "Bachelor of Information Technology"
     }
   },
@@ -95,7 +95,7 @@ const DATA = {
         "en": "James Cook University, Singapore"
       },
       "org": {
-        "zh": "信息技术学士（Information Technology）",
+        "zh": "信息技术学士 Information Technology",
         "en": "Bachelor of Information Technology"
       },
       "meta": {
@@ -246,7 +246,10 @@ const DATA = {
         "zh": "Basilos Pte. Ltd.｜AI 平台：Tyrion.ai｜新加坡",
         "en": "Basilos Pte. Ltd. · AI platform: Tyrion.ai · Singapore"
       },
-      "highlightCount": 3,
+      "summary": {
+        "zh": "为 AI 工作台封装人脸一致性连接器，整理 54 项测试记录。",
+        "en": "Packaged a face-consistency connector for the AI workbench and documented 54 test checks."
+      },
       "bullets": [
         {
           "zh": "人脸方案选型：针对 AIGC 模特生成图的身份漂移，对比 InsightFace、DeepFace 等 5 种方案；在 3 身份参考库中开展 1:N 开放集验证，13 张已知样本正确识别、10 张陌生样本正确拒识。",
@@ -295,7 +298,10 @@ const DATA = {
         "zh": "新加坡建筑专业联盟（STAS）｜新加坡",
         "en": "Specialists Trade Alliance of Singapore (STAS) · Singapore"
       },
-      "highlightCount": 2,
+      "summary": {
+        "zh": "参与预制机电厂商认证材料审核，维护 3 场展会付款记录。",
+        "en": "Reviewed accreditation materials for prefab MEP manufacturers and maintained payment records for three exhibitions."
+      },
       "bullets": [
         {
           "zh": "认证材料审核：参与预制机电（MEP）厂商认证计划，查阅公司文件夹中申请企业提交的人员配置、工作流程与厂区布局材料，对照官方评审标准检查是否符合要求；梳理在办／已结申请并整理审核要点笔记，为后续材料复核提供参考。",
@@ -328,7 +334,10 @@ const DATA = {
         "zh": "徐州华夏电子有限公司｜中国·徐州",
         "en": "Xuzhou Huaxia Electronics Co., Ltd. · Xuzhou, China"
       },
-      "highlightCount": 2,
+      "summary": {
+        "zh": "每日编制十余份出货检验报告，维护约 200 名员工的工作数据。",
+        "en": "Prepared more than 10 inspection reports daily and maintained work data for about 200 employees."
+      },
       "bullets": [
         {
           "zh": "出货质量单证：每日编制十余份车用线束、汽车连接配件及五金冲压件的出货检验报告，按规范随货装箱并归档，维护出货单证完整性，便于后续查阅。",
@@ -1210,10 +1219,8 @@ const DATA = {
         "zh": "校园辅导认可｜James Cook University Singapore，2026 年第 2 学期。2026.05–2026.08 辅导服务期间，为 50 余名学生提供编程及核心 IT 课程辅导，并与项目顾问跟踪学习进展。",
         "en": "Peer tutoring recognition · James Cook University Singapore, Trimester 2, 2026. During May–August 2026, tutored 50+ students in programming and core IT coursework and tracked their learning progress with programme advisors."
       },
-      "link": {
-        "url": "assets/certificates/emas-peer-tutor.pdf",
-        "label": { "zh": "查看证书 PDF", "en": "View certificate PDF" }
-      }
+      "file": "emas-peer-tutor",
+      "issuer": { "zh": "詹姆斯库克大学新加坡校区 · 2026", "en": "James Cook University Singapore · 2026" }
     },
     {
       "title": {
@@ -1224,10 +1231,8 @@ const DATA = {
         "zh": "学历文凭｜新加坡建设局学院（BCA Academy），2024.11.19。",
         "en": "Academic qualification · BCA Academy, 19 November 2024."
       },
-      "link": {
-        "url": "assets/certificates/bca-construction-engineering-diploma.pdf",
-        "label": { "zh": "查看证书 PDF", "en": "View certificate PDF" }
-      }
+      "file": "bca-construction-engineering-diploma",
+      "issuer": { "zh": "BCA Academy · 2024", "en": "BCA Academy · 2024" }
     },
     {
       "title": {
@@ -1238,10 +1243,8 @@ const DATA = {
         "zh": "课程结业证书｜LearnCollab Pte Ltd。课程时间：2023.11.18–2023.11.26。",
         "en": "Certificate of Successful Completion · LearnCollab Pte Ltd. Course dates: 18–26 November 2023."
       },
-      "link": {
-        "url": "assets/certificates/wsq-wsh-management.pdf",
-        "label": { "zh": "查看证书 PDF", "en": "View certificate PDF" }
-      }
+      "file": "wsq-wsh-management",
+      "issuer": { "zh": "LearnCollab Pte Ltd · 2023", "en": "LearnCollab Pte Ltd · 2023" }
     },
     {
       "title": {
@@ -1252,13 +1255,8 @@ const DATA = {
         "zh": "课程结业证书｜BCA Academy，2023.08.18。通过基于质量、环境及职业健康安全标准的内部质量审核课程考核。",
         "en": "Certificate of Successful Completion · BCA Academy, 18 August 2023. Passed the coursework assessments for internal quality auditing based on quality, environmental and health and safety standards."
       },
-      "link": {
-        "url": "assets/certificates/bca-iso-internal-audit.pdf",
-        "label": {
-          "zh": "查看证书 PDF",
-          "en": "View certificate PDF"
-        }
-      }
+      "file": "bca-iso-internal-audit",
+      "issuer": { "zh": "BCA Academy · 2023", "en": "BCA Academy · 2023" }
     },
     {
       "title": {
@@ -1269,10 +1267,8 @@ const DATA = {
         "zh": "课程结业证书｜Furen International School，2020.10.02。",
         "en": "Certificate of Completion · Furen International School, 2 October 2020."
       },
-      "link": {
-        "url": "assets/certificates/gce-o-level-preparatory-course.pdf",
-        "label": { "zh": "查看证书 PDF", "en": "View certificate PDF" }
-      }
+      "file": "gce-o-level-preparatory-course",
+      "issuer": { "zh": "Furen International School · 2020", "en": "Furen International School · 2020" }
     },
     {
       "title": {
@@ -1283,10 +1279,8 @@ const DATA = {
         "zh": "竞赛奖项｜BIMAGE Virtual Design & Construction Boot Camp Competition，四人团队，2023。",
         "en": "Competition award · BIMAGE Virtual Design & Construction Boot Camp Competition, four-person team, 2023."
       },
-      "link": {
-        "url": "assets/certificates/vdc-boot-camp-award.pdf",
-        "label": { "zh": "查看奖项 PDF", "en": "View award PDF" }
-      }
+      "file": "vdc-boot-camp-award",
+      "issuer": { "zh": "BIMAGE · 2023", "en": "BIMAGE · 2023" }
     }
   ],
   "profileLead": {
@@ -1309,22 +1303,32 @@ const DATA = {
     "mbti": "ISFJ",
     "paragraphs": [
       {
-        "zh": "我做事比较务实，目标明确后会提前规划，留出时间把细节做好。遇到问题时，我习惯先弄清原因，再想怎么解决。比起赶在最后交付，我更喜欢按自己的节奏稳步推进。",
-        "en": "I am practical and like to plan once I know what I am aiming for. I leave time for the details and try to understand the cause of a problem before deciding what to do. I prefer steady progress to a last-minute rush."
+        "zh": "我做事比较务实。目标明确后会提前规划，留出时间打磨细节。遇到问题，我习惯先弄清原因，再动手解决。我有时会因为想把成果做得更完整而晚一点分享，现在会更早拿出阶段成果，主动听取反馈。",
+        "en": "I am practical. Once I know the goal, I plan ahead and leave time for the details. When something goes wrong, I look for the cause before acting. I can spend too long polishing a draft, so I now share work earlier and ask for feedback."
       },
       {
-        "zh": "相处上，我比较随和，看重真诚、尊重和说到做到。别人提出合理的建议，我愿意听，也愿意调整。我会留时间学习和复盘，也重视工作和生活的平衡。希望自己是一个做事可靠、相处起来也舒服的人。",
-        "en": "I am easy to talk to and value sincerity, mutual respect and following through. I listen to constructive suggestions and adjust when they make sense. I make time to learn and reflect, and I value balance between work and life. I want to be someone people can rely on and feel comfortable around."
+        "zh": "我看重真诚、尊重和说到做到，也乐于做团队负责人信得过的副手，把目标拆成任务、补上细节、及时同步进展。看到身边的人做得好，我也会受到激励。我更看重自己的长期进步，也会给生活留出时间。",
+        "en": "I value sincerity, respect and following through. On a team, I enjoy being someone the lead can rely on to turn priorities into tasks, work through the details and keep people informed. I learn from people around me, measure progress over time and make room for life outside work."
       },
       {
-        "zh": "平时我喜欢钻研新技术，也乐于做团队负责人信得过的副手：把方向拆成任务、补上细节、及时同步进度。",
-        "en": "I enjoy exploring new technologies. On a team, I like being a dependable right hand to the lead: turning priorities into tasks, following through on details and keeping them informed."
+        "zh": "平时我喜欢钻研新技术，也会把学到的东西用在家里。",
+        "en": "I enjoy exploring new technologies and putting what I learn to use at home."
       }
     ],
-    "growth": {
-      "zh": "我有时会因为想把成果打磨得更完整，分享进度晚了一些。现在我会早点拿出阶段成果、主动征求反馈。看到优秀的同伴也会激励我，但我更想用自己的长期进步来衡量成长。",
-      "en": "My standards sometimes make me wait too long before sharing work in progress. I am practising sharing drafts earlier and asking for feedback. Seeing others do well motivates me, and I am learning to measure growth against my own longer-term progress."
-    }
+    "projects": [
+      {
+        "title": { "zh": "JJTrip", "en": "JJTrip" },
+        "body": { "zh": "给家人做的中文旅行攻略。在五座城市的互动地图上查找地点、收藏目的地和规划路线。", "en": "A Chinese-language travel planner for my family, with interactive maps for five cities, saved places and custom routes." },
+        "url": "https://github.com/Chu-Junjie/JJTrip",
+        "label": { "zh": "查看 GitHub", "en": "View on GitHub" }
+      },
+      {
+        "title": { "zh": "高考上岸地图", "en": "Gaokao Quest" },
+        "body": { "zh": "给妹妹做的备考工具。按题型检索数学和英语解题步骤，并记录笔记与错题。", "en": "A study tool for my younger sister to find step-by-step maths and English strategies by question type and keep notes on mistakes." },
+        "url": "https://chu-junjie.github.io/gaokao_quest/",
+        "label": { "zh": "查看项目说明", "en": "View project overview" }
+      }
+    ]
   },
   "resumes": [
     {
@@ -1365,6 +1369,8 @@ const DATA = {
   "featured": [
     "sg-navi",
     "scamwise",
-    "wildlife"
+    "wildlife",
+    "recommendation",
+    "smartseat"
   ]
 };

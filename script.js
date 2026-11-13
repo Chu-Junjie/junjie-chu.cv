@@ -1,12 +1,12 @@
 /* Rendering is progressive enhancement: index.html also contains the Chinese content. */
 const UI = {
   skip:['跳至正文','Skip to content'], moreContact:['更多联系方式','More contact details'],
-  profileKicker:['软件开发 · 数据分析 · 项目协作','Software Development · Data Analysis · Project Collaboration'], highlights:['代表成果','Selected work'],
+  profileKicker:['软件开发 · 数据分析 · 项目协作','Software Development · Data Analysis · Project Collaboration'], highlights:['精选项目','Featured projects'],
   heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewCapstone:['查看毕业项目','View capstone'], primaryDownload:['下载个人简历','Download résumé'],
   graduatePreview:['毕业后预览 · 模拟 2027 年 2 月','Graduation preview · February 2027 scenario'], exitPreview:['返回公开页','Return to public view'],
-  personal:['生活','Life'], guardian:['守护者','Defender'], growth:['我在练习的事','What I am working on'],
+  personal:['About me','About me'], guardian:['守护者','Defender'],
   projects:['作品集','Portfolio'], projectsIntro:['按时间倒序排列。点击项目查看我的贡献、验证结果和演示截图。','Most recent projects first. Select a project to see my contribution, validation results and demo screenshots.'],
-  experience:['工作经历','Work experience'], moreContributions:['查看其余 {count} 项贡献','Show {count} more contributions'], hideContributions:['收起其余贡献','Hide additional contributions'],
+  experience:['工作经历','Work experience'], viewDetails:['查看详情','View details'], hideDetails:['收起详情','Hide details'],
   education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
   contactTitle:['联系方式','Contact details'], roleResumes:['简历下载','Résumé downloads'], resumePreview:['预览','Preview'],
   resumeLanguage:['简历语言','Résumé language'], downloadPdf:['下载 PDF','Download PDF'], downloadWord:['下载 Word','Download Word'], closeDialog:['关闭弹窗','Close dialog'],
@@ -30,8 +30,6 @@ const projectTeam=size=>size===1
 
 function renderProjects(){
   const projects=[...DATA.projects].sort((a,b)=>b.period[1].localeCompare(a.period[1])||b.period[0].localeCompare(a.period[0]));
-  const expandLabel=lang==='en'?'View details':'查看详情';
-  const collapseLabel=lang==='en'?'Hide details':'收起详情';
   $('project-directory').innerHTML=projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
   $('project-directory').setAttribute('aria-label',ui('directory'));
   $('mobile-project-links').innerHTML=projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
@@ -45,9 +43,9 @@ function renderProjects(){
       <summary class="project-summary" aria-labelledby="${p.id}-title">
         <span class="project-top"><span class="project-tags"><span class="eyebrow">${tx(p.category)}</span><span class="project-team">${projectTeam(p.teamSize)}</span></span><span class="project-date"><time datetime="${p.period[0]}">${projectMonth(p.period[0])}</time>–<time datetime="${p.period[1]}">${projectMonth(p.period[1])}</time></span></span>
         <h3 id="${p.id}-title">${tx(p.title)}</h3>
-        <span class="project-toggle" aria-hidden="true"><span class="project-toggle-show">${expandLabel}</span><span class="project-toggle-hide">${collapseLabel}</span></span>
         <span class="project-role">${tx(p.role)}</span>
         <span class="project-result">${tx(p.result)}</span>
+        <span class="project-toggle" aria-hidden="true"><span class="project-toggle-show">${ui('viewDetails')}</span><span class="project-toggle-hide">${ui('hideDetails')}</span></span>
       </summary>
       <div class="project-body" data-project="${p.id}">
     <dl class="case-summary"><div><dt>${ui('problem')}</dt><dd>${tx(p.problem)}</dd></div><div><dt>${ui('contribution')}</dt><dd>${tx(p.contribution)}</dd></div></dl>
@@ -65,12 +63,29 @@ function renderProjects(){
 function timelineBullets(bullets){
   return bullets.length?`<ul>${bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul>`:'';
 }
-function renderTimeline(id,items){
-  $(id).innerHTML=items.map((p,i)=>{
-    const count=p.highlightCount??p.bullets.length;
-    const more=p.bullets.slice(count);
-    return `<article class="timeline-item"><p class="timeline-date">${tx(p.date)}</p><div><h3>${tx(p.title)}</h3><p class="timeline-org">${tx(p.org)}</p>${timelineBullets(p.bullets.slice(0,count))}${more.length?`<details class="work-details" id="${id}-${i+1}-details"><summary><span class="work-show">${ui('moreContributions').replace('{count}',more.length)}</span><span class="work-hide">${ui('hideContributions')}</span></summary>${timelineBullets(more)}</details>`:''}</div></article>`;
-  }).join('');
+function renderExperience(){
+  $('experience-list').innerHTML=DATA.experience.map((p,i)=>`<article class="work-card">
+    <details class="work-details" id="experience-list-${i+1}-details">
+      <summary class="work-summary" aria-labelledby="work-${i}-title">
+        <span class="work-date">${tx(p.date)}</span>
+        <h3 id="work-${i}-title">${tx(p.title)}</h3>
+        <span class="work-org">${tx(p.org)}</span>
+        <span class="work-result">${tx(p.summary)}</span>
+        <span class="card-action" aria-hidden="true"><span class="work-show">${ui('viewDetails')} ›</span><span class="work-hide">${ui('hideDetails')}</span></span>
+      </summary>
+      <div class="work-body">${timelineBullets(p.bullets)}</div>
+    </details>
+  </article>`).join('');
+}
+const certificatePdf=certificate=>`assets/certificates/${certificate.file}.pdf`;
+function renderCertificates(){
+  $('leadership-list').innerHTML=DATA.leadership.map(p=>`<article class="lead-item">
+    <a class="certificate-link" href="${certificatePdf(p)}" data-certificate="${p.file}" target="_blank" rel="noopener">
+      <h4>${tx(p.title)}</h4>
+      <span class="certificate-issuer">${tx(p.issuer)}</span>
+      <span class="card-action">${ui('resumePreview')} <span aria-hidden="true">›</span></span>
+    </a>
+  </article>`).join('');
 }
 const resumeStem=(resume,language)=>resume.file+(language==='en'?'-en':'');
 const resumePdf=(resume,language)=>`assets/resumes/${resumeStem(resume,language)}.pdf`;
@@ -130,19 +145,26 @@ function render(){
   $('exit-graduate-preview').setAttribute('href',(publicUrl.pathname.split('/').at(-1)||'./')+publicUrl.search+publicUrl.hash);
   $('personal-type').textContent=DATA.personal.mbti;
   $('personal-story').innerHTML=DATA.personal.paragraphs.map(p=>`<p>${tx(p)}</p>`).join('');
-  $('personal-growth-text').textContent=t(DATA.personal.growth);
+  $('personal-projects').innerHTML=DATA.personal.projects.map(p=>`<article class="personal-project">
+    <h3>${tx(p.title)}</h3><p>${tx(p.body)}</p>
+    <a class="text-link" href="${escapeHTML(p.url)}" target="_blank" rel="noopener" aria-label="${tx(p.label)} · ${tx(p.title)}">${tx(p.label)} <span aria-hidden="true">↗</span></a>
+  </article>`).join('');
   $('lang-toggle').setAttribute('aria-label',lang==='zh'?'Switch to English':'切换为中文');
   $('lang-toggle').setAttribute('aria-pressed',String(lang==='en'));
   $('side-nav').setAttribute('aria-label',lang==='zh'?'页面导航':'Page navigation');
   $('mobile-chapters').setAttribute('aria-label',lang==='zh'?'章节导航':'Section navigation');
-  $('featured-list').setAttribute('aria-label',lang==='zh'?'代表项目':'Featured projects');
+  $('featured-list').setAttribute('aria-label',ui('highlights'));
   document.title=lang==='zh'?'褚俊杰 Junjie Chu — 项目与经历':'Junjie Chu — Projects & Experience';
   document.querySelector('meta[name="description"]').content=t(DATA.summary);
-  renderProjects(); renderTimeline('experience-list',DATA.experience);
-  renderTimeline('education-list',graduated?DATA.education.map(item=>item.current?{...item,date:DATA.graduation.completedDate,org:DATA.graduation.completedProgramme}:item):DATA.education);
+  renderProjects(); renderExperience();
+  $('education-list').innerHTML=DATA.education.map(p=>{
+    const complete=graduated&&p.current;
+    const date=complete?DATA.graduation.completedDate:p.date;
+    const programme=complete?DATA.graduation.completedProgramme:p.org;
+    return `<article class="timeline-item"><p class="timeline-date">${tx(date)}</p><div><h3>${tx(p.title)}</h3><p class="timeline-org">${tx(programme)}</p>${timelineBullets(p.bullets)}</div></article>`;
+  }).join('');
   $('skills-list').innerHTML=DATA.skills.map(p=>`<div class="skill-group"><h4>${tx(p.label)}</h4><p>${p.items.map(escapeHTML).join(' · ')}</p></div>`).join('');
-  $('leadership-list').innerHTML=DATA.leadership.map(p=>`<article class="lead-item"><h4>${tx(p.title)}</h4><p>${tx(p.body)}</p>${p.link?`<a class="text-link certificate-link" href="${escapeHTML(p.link.url)}" target="_blank" rel="noopener">${tx(p.link.label)} ↗</a>`:''}</article>`).join('');
-  renderDownloads(); renderContacts();
+  renderCertificates(); renderDownloads(); renderContacts();
   document.dispatchEvent(new Event('portfolio:render'));
 }
 function setLang(next){
@@ -203,15 +225,14 @@ function showProject(project,trigger,target){
   return true;
 }
 function showWork(summary){
-  const item=summary.closest('.timeline-item');
-  const body=document.createElement('div');
-  body.className='timeline-item dialog-work';
-  const contributions=item.querySelector('div > ul').cloneNode(true);
-  contributions.append(...[...summary.parentElement.querySelectorAll('li')].map(el=>el.cloneNode(true)));
-  body.append(contributions);
-  return openDialog(item.querySelector('h3').textContent,item.querySelector('.timeline-org').textContent,body,summary);
+  const body=summary.nextElementSibling.cloneNode(true);
+  const date=document.createElement('p');
+  date.className='work-date';
+  date.textContent=summary.querySelector('.work-date').textContent;
+  body.prepend(date);
+  return openDialog(summary.querySelector('h3').textContent,summary.querySelector('.work-org').textContent,body,summary);
 }
-function showResume(resume,trigger){
+function openPdfPreview(title,label,trigger,description){
   const preview=document.createElement('div');
   preview.className='pdf-preview';
   const image=document.createElement('img');
@@ -219,21 +240,16 @@ function showResume(resume,trigger){
   const unavailable=document.createElement('p');
   unavailable.hidden=true;
   unavailable.textContent=ui('previewUnavailable');
-  image.addEventListener('error',()=>{image.hidden=true;unavailable.hidden=false});
   preview.append(image,unavailable);
-  if(!openDialog(t(resume),ui('roleResumes'),preview,trigger))return false;
-  const language=document.createElement('select');
-  language.setAttribute('aria-label',ui('resumeLanguage'));
-  language.append(new Option('中文','zh'),new Option('English','en'));
-  language.value=lang;
-  const pdf=document.createElement('a');
-  pdf.className='button';
-  pdf.textContent=ui('downloadPdf');
-  const word=document.createElement('a');
-  word.className='text-link';
-  word.textContent=ui('downloadWord');
-  word.href=`assets/resumes/${resume.file}.docx`;
-  word.download=resumeFilename(resume,'zh','docx');
+  const content=document.createElement('div');
+  if(description){
+    const detail=document.createElement('p');
+    detail.className='certificate-description';
+    detail.textContent=description;
+    content.append(detail);
+  }
+  content.append(preview);
+  if(!openDialog(title,label,content,trigger))return null;
   const zoom=document.createElement('button');
   zoom.type='button';
   zoom.className='text-link preview-zoom';
@@ -243,22 +259,55 @@ function showResume(resume,trigger){
     zoom.textContent=ui(enlarged?'fitWidth':'zoomIn');
     if(!enlarged)dialogContent.scrollLeft=0;
   });
-  image.addEventListener('error',()=>{zoom.disabled=true});
-  function updatePreview(){
-    const selected=language.value;
+  image.addEventListener('error',()=>{
+    image.hidden=true;
+    unavailable.hidden=false;
+    zoom.disabled=true;
+  });
+  const pdf=document.createElement('a');
+  pdf.className='button';
+  pdf.textContent=ui('downloadPdf');
+  dialogActions.append(pdf,zoom);
+  dialogActions.hidden=false;
+  function update(imageUrl,imageLabel,pdfUrl,filename){
     image.hidden=false;
     unavailable.hidden=true;
     zoom.disabled=false;
-    image.alt=`${ui('resumePreview')} · ${t(resume)} · ${language.selectedOptions[0].textContent}`;
-    image.src=`assets/resume-previews/${resumeStem(resume,selected)}.jpg`;
-    pdf.href=resumePdf(resume,selected);
-    pdf.download=resumeFilename(resume,selected);
-    word.hidden=selected!=='zh';
+    image.alt=imageLabel;
+    image.src=imageUrl;
+    pdf.href=pdfUrl;
+    pdf.download=filename;
     dialogContent.scrollTo(0,0);
   }
+  return {update,pdf,zoom};
+}
+function showCertificate(certificate,trigger){
+  const title=t(certificate.title);
+  const preview=openPdfPreview(title,ui('leadership'),trigger,t(certificate.body));
+  if(!preview)return false;
+  preview.update(`assets/certificate-previews/${certificate.file}.jpg`,title,certificatePdf(certificate),`${certificate.file}.pdf`);
+  return true;
+}
+function showResume(resume,trigger){
+  const preview=openPdfPreview(t(resume),ui('roleResumes'),trigger);
+  if(!preview)return false;
+  const language=document.createElement('select');
+  language.setAttribute('aria-label',ui('resumeLanguage'));
+  language.append(new Option('中文','zh'),new Option('English','en'));
+  language.value=lang;
+  const word=document.createElement('a');
+  word.className='text-link';
+  word.textContent=ui('downloadWord');
+  word.href=`assets/resumes/${resume.file}.docx`;
+  word.download=resumeFilename(resume,'zh','docx');
+  function updatePreview(){
+    const selected=language.value;
+    preview.update(`assets/resume-previews/${resumeStem(resume,selected)}.jpg`,`${ui('resumePreview')} · ${t(resume)} · ${language.selectedOptions[0].textContent}`,resumePdf(resume,selected),resumeFilename(resume,selected));
+    word.hidden=selected!=='zh';
+  }
   language.addEventListener('change',updatePreview);
-  dialogActions.append(language,pdf,word,zoom);
-  dialogActions.hidden=false;
+  preview.pdf.before(language);
+  preview.zoom.before(word);
   updatePreview();
   return true;
 }
@@ -352,6 +401,9 @@ document.addEventListener('click',event=>{
     const preview=event.target.closest?.('[data-resume]');
     const resume=preview&&DATA.resumes.find(item=>item.file===preview.dataset.resume);
     if(resume&&showResume(resume,preview)){event.preventDefault();return}
+    const certificateLink=event.target.closest?.('[data-certificate]');
+    const certificate=certificateLink&&DATA.leadership.find(item=>item.file===certificateLink.dataset.certificate);
+    if(certificate&&showCertificate(certificate,certificateLink)){event.preventDefault();return}
     const projectSummary=event.target.closest?.('.project-summary');
     if(projectSummary&&showProject(projectSummary.closest('.project'),projectSummary)){event.preventDefault();return}
     const workSummary=event.target.closest?.('.work-details > summary');
