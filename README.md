@@ -1,38 +1,5 @@
 # Junjie Chu — 通用个人作品与经历
 
-## V2 开发与部署
-
-新版源码位于 `src/`、`site/` 和 `server/`，使用 React、Vite 与 Node.js 24。根目录的静态页面及 `data.js` 保存为迁移来源。新版由 Vite 构建，仅部署 `dist/`。
-
-```sh
-npm ci
-npm run dev
-npm run build
-npm test
-npx playwright install chromium
-npm run test:e2e
-```
-
-开发及构建预览路径均为 `/junjie-chu.cv/`。本机 Edge 可通过环境变量 `PLAYWRIGHT_CHANNEL=msedge` 运行测试。构建以静态首页提供 SEO 文本和默认 Open Graph 信息，详情采用 Hash 路由，可以刷新和分享。社交平台通常只抓取默认分享卡片。
-
-### Pages 发布与回滚
-
-1. 在独立分支创建 PR，查看 `Résumé V2` 的测试结果。Actions 产物 `resume-v2-preview` 可下载，解压到本地静态服务器的 `/junjie-chu.cv/` 子目录预览。
-2. 由仓库维护者批准合并后，将 **Settings → Pages → Build and deployment → Source** 设置为 **GitHub Actions**。可在 Actions 手动运行主分支的 `Résumé V2` 工作流。只将 `dist/` 上传到 Pages，原站地址继续使用 `https://chu-junjie.github.io/junjie-chu.cv/`。
-3. 回滚时由维护者恢复上一版 V2 提交并重新运行发布。回到 V1 时先确认旧版公开资料范围，原有分支构建会重新暴露旧站所包含的资料。
-
-### AI API 配置
-
-复制 `.env.example` 为本机 `.env`，设置服务端变量后运行 `npm run api`，再启动前端。兼容提供 `POST /chat/completions` 和 JSON object mode 的模型服务。把 `AI_API_BASE_URL` 配为供应商 API 根路径，`AI_MODEL` 配为真实模型名，`AI_API_KEY` 仅保存在服务端。浏览器只使用 `VITE_AI_API_URL`。
-
-生产可使用独立的 Node Web Service。构建命令为 `npm ci && npm run prepare:site`，启动命令为 `node server/index.mjs`。设置 `AI_API_BASE_URL`、`AI_MODEL`、`AI_API_KEY` 和 `ALLOWED_ORIGIN=https://chu-junjie.github.io`，端口由托管方注入。启用 HTTPS，并用 `GET /api/health` 检查是否已配置。将 HTTPS 服务地址填入 GitHub 仓库 Actions 变量 `VITE_AI_API_URL` 后重新构建前端。若服务在反向代理后，只有代理会覆盖外部转发头时才设置 `TRUST_PROXY=1`。
-
-- `POST /api/copilot/chat` 接收 `{lang,messages,match?}`，返回纯文本回答和公开证据 ID。
-- `POST /api/job-match/analyze` 接收 `{lang,jd,requirements?}`，返回分类、要求、证据、确定性评分和简历建议。岗位文本经访客同意后才发给模型。
-- `GET /api/health` 返回 `ready` 或 `unconfigured`。缺少模型配置时，网站如实显示状态。单元测试中的模型响应仅用于测试传输、验证和评分。
-
-详见 [V2 迁移与验收记录](docs/V2-migration.md)。下方保留 V1 维护与事实核验记录。
-
 纯静态中英文网站。网页完整保留项目目标、个人贡献、实现、方法、验证、复盘和原始证据；六个简历版本各提供一页中英文 PDF，中文版另附可编辑 Word。
 
 ## 维护

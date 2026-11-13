@@ -1,9 +1,0 @@
-node_modules/
-dist/
-.v2-public/
-.v2-stage-*/
-src/data/public.json
-.env
-.env.local
-test-results/
-playwright-report/
