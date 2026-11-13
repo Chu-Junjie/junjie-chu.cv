@@ -1,0 +1,23 @@
+[
+  {"id":"python","name":"Python","icon":"siPython","group":"ai","use":["AI 连接器与模型实验","AI connectors and model experiments"],"sources":["work-basilos","sg-navi","wildlife","recommendation"]},
+  {"id":"pytorch","name":"PyTorch","icon":"siPytorch","group":"ai","use":["野生动物图像分类","Wildlife image classification"],"sources":["wildlife"]},
+  {"id":"numpy","name":"NumPy","icon":"siNumpy","group":"ai","use":["数组处理与机器学习实验","Array processing and ML experiments"],"sources":["wildlife"]},
+  {"id":"pandas","name":"pandas","icon":"siPandas","group":"ai","use":["数据整理与模型训练前处理","Data preparation for model training"],"sources":["wildlife"]},
+  {"id":"opencv","name":"OpenCV","icon":"siOpencv","group":"ai","use":["图像预处理与分类实验","Image preprocessing and classification experiments"],"sources":["wildlife"]},
+  {"id":"onnx","name":"ONNX Runtime","icon":"siOnnx","group":"ai","use":["工作台连接器离线推理","Offline inference for a workbench connector"],"sources":["work-basilos"]},
+  {"id":"kaggle","name":"Kaggle","icon":"siKaggle","group":"ai","use":["协作训练笔记本","Collaborative training notebooks"],"sources":["wildlife"]},
+  {"id":"kotlin","name":"Kotlin","icon":"siKotlin","group":"software","use":["Android 应用开发","Android application development"],"sources":["scamwise"]},
+  {"id":"compose","name":"Jetpack Compose","icon":"siJetpackcompose","group":"software","use":["Android 界面与交互","Android UI and interaction"],"sources":["scamwise"]},
+  {"id":"javascript","name":"JavaScript","icon":"siJavascript","group":"software","use":["网页交互与接口集成","Web interaction and API integration"],"sources":["sg-navi","recommendation"]},
+  {"id":"cplusplus","name":"C++","icon":"siCplusplus","group":"software","use":["信息技术课程编程实践","Programming coursework in information technology"],"sources":["education-jcu"]},
+  {"id":"html","name":"HTML5","icon":"siHtml5","group":"software","use":["推荐平台网页结构与界面","Page structure for the recommendation platform"],"sources":["recommendation"]},
+  {"id":"flask","name":"Flask","icon":"siFlask","group":"software","use":["后端接口与数据集成","Backend APIs and data integration"],"sources":["sg-navi","recommendation"]},
+  {"id":"fastapi","name":"FastAPI","icon":"siFastapi","group":"software","use":["图像矢量化本地接口","Local image-vectorisation API"],"sources":["work-basilos"]},
+  {"id":"postgresql","name":"PostgreSQL","icon":"siPostgresql","group":"data","use":["推荐系统与原型数据库","Recommendation and prototype databases"],"sources":["recommendation","sg-navi"]},
+  {"id":"mysql","name":"MySQL","icon":"siMysql","group":"data","use":["查询分析与关系数据库建模","Query analysis and relational modelling"],"sources":["library-sql","flyhigh"]},
+  {"id":"github","name":"GitHub","icon":"siGithub","group":"tools","use":["版本协作与交付记录","Version control and delivery records"],"sources":["sg-navi","recommendation","smartseat"]},
+  {"id":"github-actions","name":"GitHub Actions","icon":"siGithubactions","group":"tools","use":["推荐平台的测试与发布流程","Test and release workflows for the recommendation platform"],"sources":["recommendation"]},
+  {"id":"linux","name":"Linux","icon":"siLinux","group":"tools","use":["工作台连接器离线部署","Offline deployment for a workbench connector"],"sources":["work-basilos"]},
+  {"id":"junit","name":"JUnit","icon":"siJunit5","group":"tools","use":["Android 单元测试","Android unit tests"],"sources":["scamwise"]},
+  {"id":"figma","name":"Figma","icon":"siFigma","group":"tools","use":["座位管理交互原型","Seat management interaction prototypes"],"sources":["smartseat"]}
+]
