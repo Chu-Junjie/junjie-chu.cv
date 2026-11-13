@@ -2,11 +2,12 @@
 const UI = {
   skip:['跳至正文','Skip to content'], location:['新加坡','Singapore'], moreContact:['更多联系方式','More contact details'],
   sideNote:['软件开发 · 数据与 AI · 项目协作','Software · Data & AI · Collaboration'],
-  heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewCapstone:['查看毕业项目 ↓','View capstone ↓'], allResumes:['全部简历版本 ↓','All résumé versions ↓'],
+  heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewCapstone:['查看毕业项目 ↓','View capstone ↓'], primaryDownload:['下载个人简历','Download résumé'],
   graduatePreview:['毕业后预览 · 模拟 2027 年 2 月','Graduation preview · February 2027 scenario'], exitPreview:['返回公开页','Return to public view'],
   personal:['生活','Life'], guardian:['守护者','Defender'], growth:['我在练习的事','What I am working on'],
-  projects:['精选项目','Selected projects'], projectsIntro:['选择项目展开，查看我的贡献、验证结果和演示截图。','Open a project to see my contribution, validation results and demo screenshots.'],
-  experience:['工作经历','Work experience'], education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
+  projects:['作品集','Portfolio'], projectsIntro:['按时间倒序排列。展开项目，查看我的贡献、验证结果和演示截图。','Most recent projects first. Open a project to see my contribution, validation results and demo screenshots.'],
+  experience:['工作经历','Work experience'], moreContributions:['查看其余 {count} 项贡献','Show {count} more contributions'], hideContributions:['收起其余贡献','Hide additional contributions'],
+  education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
   contactTitle:['进一步交流','Get in touch'], contactIntro:['欢迎就项目合作或工作机会联系我。','Open to conversations about projects and job opportunities.'],
   print:['打印详细网页','Print detailed webpage'], generalDownload:['下载标准个人简历 · PDF','Download standard résumé · PDF'], github:['查看 GitHub ↗','Explore GitHub ↗'], roleResumes:['简历下载 · 中文与英文','Download CVs · Chinese & English'], downloadIntro:['六个版本均提供中文 PDF、可编辑 Word 和对应英文 PDF。按投递方向选择，网页保留完整项目细节。','Each of the six versions has a Chinese PDF, an editable Chinese Word file and a corresponding English PDF. Choose a version for your application; the website retains the full project details.'], englishDownload:['英文版 ↓','English PDF ↓'], backTop:['回到顶部 ↑','Back to top ↑'],
   problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], delivery:['实现与交付','Implementation & delivery'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['工程方法、验证与复盘','Methods, validation & reflection'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps'], directory:['项目目录','Project directory']
@@ -18,22 +19,29 @@ const ui = key => UI[key][lang==='en'?1:0];
 const escapeHTML = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const tx = value => escapeHTML(t(value));
 const $ = id => document.getElementById(id);
+const disclosureSelector='.project-details, .work-details';
+const englishMonth=new Intl.DateTimeFormat('en',{month:'short',year:'numeric',timeZone:'UTC'});
+const projectMonth=value=>lang==='zh'?value.replace('-','.'):englishMonth.format(new Date(value+'-01T00:00:00Z'));
+const projectTeam=size=>size===1
+  ? (lang==='zh'?'个人项目':'Solo project')
+  : (lang==='zh'?`${size} 人团队项目`:`${size}-person team project`);
 
 function renderProjects(){
+  const projects=[...DATA.projects].sort((a,b)=>b.period[1].localeCompare(a.period[1])||b.period[0].localeCompare(a.period[0]));
   const expandLabel=lang==='en'?'Show details':'展开详情';
   const collapseLabel=lang==='en'?'Hide details':'收起详情';
-  $('project-directory').innerHTML=DATA.projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
+  $('project-directory').innerHTML=projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
   $('project-directory').setAttribute('aria-label',ui('directory'));
-  $('mobile-project-links').innerHTML=DATA.projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
+  $('mobile-project-links').innerHTML=projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
   $('mobile-project-links').setAttribute('aria-label',ui('directory'));
   $('featured-list').innerHTML=DATA.featured.map((id,i)=>{
     const p=DATA.projects.find(p=>p.id===id);
     return `<a class="feature-card${p.kind==='capstone'?' feature-card--capstone':''}" href="#${p.id}"><span class="feature-top"><span>0${i+1}</span><span aria-hidden="true">↘</span></span><span class="feature-category">${tx(p.category)}</span><strong>${tx(p.title)}</strong><span class="feature-result">${tx(p.result)}</span></a>`;
   }).join('');
-  $('projects-list').innerHTML=DATA.projects.map(p=>`<article class="project${p.kind==='capstone'?' project--capstone':''}" id="${p.id}" aria-labelledby="${p.id}-title">
+  $('projects-list').innerHTML=projects.map(p=>`<article class="project${p.kind==='capstone'?' project--capstone':''}" id="${p.id}" aria-labelledby="${p.id}-title">
     <details class="project-details" id="${p.id}-details">
       <summary class="project-summary" aria-labelledby="${p.id}-title">
-        <span class="project-top"><span class="eyebrow">${tx(p.category)}</span><span class="project-date">${tx(p.meta)}</span></span>
+        <span class="project-top"><span class="project-tags"><span class="eyebrow">${tx(p.category)}</span><span class="project-team">${projectTeam(p.teamSize)}</span></span><span class="project-date"><time datetime="${p.period[0]}">${projectMonth(p.period[0])}</time>–<time datetime="${p.period[1]}">${projectMonth(p.period[1])}</time></span></span>
         <h3 id="${p.id}-title">${tx(p.title)}</h3>
         <span class="project-toggle" aria-hidden="true"><span class="project-toggle-show">${expandLabel}</span><span class="project-toggle-hide">${collapseLabel}</span></span>
         <span class="project-role">${tx(p.role)}</span>
@@ -52,8 +60,15 @@ function renderProjects(){
     </details>
   </article>`).join('');
 }
+function timelineBullets(bullets){
+  return bullets.length?`<ul>${bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul>`:'';
+}
 function renderTimeline(id,items){
-  $(id).innerHTML=items.map(p=>`<article class="timeline-item"><p class="timeline-date">${tx(p.date)}</p><div><h3>${tx(p.title)}</h3><p class="timeline-org">${tx(p.org)}</p>${p.bullets.length?`<ul>${p.bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul>`:''}</div></article>`).join('');
+  $(id).innerHTML=items.map((p,i)=>{
+    const count=p.highlightCount??p.bullets.length;
+    const more=p.bullets.slice(count);
+    return `<article class="timeline-item"><p class="timeline-date">${tx(p.date)}</p><div><h3>${tx(p.title)}</h3><p class="timeline-org">${tx(p.org)}</p>${timelineBullets(p.bullets.slice(0,count))}${more.length?`<details class="work-details" id="${id}-${i+1}-details"><summary><span class="work-show">${ui('moreContributions').replace('{count}',more.length)}</span><span class="work-hide">${ui('hideContributions')}</span></summary>${timelineBullets(more)}</details>`:''}</div></article>`;
+  }).join('');
 }
 function renderDownloads(){
   $('downloads-list').innerHTML=DATA.resumes.map(p=>{
@@ -64,6 +79,9 @@ function renderDownloads(){
     return `<article class="resume-option"><h4>${tx(p)}</h4><p>${format}</p><div><a class="download-pdf" aria-label="${tx(p)} · ${chinese} PDF" href="assets/resumes/${escapeHTML(p.file)}.pdf" download="${escapeHTML(name)}.pdf">PDF ↓</a><a aria-label="${tx(p)} · ${chinese} Word" href="assets/resumes/${escapeHTML(p.file)}.docx" download="${escapeHTML(name)}.docx">Word ↓</a><a class="download-english" aria-label="${tx(p)} · ${english} PDF" href="assets/resumes/${escapeHTML(p.file)}-en.pdf" download="Junjie_Chu_${escapeHTML(p.file)}_EN.pdf">${ui('englishDownload')}</a></div></article>`;
   }).join('');
   const isEnglish=lang==='en';
+  const primary=document.querySelector('[data-ui="primaryDownload"]');
+  primary.setAttribute('href',`assets/resumes/software-development${isEnglish?'-en':''}.pdf`);
+  primary.download=isEnglish?'Junjie_Chu_Software_Development_EN.pdf':'褚俊杰_软件开发工程师.pdf';
   document.querySelectorAll('[data-ui="generalDownload"]').forEach(a=>{
     a.href=`assets/resumes/${isEnglish?'general-en':'general'}.pdf`;
     a.download=isEnglish?'Junjie_Chu_Standard_Resume_EN.pdf':'褚俊杰_标准个人简历.pdf';
@@ -91,7 +109,8 @@ function render(){
   $('name').textContent=lang==='en'?'Junjie Chu':'褚俊杰';
   $('role-text').textContent=t(DATA.role); $('degree-text').textContent=t(graduated?DATA.graduation.completedDegree:DATA.degree);
   $('hero-title').textContent=t(DATA.hero); $('profile-lead').textContent=t(DATA.profileLead);
-  $('summary-text').textContent=t(DATA.summary); $('profile-focus').textContent=t(DATA.profileFocus);
+  $('summary-text').textContent=t(DATA.summary); $('profile-details').textContent=t(DATA.profileDetails);
+  $('profile-focus').textContent=t(DATA.profileFocus);
   $('graduation-text').hidden=!graduated;
   $('graduation-text').textContent=graduated?t(DATA.graduation.completed):'';
   $('graduate-preview').hidden=!preview;
@@ -122,7 +141,7 @@ function setLang(next){
     .filter(element=>element.getBoundingClientRect().top<=guide).at(-1):null;
   const rect=readingTarget?.getBoundingClientRect();
   const progress=rect?.height?Math.min(1,Math.max(0,(guide-rect.top)/rect.height)):0;
-  const detailStates=[...document.querySelectorAll('.project-details')].map(el=>[el.id,el.open]);
+  const detailStates=[...document.querySelectorAll(disclosureSelector)].map(el=>[el.id,el.open]);
   lang=next==='en'?'en':'zh';
   try{localStorage.setItem('site-lang',lang)}catch{}
   const url=new URL(location.href); url.searchParams.set('lang',lang);
@@ -211,7 +230,7 @@ document.addEventListener('click',event=>{
 $('lang-toggle').addEventListener('click',()=>setLang(lang==='zh'?'en':'zh'));
 $('print-button').addEventListener('click',()=>window.print());
 let printStates=[];
-window.addEventListener('beforeprint',()=>{printStates=[...document.querySelectorAll('.project-details')].map(el=>[el,el.open]);printStates.forEach(([el])=>el.open=true)});
+window.addEventListener('beforeprint',()=>{printStates=[...document.querySelectorAll(disclosureSelector)].map(el=>[el,el.open]);printStates.forEach(([el])=>el.open=true)});
 window.addEventListener('afterprint',()=>printStates.forEach(([el,open])=>el.open=open));
 let saved;try{saved=localStorage.getItem('site-lang')}catch{}
 const query=new URLSearchParams(location.search).get('lang');

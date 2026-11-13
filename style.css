@@ -92,6 +92,8 @@ summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
 .project-summary .project-top, .project-summary .project-role, .project-summary .project-result { grid-column: 1 / -1; }
 .project-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .project-top .eyebrow { margin: 0; font-size: 12px; }
+.project-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.project-team { color: var(--accent); background: var(--accent-soft); border-radius: 3px; padding: 0 6px; font-size: 12px; font-weight: 600; }
 .project-date { color: var(--muted); font-size: 13px; line-height: 1.6; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .project h3 { margin: 0; font-size: 21px; font-weight: 650; line-height: 1.45; letter-spacing: -.01em; overflow-wrap: anywhere; }
 .project-role { color: var(--muted); font-size: 14px; line-height: 1.65; }
@@ -141,6 +143,11 @@ summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
 .timeline-item ul { margin: 0; padding-left: 20px; }
 .timeline-item li { margin-bottom: 10px; padding-left: 2px; font-size: 15.5px; line-height: 1.85; overflow-wrap: anywhere; }
 .timeline-item li:last-child { margin-bottom: 0; }
+.work-details { margin-top: 10px; }
+.work-details summary { width: fit-content; padding: 8px 0; color: var(--accent); font-size: 13px; font-weight: 600; }
+.work-details[open] summary { margin-bottom: 6px; }
+.work-hide, .work-details[open] .work-show { display: none; }
+.work-details[open] .work-hide { display: inline; }
 .subheading { margin: 32px 0 18px; font-size: 18px; font-weight: 600; }
 #skills-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 32px; }
 .skill-group { min-width: 0; padding: 0 0 16px; border-bottom: 1px solid var(--line); }
@@ -274,8 +281,8 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; padding:
   #projects-list { gap: 12px; }
   .project { --project-inline-padding: 14px; border-radius: 6px; }
   .project-summary { padding-block: 12px; gap: 4px 8px; }
-  .project-top { display: block; }
-  .project-date { display: block; max-width: none; font-size: 12px; text-align: left; }
+  .project-top { align-items: start; }
+  .project-date { max-width: none; font-size: 12px; text-align: right; }
   .project h3 { font-size: 20px; }
   .project-role { font-size: 13px; }
   .project-result { font-size: 13px; }
@@ -379,6 +386,8 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; padding:
   .timeline-item h3 { font-size: 11pt; break-after: avoid; }
   .timeline-org { margin-bottom: 8px; font-size: 9pt; }
   .timeline-item li { margin-bottom: 6px; font-size: 9pt; line-height: 1.65; break-inside: avoid; }
+  .work-details summary { display: none; }
+  .work-details::details-content { content-visibility: visible; height: auto; }
   #skills-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 22px; }
   .skill-group { padding-bottom: 8px; break-inside: avoid; }
   .skill-group h4, .lead-item h4 { font-size: 9pt; }

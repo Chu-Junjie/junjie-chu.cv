@@ -96,7 +96,7 @@ const DATA = {
         "en": "Jan 2025–Feb 2027"
       },
       "title": {
-        "zh": "詹姆斯库克大学新加坡校区",
+        "zh": "詹姆斯库克大学新加坡校区（James Cook University）",
         "en": "James Cook University, Singapore"
       },
       "org": {
@@ -142,8 +142,8 @@ const DATA = {
       },
       "bullets": [
         {
-          "zh": "相关课程：项目管理、CAD 数字绘图、建筑信息模型（BIM）、技术交流、结构分析。",
-          "en": "Relevant coursework: project management, CAD drafting, building information modelling (BIM), technical communication and structural analysis."
+          "zh": "相关课程：项目管理、数字绘图（CAD）、建筑信息模型（BIM）、技术交流、结构分析。",
+          "en": "Relevant coursework: project management, digital drafting (CAD), building information modelling (BIM), technical communication and structural analysis."
         }
       ]
     }
@@ -251,11 +251,8 @@ const DATA = {
         "zh": "Basilos Pte. Ltd.｜AI 平台：Tyrion.ai｜新加坡",
         "en": "Basilos Pte. Ltd. · AI platform: Tyrion.ai · Singapore"
       },
+      "highlightCount": 3,
       "bullets": [
-        {
-          "zh": "AI 工作台调研与测试：通过 Google、Kaggle 和 GitHub 查找公开资料与实现，比较可用方案；参与工作台组件开发，使用 PyCharm 和 Codex 辅助测试。",
-          "en": "AI workbench research and testing: compared public approaches and implementations found through Google, Kaggle and GitHub, contributed to workbench components, and used PyCharm and Codex to support testing."
-        },
         {
           "zh": "人脸方案选型：针对 AIGC 模特生成图的身份漂移，对比 InsightFace、DeepFace 等 5 种方案；在 3 身份参考库中开展 1:N 开放集验证，13 张已知样本正确识别、10 张陌生样本正确拒识。",
           "en": "Face-recognition evaluation: compared five approaches including InsightFace and DeepFace for identity drift in generated model images. In a three-identity reference library, 1:N open-set checks correctly identified 13 known samples and rejected 10 unknown samples."
@@ -267,6 +264,10 @@ const DATA = {
         {
           "zh": "内部测试与可靠性：整理 54 项记录（23 项身份比对、31 项场景），23 组身份比对均判定正确；同一输入连续运行 30 次均成功。端到端 P50 / P95 为 2.691 / 2.996 秒，记录首次运行异常、质量提示问题和未验证项。",
           "en": "Internal testing: maintained 54 records comprising 23 identity comparisons and 31 scenario checks. All 23 identity comparisons were correct, and 30 consecutive runs of the same input succeeded. End-to-end P50/P95 were 2.691/2.996 seconds; logged first-run errors, quality-warning issues and unverified cases."
+        },
+        {
+          "zh": "AI 工作台调研与测试：通过 Google、Kaggle 和 GitHub 查找公开资料与实现，比较可用方案；参与工作台组件开发，使用 PyCharm 和 Codex 辅助测试。",
+          "en": "AI workbench research and testing: compared public approaches and implementations found through Google, Kaggle and GitHub, contributed to workbench components, and used PyCharm and Codex to support testing."
         },
         {
           "zh": "异常与结果契约：检查无人脸、多脸、坏图、低清、遮挡及阈值边界，输出含分数、阈值、原因码及人工复核状态的 JSON；区分上传层拦截与连接器处理，避免把拦截结果计作功能通过。",
@@ -292,13 +293,14 @@ const DATA = {
         "en": "April–September 2024"
       },
       "title": {
-        "zh": "运营与行政实习生（录用职称：Associate）",
-        "en": "Operations & Administration Intern (offer designation: Associate)"
+        "zh": "运营与行政实习生",
+        "en": "Operations & Administration Intern"
       },
       "org": {
         "zh": "新加坡建筑专业联盟（STAS）｜新加坡",
         "en": "Specialists Trade Alliance of Singapore (STAS) · Singapore"
       },
+      "highlightCount": 2,
       "bullets": [
         {
           "zh": "认证材料审核：参与预制机电（MEP）厂商认证计划，查阅公司文件夹中申请企业提交的人员配置、工作流程与厂区布局材料，对照官方评审标准检查是否符合要求；梳理在办／已结申请并整理审核要点笔记，为后续材料复核提供参考。",
@@ -331,6 +333,7 @@ const DATA = {
         "zh": "徐州华夏电子有限公司｜中国·徐州",
         "en": "Xuzhou Huaxia Electronics Co., Ltd. · Xuzhou, China"
       },
+      "highlightCount": 2,
       "bullets": [
         {
           "zh": "出货质量单证：每日编制十余份车用线束、汽车连接配件及五金冲压件的出货检验报告，按规范随货装箱并归档，维护出货单证完整性，便于后续查阅。",
@@ -354,15 +357,16 @@ const DATA = {
       "title": { "zh": "SG-Navi", "en": "SG-Navi" },
       "category": { "zh": "本科毕业项目 / 跨学科协作", "en": "Capstone / Cross-disciplinary collaboration" },
       "role": { "zh": "开发团队产品负责人｜RAG、官方来源与技术验收", "en": "Product Owner for the development team · RAG, official sources and technical acceptance" },
-      "meta": { "zh": "2026 · 团队项目", "en": "2026 · Team project" },
+      "teamSize": 6,
+      "period": ["2026-09", "2026-12"],
       "result": { "zh": "英语租房押金与消费投诉 · 两条公开原型流程", "en": "English rental deposit and consumer complaint journeys" },
       "problem": {
         "zh": "帮助用户为新加坡租房押金或消费投诉问题整理事实、补齐信息，并查阅相关官方来源。",
         "en": "Help users in Singapore organise facts, identify missing information and find official sources when preparing a rental deposit or consumer complaint enquiry."
       },
       "contribution": {
-        "zh": "担任开发团队产品负责人，负责检索增强生成（RAG）、官方来源整理、共享接口契约与联调技术验收。金融报价等分析由商科组员负责。",
-        "en": "Served as Product Owner for the development team and took responsibility for retrieval-augmented generation (RAG), official source curation, shared interface contracts and integration acceptance. Business students handled the financial analyses, including quotations."
+        "zh": "6 人跨学科团队由 3 名开发成员和 3 名商科成员组成。我担任开发团队产品负责人，负责检索增强生成（RAG）、官方来源整理、共享接口契约与联调技术验收。金融报价等分析由商科成员负责。",
+        "en": "The six-person team had three development members and three business members. As Product Owner for the development team, I handled retrieval-augmented generation (RAG), official sources, shared interface contracts and integration acceptance. The business members handled financial analyses, including quotations."
       },
       "bullets": [
         {
@@ -429,10 +433,8 @@ const DATA = {
         "zh": "反诈骗教育与链接安全检测 Android 应用｜独立开发",
         "en": "Anti-scam education & link-safety Android app · Solo developer"
       },
-      "meta": {
-        "zh": "2026.05 – 2026.08",
-        "en": "May 2026 – Aug 2026"
-      },
+      "teamSize": 1,
+      "period": ["2026-05", "2026-08"],
       "links": [
         {
           "label": {
@@ -553,13 +555,11 @@ const DATA = {
         "en": "Smart Digital Product Recommendation Platform"
       },
       "role": {
-        "zh": "产品负责人（PO）／前端开发协作｜4 人团队",
-        "en": "Product Owner / frontend contributor · Four-person team"
+        "zh": "产品负责人（PO）／前端开发协作",
+        "en": "Product Owner / frontend contributor"
       },
-      "meta": {
-        "zh": "2026.05 – 2026.08",
-        "en": "May 2026 – Aug 2026"
-      },
+      "teamSize": 4,
+      "period": ["2026-05", "2026-08"],
       "links": [
         {
           "label": {
@@ -671,13 +671,11 @@ const DATA = {
         "en": "Wildlife Conservation Image Classification"
       },
       "role": {
-        "zh": "数据处理与训练协作｜5 人团队｜DrivenData 练习榜记录 48/810",
-        "en": "Data processing & training contributor · Five-person team · DrivenData practice leaderboard record 48/810"
+        "zh": "数据处理与训练协作｜DrivenData 练习榜记录 48/810",
+        "en": "Data processing & training contributor · DrivenData practice leaderboard record 48/810"
       },
-      "meta": {
-        "zh": "2026.05 – 2026.08",
-        "en": "May 2026 – Aug 2026"
-      },
+      "teamSize": 5,
+      "period": ["2026-05", "2026-08"],
       "stack": [
         "Python",
         "PyTorch",
@@ -804,13 +802,11 @@ const DATA = {
         "en": "Student Dropout Prediction & Model Comparison"
       },
       "role": {
-        "zh": "个人课程项目｜数据分析与机器学习",
-        "en": "Individual course project · Data analysis & machine learning"
+        "zh": "课程项目｜数据分析与机器学习",
+        "en": "Course project · Data analysis & machine learning"
       },
-      "meta": {
-        "zh": "",
-        "en": ""
-      },
+      "teamSize": 1,
+      "period": ["2025-05", "2025-08"],
       "stack": [
         "Weka",
         "EDA",
@@ -909,13 +905,11 @@ const DATA = {
         "en": "SmartSeat"
       },
       "role": {
-        "zh": "前端与 UI 交互开发｜曾任 Scrum Master｜7 人团队",
-        "en": "Frontend & UI/interaction development · Also served as Scrum Master · Seven-person team"
+        "zh": "前端与 UI 交互开发｜曾任 Scrum Master",
+        "en": "Frontend & UI/interaction development · Also served as Scrum Master"
       },
-      "meta": {
-        "zh": "2025.09 – 2025.12",
-        "en": "Sep 2025 – Dec 2025"
-      },
+      "teamSize": 7,
+      "period": ["2025-09", "2025-12"],
       "links": [
         {
           "label": {
@@ -1026,13 +1020,11 @@ const DATA = {
         "en": "FlyHigh Airline Database Design"
       },
       "role": {
-        "zh": "个人课程项目｜ER/EER 建模与关系约束",
-        "en": "Individual course project · ER/EER modelling & relationship constraints"
+        "zh": "课程项目｜ER/EER 建模与关系约束",
+        "en": "Course project · ER/EER modelling & relationship constraints"
       },
-      "meta": {
-        "zh": "2025.06–2025.09",
-        "en": "June–September 2025"
-      },
+      "teamSize": 1,
+      "period": ["2025-06", "2025-09"],
       "category": {
         "zh": "数据库设计 / SQL 分析",
         "en": "DATABASE DESIGN / SQL ANALYSIS"
@@ -1114,13 +1106,11 @@ const DATA = {
         "en": "SQL ANALYSIS / METRIC DEFINITIONS"
       },
       "role": {
-        "zh": "个人课程实践｜MySQL 查询与结果解释",
-        "en": "Individual course practical · MySQL queries & interpretation"
+        "zh": "课程实践｜MySQL 查询与结果解释",
+        "en": "Course practical · MySQL queries & interpretation"
       },
-      "meta": {
-        "zh": "",
-        "en": ""
-      },
+      "teamSize": 1,
+      "period": ["2026-01", "2026-02"],
       "stack": [
         "MySQL",
         "JOIN",
@@ -1309,16 +1299,20 @@ const DATA = {
     "en": "Updated 12 November 2026"
   },
   "profileLead": {
-    "zh": "褚俊杰｜AI 工程与软件交付",
-    "en": "Junjie Chu · AI engineering & software delivery"
+    "zh": "褚俊杰｜软件开发与 AI 工程",
+    "en": "Junjie Chu · Software Development & AI Engineering"
   },
   "summary": {
-    "zh": "JCU 信息技术专业，GPA 5.85/7.00（系内前 5%）。在 Basilos（Tyrion.ai）担任 AI 工程实习生，参与工作台方案调研、连接器开发与测试，整理 54 项测试记录。在 SG-Navi 毕业项目中担任开发团队产品负责人，负责 RAG 与联调验收。曾任 JCU 学习中心同伴导师，为学生提供算法辅导。",
-    "en": "My background is in Information Technology at JCU (GPA 5.85/7.00, top 5% in my department). As an AI Engineering Intern at Basilos (Tyrion.ai), I researched workbench solutions, helped develop and test a connector, and documented 54 test cases and comparisons. As Product Owner for the SG-Navi development team, I was responsible for RAG and integration acceptance. I also tutored students in algorithms at the JCU Learning Centre."
+    "zh": "我的实践集中在软件开发与 AI 应用，从拆解需求到实现和验证。JCU 信息技术专业，GPA 5.85/7.00（系内前 5%）。在 Basilos（Tyrion.ai）实习期间，我参与 AI 工作台的方案评估，用 Python 和 ONNX Runtime 封装人脸一致性连接器，并整理 54 项测试记录，覆盖身份比对和异常场景。",
+    "en": "I work on software and applied AI, from breaking down requirements to implementing and testing features. I studied Information Technology at JCU (GPA 5.85/7.00, top 5% in my department). During my internship at Basilos (Tyrion.ai), I evaluated approaches for the AI workbench, packaged a face-consistency connector using Python and ONNX Runtime, and documented 54 identity comparisons and scenario checks."
+  },
+  "profileDetails": {
+    "zh": "我独立开发了 ScamWise Campus Android 应用，编写 102 项自动化测试，覆盖训练判分、数据保存和界面流程。在 6 人跨学科毕业项目 SG-Navi 中，我担任开发团队产品负责人，负责 RAG、共享接口契约与联调验收。",
+    "en": "I built ScamWise Campus as a solo Android developer and wrote 102 automated tests covering training scores, data persistence and UI flows. On the six-person SG-Navi capstone, I served as Product Owner for the development team and owned RAG, shared API contracts and integration acceptance."
   },
   "profileFocus": {
-    "zh": "Python · C++ · 深度学习 · Scrum",
-    "en": "Python · C++ · Deep learning · Scrum"
+    "zh": "Python · Kotlin · C++ · 深度学习 · 自动化测试 · Scrum",
+    "en": "Python · Kotlin · C++ · Deep learning · Automated testing · Scrum"
   },
   "personal": {
     "mbti": "ISFJ",
