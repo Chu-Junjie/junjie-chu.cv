@@ -423,7 +423,7 @@ const DATA = {
         "en": "Cross-disciplinary team prototype. The published interface and test results reflect team delivery. The demo supports research and preparation."
       },
       "links": [
-        { "label": { "zh": "在线演示", "en": "Live demo" }, "url": "https://chu-junjie.github.io/SG-Navi/" },
+        { "kind": "demo", "label": { "zh": "在线演示", "en": "Live demo" }, "url": "https://chu-junjie.github.io/SG-Navi/" },
         { "label": { "zh": "GitHub", "en": "GitHub" }, "url": "https://github.com/Chu-Junjie/SG-Navi" },
         { "label": { "zh": "联调验收记录", "en": "Integration acceptance" }, "url": "https://github.com/Chu-Junjie/SG-Navi/blob/main/docs/task15-acceptance.md" }
       ]
@@ -441,6 +441,7 @@ const DATA = {
       "period": ["2026-05", "2026-08"],
       "links": [
         {
+          "kind": "demo",
           "label": {
             "zh": "在线演示",
             "en": "Interactive demo"
@@ -566,6 +567,7 @@ const DATA = {
       "period": ["2026-05", "2026-08"],
       "links": [
         {
+          "kind": "demo",
           "label": {
             "zh": "在线预览",
             "en": "Live site"
@@ -916,6 +918,7 @@ const DATA = {
       "period": ["2025-09", "2025-12"],
       "links": [
         {
+          "kind": "demo",
           "label": {
             "zh": "在线演示",
             "en": "Interactive demo"

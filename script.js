@@ -5,12 +5,12 @@ const UI = {
   heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewCapstone:['查看毕业项目','View capstone'], primaryDownload:['下载个人简历','Download résumé'],
   graduatePreview:['毕业后预览 · 模拟 2027 年 2 月','Graduation preview · February 2027 scenario'], exitPreview:['返回公开页','Return to public view'],
   personal:['About me','About me'], guardian:['守护者','Defender'],
-  projects:['作品集','Portfolio'], projectsIntro:['按时间倒序排列。点击项目查看我的贡献、验证结果和演示截图。','Most recent projects first. Select a project to see my contribution, validation results and demo screenshots.'],
+  projects:['作品集','Portfolio'],
   experience:['工作经历','Work experience'], viewDetails:['查看详情','View details'], hideDetails:['收起详情','Hide details'],
   education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
   contactTitle:['联系方式','Contact details'], roleResumes:['简历下载','Résumé downloads'], resumePreview:['预览','Preview'],
   resumeLanguage:['简历语言','Résumé language'], downloadPdf:['下载 PDF','Download PDF'], downloadWord:['下载 Word','Download Word'], closeDialog:['关闭弹窗','Close dialog'],
-  zoomIn:['放大','Zoom in'], fitWidth:['适合宽度','Fit width'],
+  zoomIn:['放大','Zoom in'], zoomOut:['缩小','Zoom out'],
   previewUnavailable:['预览暂不可用，请下载 PDF 查看。','Preview unavailable. Download the PDF to view it.'], backTop:['回到顶部 ↑','Back to top ↑'],
   problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], delivery:['实现与交付','Implementation & delivery'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['工程方法、验证与复盘','Methods, validation & reflection'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps'], directory:['项目目录','Project directory']
 };
@@ -30,8 +30,6 @@ const projectTeam=size=>size===1
 
 function renderProjects(){
   const projects=[...DATA.projects].sort((a,b)=>b.period[1].localeCompare(a.period[1])||b.period[0].localeCompare(a.period[0]));
-  $('project-directory').innerHTML=projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
-  $('project-directory').setAttribute('aria-label',ui('directory'));
   $('mobile-project-links').innerHTML=projects.map(p=>`<a href="#${p.id}">${tx(p.title)} <span aria-hidden="true">↘</span></a>`).join('');
   $('mobile-project-links').setAttribute('aria-label',ui('directory'));
   $('featured-list').innerHTML=DATA.featured.map(id=>{
@@ -48,17 +46,22 @@ function renderProjects(){
         <span class="project-toggle" aria-hidden="true"><span class="project-toggle-show">${ui('viewDetails')}</span><span class="project-toggle-hide">${ui('hideDetails')}</span></span>
       </summary>
       <div class="project-body" data-project="${p.id}">
+    ${projectLinks(p.links?.filter(link=>link.kind==='demo'),'project-demos','button')}
     <dl class="case-summary"><div><dt>${ui('problem')}</dt><dd>${tx(p.problem)}</dd></div><div><dt>${ui('contribution')}</dt><dd>${tx(p.contribution)}</dd></div></dl>
     ${p.bullets?.length?`<div class="project-delivery"><h4>${ui('delivery')}</h4><ul>${p.bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul></div>`:''}
     <p class="project-stack">${p.stack.map(escapeHTML).join(' · ')}</p>
     ${p.screenshots?`<div class="project-gallery">${p.screenshots.map(shot=>`<figure><a href="assets/scamwise/${shot.file}.jpg" target="_blank" rel="noopener" aria-label="${tx(shot)} — ${ui('original')}"><img src="assets/scamwise/${shot.file}.jpg" alt="ScamWise Campus — ${tx(shot)}" loading="lazy" decoding="async" width="474" height="1001"></a><figcaption>${tx(shot)}</figcaption></figure>`).join('')}</div>`:''}
     ${p.evidence?`<div class="evidence-gallery${p.evidence.length===3?' evidence-gallery-three':''}">${p.evidence.map(shot=>`<figure class="${shot.width<shot.height?'evidence-portrait':'evidence-landscape'}"><a href="${escapeHTML(shot.src)}" target="_blank" rel="noopener" aria-label="${tx(shot.caption)} — ${ui('original')}"><img src="${escapeHTML(shot.src)}" alt="${tx(shot.caption)}" loading="lazy" decoding="async" width="${shot.width}" height="${shot.height}"></a><figcaption>${tx(shot.caption)}<span>${tx(shot.source)}</span></figcaption></figure>`).join('')}</div>`:''}
     ${p.boundary?`<p class="project-boundary">${tx(p.boundary)}</p>`:''}
-    <div class="project-links">${(p.links||[]).map(link=>`<a class="text-link" href="${escapeHTML(link.url)}" target="_blank" rel="noopener">${t(link.label)==='GitHub'?ui('code'):tx(link.label)+' ↗'}</a>`).join('')}</div>
+    ${projectLinks(p.links?.filter(link=>link.kind!=='demo'),'project-links','text-link')}
     <div class="detail-body"><h4>${ui('decision')}</h4><p>${tx(p.decision)}</p><h4 id="${p.id}-quality">${ui('validation')}</h4><p>${tx(p.validation)}</p>${p.reflection?`<h4>${ui('lesson')}</h4><p>${tx(p.reflection)}</p>`:''}</div>
       </div>
     </details>
   </article>`).join('');
+}
+function projectLinks(links,groupClass,linkClass){
+  if(!links?.length)return '';
+  return `<div class="${groupClass}">${links.map(link=>`<a class="${linkClass}" href="${escapeHTML(link.url)}" target="_blank" rel="noopener">${t(link.label)==='GitHub'?ui('code'):tx(link.label)+' ↗'}</a>`).join('')}</div>`;
 }
 function timelineBullets(bullets){
   return bullets.length?`<ul>${bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul>`:'';
@@ -196,8 +199,9 @@ const dialogClose=dialog.querySelector('.dialog-close');
 const supportsDialog=typeof dialog.showModal==='function';
 let dialogTrigger=null;
 document.documentElement.classList.toggle('dialog-ready',supportsDialog);
-function openDialog(title,label,content,trigger){
+function openDialog(title,label,content,trigger,{pdf=false}={}){
   if(!supportsDialog)return false;
+  dialog.classList.toggle('pdf-dialog',pdf);
   $('dialog-title').textContent=title;
   $('dialog-label').textContent=label;
   dialogClose.setAttribute('aria-label',ui('closeDialog'));
@@ -235,13 +239,20 @@ function showWork(summary){
 function openPdfPreview(title,label,trigger,description){
   const preview=document.createElement('div');
   preview.className='pdf-preview';
+  preview.tabIndex=0;
+  preview.setAttribute('role','region');
+  preview.setAttribute('aria-label',`${ui('resumePreview')} · ${title}`);
+  const page=document.createElement('div');
+  page.className='pdf-page';
   const image=document.createElement('img');
   image.decoding='async';
+  image.hidden=true;
   const unavailable=document.createElement('p');
   unavailable.hidden=true;
   unavailable.textContent=ui('previewUnavailable');
-  preview.append(image,unavailable);
-  const content=document.createElement('div');
+  page.append(image,unavailable);
+  preview.append(page);
+  const content=document.createDocumentFragment();
   if(description){
     const detail=document.createElement('p');
     detail.className='certificate-description';
@@ -249,20 +260,49 @@ function openPdfPreview(title,label,trigger,description){
     content.append(detail);
   }
   content.append(preview);
-  if(!openDialog(title,label,content,trigger))return null;
-  const zoom=document.createElement('button');
-  zoom.type='button';
-  zoom.className='text-link preview-zoom';
-  zoom.textContent=ui('zoomIn');
-  zoom.addEventListener('click',()=>{
-    const enlarged=preview.classList.toggle('is-enlarged');
-    zoom.textContent=ui(enlarged?'fitWidth':'zoomIn');
-    if(!enlarged)dialogContent.scrollLeft=0;
+  if(!openDialog(title,label,content,trigger,{pdf:true}))return null;
+  const zoom=document.createElement('div');
+  zoom.className='preview-zoom';
+  const scales=[1,1.25,1.5,2,2.5,3,4,5,6];
+  let level=0;
+  function zoomButton(direction,key){
+    const button=document.createElement('button');
+    button.type='button';
+    button.title=ui(key);
+    button.setAttribute('aria-label',ui(key));
+    button.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.2 15.2 4.8 4.8M7.5 10.5h6${direction===1?'m-3-3v6':''}"/></svg>`;
+    button.addEventListener('click',()=>{
+      if(!button.disabled)changeZoom(level+direction);
+    });
+    return button;
+  }
+  const zoomOut=zoomButton(-1,'zoomOut');
+  const zoomIn=zoomButton(1,'zoomIn');
+  zoom.append(zoomOut,zoomIn);
+  function updateZoomButtons(){
+    zoomOut.disabled=image.hidden||level===0;
+    zoomIn.disabled=image.hidden||level===scales.length-1;
+  }
+  function changeZoom(next){
+    const viewport=preview.getBoundingClientRect();
+    const before=image.getBoundingClientRect();
+    const x=(viewport.left+preview.clientWidth/2-before.left)/before.width;
+    const y=(viewport.top+preview.clientHeight/2-before.top)/before.height;
+    level=next;
+    preview.style.setProperty('--page-scale',scales[level]);
+    const after=image.getBoundingClientRect();
+    preview.scrollBy(after.left+after.width*x-viewport.left-preview.clientWidth/2,after.top+after.height*y-viewport.top-preview.clientHeight/2);
+    updateZoomButtons();
+  }
+  image.addEventListener('load',()=>{
+    preview.style.setProperty('--page-ratio',image.naturalWidth/image.naturalHeight);
+    image.hidden=false;
+    updateZoomButtons();
   });
   image.addEventListener('error',()=>{
     image.hidden=true;
     unavailable.hidden=false;
-    zoom.disabled=true;
+    updateZoomButtons();
   });
   const pdf=document.createElement('a');
   pdf.className='button';
@@ -270,14 +310,16 @@ function openPdfPreview(title,label,trigger,description){
   dialogActions.append(pdf,zoom);
   dialogActions.hidden=false;
   function update(imageUrl,imageLabel,pdfUrl,filename){
-    image.hidden=false;
+    image.hidden=true;
     unavailable.hidden=true;
-    zoom.disabled=false;
+    level=0;
+    preview.style.removeProperty('--page-scale');
+    preview.scrollTo(0,0);
+    updateZoomButtons();
     image.alt=imageLabel;
     image.src=imageUrl;
     pdf.href=pdfUrl;
     pdf.download=filename;
-    dialogContent.scrollTo(0,0);
   }
   return {update,pdf,zoom};
 }
@@ -320,6 +362,7 @@ dialog.addEventListener('click',event=>{
 });
 dialog.addEventListener('close',()=>{
   if(dialog.open)return;
+  dialog.classList.remove('pdf-dialog');
   document.documentElement.classList.remove('has-dialog');
   dialogContent.replaceChildren();
   dialogActions.replaceChildren();
