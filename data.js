@@ -103,7 +103,7 @@ const DATA = {
         "en": "Jan 2025–Feb 2027"
       },
       "title": {
-        "zh": "詹姆斯库克大学新加坡校区（James Cook University）",
+        "zh": "詹姆斯库克大学新加坡校区 James Cook University",
         "en": "James Cook University, Singapore"
       },
       "logo": "jcu-singapore.png",
@@ -137,7 +137,7 @@ const DATA = {
         "en": "Oct 2021 – Nov 2024"
       },
       "title": {
-        "zh": "新加坡建设局学院（BCA Academy）",
+        "zh": "新加坡建设局学院 BCA Academy",
         "en": "BCA Academy, Singapore"
       },
       "logo": "bca-academy.png",
