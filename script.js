@@ -7,6 +7,7 @@ const UI = {
   personal:['关于我','ABOUT ME'], guardian:['守护者','Defender'],
   projects:['作品集','Portfolio'],
   experience:['工作经历','Work experience'], viewDetails:['查看详情','View details'], hideDetails:['收起详情','Hide details'],
+  companyWebsite:['访问 {name} 官网','Visit the {name} website'],
   education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
   contactTitle:['联系方式','Contact details'], contactDomestic:['国内','China'], contactInternational:['国外 · 新加坡','International · Singapore'], roleResumes:['简历下载','Résumé downloads'], resumePreview:['预览','Preview'],
   resumeLanguage:['简历语言','Résumé language'], downloadPdf:['下载 PDF','Download PDF'], downloadWord:['下载 Word','Download Word'], closeDialog:['关闭弹窗','Close dialog'],
@@ -73,11 +74,15 @@ function renderExperience(){
         <span class="work-date">${tx(p.date)}</span>
         <h3 id="work-${i}-title">${tx(p.title)}</h3>
         <span class="work-org">${tx(p.org)}</span>
+        <span class="work-industry">${tx(p.industry)}</span>
         <span class="work-result">${tx(p.summary)}</span>
         <span class="card-action" aria-hidden="true"><span class="work-show">${ui('viewDetails')} ›</span><span class="work-hide">${ui('hideDetails')}</span></span>
       </summary>
       <div class="work-body">${timelineBullets(p.bullets)}</div>
     </details>
+    <a class="work-website" href="${escapeHTML(p.website.url)}" target="_blank" rel="noopener" aria-label="${escapeHTML(ui('companyWebsite').replace('{name}',t(p.website.name)))}" title="${escapeHTML(ui('companyWebsite').replace('{name}',t(p.website.name)))}">
+      <span class="work-logo" data-brand="${p.website.logo}"><img src="assets/work-logos/${p.website.logo}.png" alt="" decoding="async"></span><span aria-hidden="true">↗</span>
+    </a>
   </article>`).join('');
 }
 const certificatePdf=certificate=>`assets/certificates/${certificate.file}.pdf`;
@@ -196,14 +201,14 @@ const dialogClose=dialog.querySelector('.dialog-close');
 const supportsDialog=typeof dialog.showModal==='function';
 let dialogTrigger=null;
 document.documentElement.classList.toggle('dialog-ready',supportsDialog);
-function openDialog(title,label,content,trigger,{pdf=false,demo=null}={}){
+function openDialog(title,label,content,trigger,{pdf=false,action=null}={}){
   if(!supportsDialog)return false;
   dialog.classList.toggle('pdf-dialog',pdf);
   $('dialog-title').textContent=title;
   $('dialog-label').textContent=label;
   const titleAction=$('dialog-title-action');
-  titleAction.replaceChildren(...(demo?[demo]:[]));
-  titleAction.hidden=!demo;
+  titleAction.replaceChildren(...(action?[action]:[]));
+  titleAction.hidden=!action;
   dialogClose.setAttribute('aria-label',ui('closeDialog'));
   dialogActions.replaceChildren();
   dialogActions.hidden=true;
@@ -223,7 +228,7 @@ function showProject(project,trigger,target){
   const label=[project.querySelector('.project-team').textContent,project.querySelector('.project-date').textContent].join(' · ');
   const demo=body.querySelector('.project-demos');
   demo?.remove();
-  if(!openDialog(title,label,body,trigger,{demo}))return false;
+  if(!openDialog(title,label,body,trigger,{action:demo}))return false;
   if(target?.id&&target!==project){
     const heading=$('dialog-'+target.id);
     if(heading)dialogContent.scrollTop=heading.getBoundingClientRect().top-dialogContent.getBoundingClientRect().top-16;
@@ -236,7 +241,9 @@ function showWork(summary){
   date.className='work-date';
   date.textContent=summary.querySelector('.work-date').textContent;
   body.prepend(date);
-  return openDialog(summary.querySelector('h3').textContent,summary.querySelector('.work-org').textContent,body,summary);
+  const action=summary.closest('.work-card').querySelector('.work-website').cloneNode(true);
+  const label=[summary.querySelector('.work-org').textContent,summary.querySelector('.work-industry').textContent].join(' · ');
+  return openDialog(summary.querySelector('h3').textContent,label,body,summary,{action});
 }
 function openPdfPreview(title,label,trigger,description){
   const preview=document.createElement('div');

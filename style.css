@@ -145,6 +145,7 @@ summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
 .timeline-item ul { margin: 0; padding-left: 20px; }
 .timeline-item li { margin-bottom: 10px; padding-left: 2px; font-size: 15.5px; line-height: 1.85; overflow-wrap: anywhere; }
 .timeline-item li:last-child { margin-bottom: 0; }
+.work-card { position: relative; }
 .work-details { height: 100%; }
 .work-summary, .certificate-link { display: flex; flex-direction: column; gap: 6px; height: 100%; min-height: 44px; padding: 15px 16px; border-radius: 6px; color: var(--ink); list-style: none; text-decoration: none; transition: background-color .2s; }
 .work-summary::-webkit-details-marker { display: none; }
@@ -152,6 +153,21 @@ summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
 .work-summary:focus-visible, .certificate-link:focus-visible { outline-offset: -4px; }
 .work-date, .work-org, .certificate-issuer { color: var(--muted); font-size: 13px; line-height: 1.55; }
 .work-summary h3, .certificate-link h4 { margin: 0; font-size: 16px; font-weight: 650; line-height: 1.45; overflow-wrap: anywhere; text-wrap: initial; }
+.work-summary h3 { display: flex; align-items: center; min-height: 44px; padding-inline-end: 100px; }
+.work-website { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 4px; border-radius: 5px; color: var(--accent); font-size: 12px; text-decoration: none; }
+.work-card > .work-website { position: absolute; inset-block-start: 41px; inset-inline-end: 12px; }
+.work-website:hover { background: var(--accent-soft); }
+.work-logo { display: grid; place-items: center; width: 72px; height: 32px; border-radius: 4px; background: white; overflow: hidden; }
+.work-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.work-logo[data-brand="tyrion"] { background: #13283a; padding-inline: 4px; }
+.work-logo[data-brand="stas"], .work-logo[data-brand="huaxia"] { justify-items: end; }
+.work-logo[data-brand="stas"] img { width: 29px; height: 29px; }
+.work-logo[data-brand="huaxia"] img { width: 37px; height: 24px; object-fit: cover; object-position: left center; }
+.work-industry { align-self: start; padding: 1px 6px; border-radius: 3px; color: var(--accent); background: var(--accent-soft); font-size: 12px; font-weight: 600; }
+@media (min-width: 721px) and (max-width: 1120px) {
+  .work-card > .work-website .work-logo { width: 51px; }
+  .work-summary h3 { padding-inline-end: 73px; }
+}
 .work-result { margin: 2px 0; color: var(--ink); font-size: 14px; line-height: 1.65; }
 .card-action { display: flex; gap: 5px; align-items: center; margin-top: auto; padding-top: 4px; color: var(--accent); font-size: 13px; font-weight: 600; }
 .work-hide, .work-details[open] .work-show { display: none; }
@@ -449,6 +465,8 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; padding:
   .timeline-org { margin-bottom: 8px; font-size: 9pt; }
   .timeline-item li { margin-bottom: 6px; font-size: 9pt; line-height: 1.65; break-inside: avoid; }
   .work-card { border: 0; border-bottom: 1px solid #ccc; }
+  .work-card > .work-website { display: none; }
+  .work-summary h3 { min-height: 0; padding-inline-end: 0; }
   .work-summary, .work-body { padding: 6px 0; border: 0; }
   .work-summary .card-action, .work-result, .certificate-link .card-action { display: none; }
   .work-body li { font-size: 9pt; }

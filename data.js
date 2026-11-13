@@ -258,6 +258,8 @@ const DATA = {
         "zh": "Basilos Pte. Ltd.｜AI 平台：Tyrion.ai｜新加坡",
         "en": "Basilos Pte. Ltd. · AI platform: Tyrion.ai · Singapore"
       },
+      "industry": { "zh": "企业 AI 软件", "en": "Enterprise AI software" },
+      "website": { "name": { "zh": "Tyrion.ai", "en": "Tyrion.ai" }, "url": "https://tyrion.ai/en/", "logo": "tyrion" },
       "summary": {
         "zh": "独立调研并评估 5 种人脸比对方案，封装工作台连接器，整理 54 项测试记录。",
         "en": "Independently researched and evaluated five face-matching approaches, packaged a workbench connector and documented 54 test checks."
@@ -310,6 +312,8 @@ const DATA = {
         "zh": "新加坡建筑专业联盟（STAS）｜新加坡",
         "en": "Specialists Trade Alliance of Singapore (STAS) · Singapore"
       },
+      "industry": { "zh": "建筑业协会", "en": "Construction trade association" },
+      "website": { "name": { "zh": "STAS", "en": "STAS" }, "url": "https://stas.org.sg/", "logo": "stas" },
       "summary": {
         "zh": "参与预制机电厂商认证材料审核，维护 3 场展会付款记录。",
         "en": "Reviewed accreditation materials for prefab MEP manufacturers and maintained payment records for three exhibitions."
@@ -346,6 +350,8 @@ const DATA = {
         "zh": "徐州华夏电子有限公司｜中国·徐州",
         "en": "Xuzhou Huaxia Electronics Co., Ltd. · Xuzhou, China"
       },
+      "industry": { "zh": "汽车电子制造", "en": "Automotive electronics manufacturing" },
+      "website": { "name": { "zh": "徐州华夏电子", "en": "Xuzhou Huaxia Electronics" }, "url": "http://hxh.js.cn/", "logo": "huaxia" },
       "summary": {
         "zh": "每日编制十余份出货检验报告，维护约 200 名员工的工作数据。",
         "en": "Prepared more than 10 inspection reports daily and maintained work data for about 200 employees."
