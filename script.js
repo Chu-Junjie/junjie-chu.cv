@@ -2,19 +2,19 @@
 const UI = {
   skip:['跳至正文','Skip to content'], moreContact:['更多联系方式','More contact details'],
   profileKicker:['软件开发 · 数据分析 · 项目协作','Software Development · Data Analysis · Project Collaboration'], highlights:['精选项目','Featured projects'],
-  heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewCapstone:['查看毕业项目','View capstone'], primaryDownload:['下载个人简历','Download résumé'],
+  heroEyebrow:['个人简介 / 2027 届','PROFESSIONAL PROFILE / CLASS OF 2027'], viewCapstone:['查看毕业项目','View capstone'], primaryPreview:['预览个人简历','Preview résumé'], primaryDownload:['下载个人简历','Download résumé'],
   graduatePreview:['毕业后预览 · 模拟 2027 年 2 月','Graduation preview · February 2027 scenario'], exitPreview:['返回公开页','Return to public view'],
-  personal:['About me','About me'], guardian:['守护者','Defender'],
+  personal:['关于我','ABOUT ME'], guardian:['守护者','Defender'],
   projects:['作品集','Portfolio'],
   experience:['工作经历','Work experience'], viewDetails:['查看详情','View details'], hideDetails:['收起详情','Hide details'],
   education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
-  contactTitle:['联系方式','Contact details'], roleResumes:['简历下载','Résumé downloads'], resumePreview:['预览','Preview'],
+  contactTitle:['联系方式','Contact details'], contactDomestic:['国内','China'], contactInternational:['国外 · 新加坡','International · Singapore'], roleResumes:['简历下载','Résumé downloads'], resumePreview:['预览','Preview'],
   resumeLanguage:['简历语言','Résumé language'], downloadPdf:['下载 PDF','Download PDF'], downloadWord:['下载 Word','Download Word'], closeDialog:['关闭弹窗','Close dialog'],
   zoomIn:['放大','Zoom in'], zoomOut:['缩小','Zoom out'],
   previewUnavailable:['预览暂不可用，请下载 PDF 查看。','Preview unavailable. Download the PDF to view it.'], backTop:['回到顶部 ↑','Back to top ↑'],
   problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], delivery:['实现与交付','Implementation & delivery'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['工程方法、验证与复盘','Methods, validation & reflection'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps'], directory:['项目目录','Project directory']
 };
-const MOBILE_NAV = {about:['概览','Intro'],projects:['项目','Projects'],experience:['经历','Work'],education:['背景','Study'],personal:['生活','Life'],resources:['联系','Contact']};
+const MOBILE_NAV = {about:['概览','Intro'],projects:['项目','Projects'],experience:['经历','Work'],education:['背景','Study'],personal:['关于我','About'],resources:['联系','Contact']};
 let lang='zh';
 const t = value => value?.[lang] ?? value?.zh ?? '';
 const ui = key => UI[key][lang==='en'?1:0];
@@ -106,26 +106,23 @@ function renderDownloads(){
     </div>
   </article>`).join('');
   const software=DATA.resumes.find(p=>p.file==='software-development');
-  document.querySelectorAll('[data-ui="primaryDownload"]').forEach(link=>{
-    link.setAttribute('href',resumePdf(software,lang));
-    link.download=resumeFilename(software,lang);
-  });
+  $('primary-preview').href=resumePdf(software,lang);
+  $('primary-download').href=resumePdf(software,lang);
+  $('primary-download').download=resumeFilename(software,lang);
 }
 function renderContacts(){
-  if(!Array.isArray(DATA.contact))return;
-  const contacts=DATA.contact.filter(p=>['phone','wechat','mail-alt'].includes(p.key));
+  const contacts=new Map(DATA.contact.map(p=>[p.key,p]));
   const details=document.querySelector('.more-contact');
-  details.innerHTML=`<summary data-ui="moreContact">${ui('moreContact')}</summary>${contacts.map(p=>p.href?`<a href="${escapeHTML(p.href)}">${tx(p)}</a>`:`<p>${tx(p)}</p>`).join('')}`;
-  const mail=DATA.contact.find(p=>p.key==='mail');
-  if(mail){
-    document.querySelectorAll('.primary-contact a[href^="mailto:"],.contact-email').forEach(a=>a.href=mail.href);
-    document.querySelector('.contact-email').textContent=t(mail);
-  }
-  const phone=DATA.contact.find(p=>p.key==='phone');
-  if(phone){
-    $('contact-phone').href=phone.href;
-    $('contact-phone').textContent='+86 '+t(phone);
-  }
+  details.innerHTML=`<summary data-ui="moreContact">${ui('moreContact')}</summary>${['phone','phone-sg','wechat','mail-alt'].map(key=>{
+    const p=contacts.get(key);
+    return p.href?`<a href="${escapeHTML(p.href)}">${tx(p)}</a>`:`<p>${tx(p)}</p>`;
+  }).join('')}`;
+  document.querySelector('.primary-contact a[href^="mailto:"]').href=contacts.get('mail').href;
+  document.querySelectorAll('[data-contact]').forEach(link=>{
+    const p=contacts.get(link.dataset.contact);
+    link.href=p.href;
+    link.textContent=t(p);
+  });
 }
 function render(){
   const preview=new URLSearchParams(location.search).get('preview')==='graduate'&&!DATA.graduation.confirmed;
@@ -138,7 +135,7 @@ function render(){
   $('name').textContent=lang==='en'?'Junjie Chu':'褚俊杰';
   $('role-text').textContent=t(DATA.role); $('degree-text').textContent=t(graduated?DATA.graduation.completedDegree:DATA.degree);
   $('hero-title').textContent=t(DATA.hero); $('profile-lead').textContent=t(DATA.profileLead);
-  $('summary-text').textContent=t(DATA.summary); $('profile-details').textContent=t(DATA.profileDetails);
+  $('summary-text').textContent=t(DATA.summary); $('basilos-summary').textContent=t(DATA.basilosSummary); $('profile-details').textContent=t(DATA.profileDetails);
   $('profile-focus').textContent=t(DATA.profileFocus);
   $('graduation-text').hidden=!graduated;
   $('graduation-text').textContent=graduated?t(DATA.graduation.completed):'';
@@ -199,11 +196,14 @@ const dialogClose=dialog.querySelector('.dialog-close');
 const supportsDialog=typeof dialog.showModal==='function';
 let dialogTrigger=null;
 document.documentElement.classList.toggle('dialog-ready',supportsDialog);
-function openDialog(title,label,content,trigger,{pdf=false}={}){
+function openDialog(title,label,content,trigger,{pdf=false,demo=null}={}){
   if(!supportsDialog)return false;
   dialog.classList.toggle('pdf-dialog',pdf);
   $('dialog-title').textContent=title;
   $('dialog-label').textContent=label;
+  const titleAction=$('dialog-title-action');
+  titleAction.replaceChildren(...(demo?[demo]:[]));
+  titleAction.hidden=!demo;
   dialogClose.setAttribute('aria-label',ui('closeDialog'));
   dialogActions.replaceChildren();
   dialogActions.hidden=true;
@@ -221,7 +221,9 @@ function showProject(project,trigger,target){
   body.querySelectorAll('img[loading="lazy"]').forEach(image=>image.loading='eager');
   const title=project.querySelector('h3').textContent;
   const label=[project.querySelector('.project-team').textContent,project.querySelector('.project-date').textContent].join(' · ');
-  if(!openDialog(title,label,body,trigger))return false;
+  const demo=body.querySelector('.project-demos');
+  demo?.remove();
+  if(!openDialog(title,label,body,trigger,{demo}))return false;
   if(target?.id&&target!==project){
     const heading=$('dialog-'+target.id);
     if(heading)dialogContent.scrollTop=heading.getBoundingClientRect().top-dialogContent.getBoundingClientRect().top-16;

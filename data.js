@@ -30,9 +30,15 @@ const DATA = {
   "contact": [
     {
       "key": "phone",
-      "zh": "187 5215 8616",
-      "en": "187 5215 8616",
+      "zh": "+86 187 5215 8616",
+      "en": "+86 187 5215 8616",
       "href": "tel:+8618752158616"
+    },
+    {
+      "key": "phone-sg",
+      "zh": "+65 9156 4255",
+      "en": "+65 9156 4255",
+      "href": "tel:+6591564255"
     },
     {
       "key": "wechat",
@@ -53,8 +59,8 @@ const DATA = {
     },
     {
       "key": "mail-alt",
-      "zh": "备用邮箱 chujunjie0908@gmail.com",
-      "en": "Alternative email: chujunjie0908@gmail.com",
+      "zh": "chujunjie0908@gmail.com",
+      "en": "chujunjie0908@gmail.com",
       "href": "mailto:chujunjie0908@gmail.com"
     }
   ],
@@ -76,8 +82,8 @@ const DATA = {
       "en": "Background"
     },
     "personal": {
-      "zh": "生活",
-      "en": "Life"
+      "zh": "关于我",
+      "en": "About me"
     },
     "resources": {
       "zh": "联系",
@@ -247,13 +253,13 @@ const DATA = {
         "en": "Basilos Pte. Ltd. · AI platform: Tyrion.ai · Singapore"
       },
       "summary": {
-        "zh": "为 AI 工作台封装人脸一致性连接器，整理 54 项测试记录。",
-        "en": "Packaged a face-consistency connector for the AI workbench and documented 54 test checks."
+        "zh": "独立调研并评估 5 种人脸比对方案，封装工作台连接器，整理 54 项测试记录。",
+        "en": "Independently researched and evaluated five face-matching approaches, packaged a workbench connector and documented 54 test checks."
       },
       "bullets": [
         {
-          "zh": "人脸方案选型：针对 AIGC 模特生成图的身份漂移，对比 InsightFace、DeepFace 等 5 种方案；在 3 身份参考库中开展 1:N 开放集验证，13 张已知样本正确识别、10 张陌生样本正确拒识。",
-          "en": "Face-recognition evaluation: compared five approaches including InsightFace and DeepFace for identity drift in generated model images. In a three-identity reference library, 1:N open-set checks correctly identified 13 known samples and rejected 10 unknown samples."
+          "zh": "独立调研与选型：针对 AIGC 模特生成图的身份漂移，调研并对比 InsightFace、DeepFace 等 5 种方案。在包含 3 个身份的参考库中开展 1:N 开放集验证，13 张已知样本正确识别，10 张陌生样本正确拒识。",
+          "en": "Independent research and evaluation: researched and compared five approaches, including InsightFace and DeepFace, to address identity drift in generated model images. In a three-identity reference library, 1:N open-set checks correctly identified 13 known samples and rejected 10 unknown samples."
         },
         {
           "zh": "连接器工程化：将选型结果落实为 1:1 一致性连接器，基于 buffalo_l 完成人脸检测、对齐、特征提取和余弦比对；封装 Python / ONNX Runtime 离线推理，打包 Linux 依赖、校验模型哈希并部署至 Workbench。",
@@ -1287,12 +1293,16 @@ const DATA = {
     }
   ],
   "profileLead": {
-    "zh": "褚俊杰｜软件开发与 AI 工程",
-    "en": "Junjie Chu · Software Development & AI Engineering"
+    "zh": "CHU JUNJIE",
+    "en": "CHU JUNJIE"
   },
   "summary": {
-    "zh": "我的实践集中在软件开发与 AI 应用，从拆解需求到实现和验证。JCU 信息技术专业，GPA 5.85/7.00（系内前 5%）。在 Basilos（Tyrion.ai）实习期间，我参与 AI 工作台的方案评估，用 Python 和 ONNX Runtime 封装人脸一致性连接器，并整理 54 项测试记录，覆盖身份比对和异常场景。",
-    "en": "I work on software and applied AI, from breaking down requirements to implementing and testing features. I studied Information Technology at JCU (GPA 5.85/7.00, top 5% in my department). During my internship at Basilos (Tyrion.ai), I evaluated approaches for the AI workbench, packaged a face-consistency connector using Python and ONNX Runtime, and documented 54 identity comparisons and scenario checks."
+    "zh": "我专注于软件开发与 AI 应用，具备从需求拆解到实现与验证的项目经验。JCU 信息技术专业，GPA 5.85/7.00（系内前 5%）。",
+    "en": "I focus on software development and applied AI, with experience taking projects from requirements through implementation and testing. I studied Information Technology at JCU (GPA 5.85/7.00, top 5% in my department)."
+  },
+  "basilosSummary": {
+    "zh": "实习期间，我为 AI 工作台独立调研并对比 5 种人脸比对方案，从公开资料筛选、方案评估推进到连接器实现和测试。用 Python 与 ONNX Runtime 封装人脸一致性连接器，整理 54 项测试记录，覆盖身份比对和异常场景。",
+    "en": "During my internship, I independently researched and compared five face-matching approaches for the AI workbench. I carried the work from reviewing public sources and evaluating candidates through implementation and testing, packaged a face-consistency connector in Python and ONNX Runtime, and documented 54 identity comparisons and scenario checks."
   },
   "profileDetails": {
     "zh": "我独立开发了 ScamWise Campus Android 应用，编写 102 项自动化测试，覆盖训练判分、数据保存和界面流程。在 6 人跨学科毕业项目 SG-Navi 中，我担任开发团队产品负责人，负责 RAG、共享接口契约与联调验收。",
