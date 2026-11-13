@@ -149,7 +149,7 @@ summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
 .education-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px 20px; margin-bottom: 14px; }
 .education-heading h3 { overflow-wrap: anywhere; }
 .education-heading .timeline-org { margin-bottom: 0; }
-.school-logo { display: block; width: 148px; height: 64px; object-fit: contain; padding: 4px 6px; border: 1px solid var(--line); border-radius: 5px; background: white; }
+.school-logo { display: block; width: 148px; height: 64px; object-fit: contain; padding: 4px 6px; }
 .timeline-item ul { margin: 0; padding-left: 20px; }
 .timeline-item li { margin-bottom: 10px; padding-left: 2px; font-size: 15.5px; line-height: 1.85; overflow-wrap: anywhere; }
 .timeline-item li:last-child { margin-bottom: 0; }
@@ -163,9 +163,9 @@ summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
 .work-summary h3, .certificate-link h4 { margin: 0; font-size: 16px; font-weight: 650; line-height: 1.45; overflow-wrap: anywhere; text-wrap: initial; }
 .work-summary h3 { display: flex; align-items: center; min-height: 44px; padding-inline-end: calc(var(--work-logo-width) + 9px); }
 .work-website { gap: 4px; }
-.work-logo { position: absolute; inset-block-start: 41px; inset-inline-end: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: var(--work-logo-width); height: 44px; padding: 4px; border: 1px solid var(--line); border-radius: 5px; background: white; }
+.work-logo { position: absolute; inset-block-start: 41px; inset-inline-end: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: var(--work-logo-width); height: 44px; padding: 4px; }
 .work-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.work-logo[data-brand="tyrion"] { color: white; background: #13283a; }
+.work-logo[data-brand="tyrion"] { color: white; background: #13283a; border-radius: 5px; }
 .work-logo[data-brand="tyrion"] img { height: 21px; }
 .work-logo span { font-size: 9px; font-weight: 600; line-height: 1.2; white-space: nowrap; }
 .work-industry { align-self: start; padding: 1px 6px; border-radius: 3px; color: var(--accent); background: var(--accent-soft); font-size: 12px; font-weight: 600; }
