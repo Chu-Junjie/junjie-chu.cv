@@ -168,7 +168,13 @@ function render(){
     const complete=graduated&&p.current;
     const date=complete?DATA.graduation.completedDate:p.date;
     const programme=complete?DATA.graduation.completedProgramme:p.org;
-    return `<article class="timeline-item"><p class="timeline-date">${tx(date)}</p><div><h3>${tx(p.title)}</h3><p class="timeline-org">${tx(programme)}</p>${timelineBullets(p.bullets)}</div></article>`;
+    return `<article class="timeline-item"><p class="timeline-date">${tx(date)}</p><div>
+      <div class="education-heading">
+        <div><h3>${tx(p.title)}</h3><p class="timeline-org">${tx(programme)}</p></div>
+        <img class="school-logo" src="assets/school-logos/${escapeHTML(p.logo)}" alt="" width="148" height="64" decoding="async">
+      </div>
+      ${timelineBullets(p.bullets)}
+    </div></article>`;
   }).join('');
   $('skills-list').innerHTML=DATA.skills.map(p=>`<div class="skill-group"><h4>${tx(p.label)}</h4><p>${p.items.map(escapeHTML).join(' · ')}</p></div>`).join('');
   renderCertificates(); renderDownloads(); renderContacts();

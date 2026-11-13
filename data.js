@@ -106,6 +106,7 @@ const DATA = {
         "zh": "詹姆斯库克大学新加坡校区（James Cook University）",
         "en": "James Cook University, Singapore"
       },
+      "logo": "jcu-singapore.png",
       "org": {
         "zh": "信息技术学士 Information Technology",
         "en": "Bachelor of Information Technology"
@@ -139,6 +140,7 @@ const DATA = {
         "zh": "新加坡建设局学院（BCA Academy）",
         "en": "BCA Academy, Singapore"
       },
+      "logo": "bca-academy.png",
       "org": {
         "zh": "建筑工程文凭 Diploma in Construction Engineering",
         "en": "Diploma in Construction Engineering"

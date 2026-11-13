@@ -146,6 +146,10 @@ summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
 .timeline-date { margin-bottom: 6px; padding-top: 2px; color: var(--muted); font-size: 13px; line-height: 1.7; font-variant-numeric: tabular-nums; }
 .timeline-item h3 { margin-bottom: 6px; font-size: 18px; font-weight: 600; line-height: 1.5; }
 .timeline-org { margin-bottom: 14px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.education-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px 20px; margin-bottom: 14px; }
+.education-heading h3 { overflow-wrap: anywhere; }
+.education-heading .timeline-org { margin-bottom: 0; }
+.school-logo { display: block; width: 148px; height: 64px; object-fit: contain; padding: 4px 6px; border: 1px solid var(--line); border-radius: 5px; background: white; }
 .timeline-item ul { margin: 0; padding-left: 20px; }
 .timeline-item li { margin-bottom: 10px; padding-left: 2px; font-size: 15.5px; line-height: 1.85; overflow-wrap: anywhere; }
 .timeline-item li:last-child { margin-bottom: 0; }
@@ -324,6 +328,8 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; padding:
   .timeline-item { padding-block: 20px; }
   .timeline-item h3 { font-size: 17px; }
   .timeline-item li { font-size: 15px; }
+  .education-heading { gap: 10px; }
+  .school-logo { width: 98px; height: 49px; }
   #skills-list { grid-template-columns: 1fr; gap: 18px; }
   .subheading { margin-top: 28px; font-size: 17px; }
   .contact-card, .personal-card { padding: 14px; }
@@ -463,6 +469,7 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; padding:
   .timeline-date { font-size: 8pt; white-space: nowrap; }
   .timeline-item h3 { font-size: 11pt; break-after: avoid; }
   .timeline-org { margin-bottom: 8px; font-size: 9pt; }
+  .school-logo { width: 100px; height: 42px; }
   .timeline-item li { margin-bottom: 6px; font-size: 9pt; line-height: 1.65; break-inside: avoid; }
   .work-card { border: 0; border-bottom: 1px solid #ccc; }
   .work-logo { display: none; }
