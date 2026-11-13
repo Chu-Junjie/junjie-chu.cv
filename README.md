@@ -46,6 +46,12 @@
 基址为 `https://chu-junjie.github.io/junjie-chu.cv/`。英文在锚点前加 `?lang=en`。
 旧的 `#skills`、`#leadership` 仍可定位；语言切换保留项目展开状态。
 
+## 技能与证据
+
+`data.js` 中的 `skillCatalog` 通过稳定 ID 引用同一文件里的公开项目、工作经历和教育背景。`skillEvidence` 指向项目已有的公开验证材料。技能详情可用 `#skill-python` 等锚点直达。Kaggle 链接指向实验笔记本，排行榜记录保存在 DrivenData 项目证据中。
+
+Python、ONNX Runtime 和 Excel 分别使用 [Python Software Foundation](https://www.python.org/community/logos/)、[ONNX Runtime](https://onnxruntime.ai/docs/reference/citing.html) 和 [Microsoft Excel 产品页](https://www.microsoft.com/en-us/microsoft-365/excel) 发布的标志。其他技能标志来自 [Devicon v2.17.0](https://github.com/devicons/devicon/tree/v2.17.0)，随附 [MIT 许可](assets/skill-logos/LICENSE-devicon.txt)。标志的商标权归各品牌所有。
+
 ## 本轮证据及内容核验
 
 - 工作经历按时间倒序展示 Basilos、STAS 和徐州华夏电子。STAS 显示为运营与行政实习生，保留认证材料审核、3场展会付款、市场调研、供应商及配置测试。华夏电子的每日十余份报告、约200名员工工作数据、Excel及车间沟通由用户确认；未加入未确认的异常案例、处理成果或效率百分比。

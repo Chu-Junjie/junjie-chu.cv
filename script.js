@@ -9,15 +9,21 @@ const UI = {
   experience:['工作经历','Work experience'], viewDetails:['查看详情','View details'], hideDetails:['收起详情','Hide details'],
   companyWebsite:['访问 {name} 官网','Visit the {name} website'],
   website:['官网','Website'],
-  education:['教育与能力','Education & capabilities'], skills:['技术与方法','Tools & methods'], leadership:['证书','Certificates'],
+  education:['教育与能力','Education & capabilities'], skills:['技能','Skills'], leadership:['证书','Certificates'],
+  skillFilters:['技能分类','Skill categories'], skillPractice:['工程实践','Engineering Practices'],
+  skillUse:['实际使用场景','How I used it'], skillTools:['相关工具与技术','Tools & technologies'],
+  skillRelated:['相关经历与项目','Related experience & projects'], skillEvidence:['公开证据','Public evidence'],
+  skillChoose:['切换技能','Switch skill'], skillProject:['查看相关项目','View related project'],
+  skillWork:['查看相关经历','View related experience'], skillEducation:['查看教育背景','View education'],
   contactTitle:['联系方式','Contact details'], contactDomestic:['国内','China'], contactInternational:['国外 · 新加坡','International · Singapore'], roleResumes:['简历下载','Résumé downloads'], resumePreview:['预览','Preview'],
   resumeLanguage:['简历语言','Résumé language'], downloadPdf:['下载 PDF','Download PDF'], downloadWord:['下载 Word','Download Word'], closeDialog:['关闭弹窗','Close dialog'],
   zoomIn:['放大','Zoom in'], zoomOut:['缩小','Zoom out'],
   previewUnavailable:['预览暂不可用，请下载 PDF 查看。','Preview unavailable. Download the PDF to view it.'], backTop:['回到顶部 ↑','Back to top ↑'],
   problem:['项目目标','The problem'], contribution:['我的贡献','My contribution'], delivery:['实现与交付','Implementation & delivery'], decision:['关键决策','Key decisions'], validation:['验证与结果','Validation & results'], details:['工程方法、验证与复盘','Methods, validation & reflection'], code:['代码仓库 ↗','Source code ↗'], original:['查看原图','View original'], case:['查看项目 →','View project →'], lesson:['复盘与后续改进','Reflection & next steps'], directory:['项目目录','Project directory']
 };
-const MOBILE_NAV = {about:['概览','Intro'],projects:['项目','Projects'],experience:['经历','Work'],education:['背景','Study'],personal:['关于我','About'],resources:['联系','Contact']};
+const MOBILE_NAV = {about:['概览','Intro'],projects:['项目','Projects'],experience:['经历','Work'],education:['背景','Study'],skills:['技能','Skills'],personal:['关于我','About'],resources:['联系','Contact']};
 let lang='zh';
+let skillCategory='all';
 const t = value => value?.[lang] ?? value?.zh ?? '';
 const ui = key => UI[key][lang==='en'?1:0];
 const escapeHTML = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -70,7 +76,7 @@ function timelineBullets(bullets){
   return bullets.length?`<ul>${bullets.map(b=>`<li>${tx(b)}</li>`).join('')}</ul>`:'';
 }
 function renderExperience(){
-  $('experience-list').innerHTML=DATA.experience.map((p,i)=>`<article class="work-card">
+  $('experience-list').innerHTML=DATA.experience.map((p,i)=>`<article class="work-card" id="${p.id}">
     <details class="work-details" id="experience-list-${i+1}-details">
       <summary class="work-summary" aria-labelledby="work-${i}-title">
         <span class="work-date">${tx(p.date)}</span>
@@ -86,6 +92,45 @@ function renderExperience(){
     </details>
     <div class="work-logo" data-brand="${p.website.logo}" aria-hidden="true"><img src="assets/work-logos/${p.website.logo}.png" alt="" decoding="async">${p.website.logoCaption?`<span>${escapeHTML(p.website.logoCaption)}</span>`:''}</div>
   </article>`).join('');
+}
+function skillReference(id){
+  const project=DATA.projects.find(item=>item.id===id);
+  if(project)return {title:t(project.title),body:t(project.role),action:ui('skillProject')};
+  const work=DATA.experience.find(item=>item.id===id);
+  if(work)return {title:t(work.org)+' · '+t(work.title),body:t(work.summary),action:ui('skillWork')};
+  const education=DATA.education.find(item=>item.id===id);
+  if(education)return {title:t(education.title),body:t(education.org),action:ui('skillEducation')};
+  throw new Error('Unknown skill reference: '+id);
+}
+function skillEvidenceLink(id){
+  const evidence=DATA.skillEvidence[id];
+  const project=DATA.projects.find(item=>item.id===evidence.project);
+  if(evidence.link){
+    const link=project.links.find(item=>item.url.includes(evidence.link));
+    if(!link)throw new Error('Unknown skill evidence link: '+id);
+    return {url:link.url,label:t(link.label)};
+  }
+  return {url:'#'+project.id+'-quality',label:t(project.title)+' · '+ui('validation')};
+}
+function skillLogo(skill){
+  return skill.logo?`<img class="skill-logo" src="assets/skill-logos/${skill.logo}.svg" alt="" width="42" height="42" loading="lazy" decoding="async">`:'';
+}
+function renderSkills(){
+  $('skill-filters').setAttribute('aria-label',ui('skillFilters'));
+  $('skill-filters').innerHTML=DATA.skillCategories.map(category=>`<button type="button" data-skill-category="${category.id}" aria-pressed="${category.id===skillCategory}">${tx(category)}</button>`).join('');
+  $('skills-list').innerHTML=DATA.skillCatalog.map(skill=>`<a id="skill-${skill.id}" class="skill-card" data-skill="${skill.id}" data-category="${skill.category}" href="#${skill.references[0]}">
+    ${skillLogo(skill)}<strong>${escapeHTML(skill.name)}</strong><span>${tx(skill.use)}</span>
+    <span class="skill-context" aria-hidden="true">${escapeHTML(skillReference(skill.references[0]).title)}</span>
+  </a>`).join('');
+  const cardNames=new Set(DATA.skillCatalog.map(skill=>skill.name));
+  for(const alias of ['Excel','Git/GitHub','MySQL Workbench'])cardNames.add(alias);
+  $('skill-practice-list').innerHTML=DATA.skills.map(group=>`<div class="skill-group"><h4>${tx(group.label)}</h4><p>${group.items.filter(item=>!cardNames.has(item)).map(escapeHTML).join(' · ')}</p></div>`).join('');
+  applySkillFilter(skillCategory);
+}
+function applySkillFilter(category){
+  skillCategory=category;
+  $('skill-filters').querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.skillCategory===category)));
+  $('skills-list').querySelectorAll('.skill-card').forEach(card=>card.hidden=category!=='all'&&card.dataset.category!==category);
 }
 const certificatePdf=certificate=>`assets/certificates/${certificate.file}.pdf`;
 function renderCertificates(){
@@ -168,7 +213,7 @@ function render(){
     const complete=graduated&&p.current;
     const date=complete?DATA.graduation.completedDate:p.date;
     const programme=complete?DATA.graduation.completedProgramme:p.org;
-    return `<article class="timeline-item"><p class="timeline-date">${tx(date)}</p><div>
+    return `<article class="timeline-item" id="${p.id}"><p class="timeline-date">${tx(date)}</p><div>
       <div class="education-heading">
         <div><h3>${tx(p.title)}</h3><p class="timeline-org">${tx(programme)}</p></div>
         <img class="school-logo" src="assets/school-logos/${escapeHTML(p.logo)}" alt="" width="148" height="64" decoding="async">
@@ -176,7 +221,7 @@ function render(){
       ${timelineBullets(p.bullets)}
     </div></article>`;
   }).join('');
-  $('skills-list').innerHTML=DATA.skills.map(p=>`<div class="skill-group"><h4>${tx(p.label)}</h4><p>${p.items.map(escapeHTML).join(' · ')}</p></div>`).join('');
+  renderSkills();
   renderCertificates(); renderDownloads(); renderContacts();
   document.dispatchEvent(new Event('portfolio:render'));
 }
@@ -200,7 +245,7 @@ function setLang(next){
   }
   updateNavigation();
 }
-const fragmentAliases=new Map([['skills','skills-list'],['leadership','leadership-list']]);
+const fragmentAliases=new Map([['leadership','leadership-list']]);
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 const dialog=$('detail-dialog');
 const dialogContent=dialog.querySelector('.dialog-content');
@@ -209,13 +254,14 @@ const dialogClose=dialog.querySelector('.dialog-close');
 const supportsDialog=typeof dialog.showModal==='function';
 let dialogTrigger=null;
 document.documentElement.classList.toggle('dialog-ready',supportsDialog);
-function openDialog(title,label,content,trigger,{pdf=false,action=null,logo=null}={}){
+function openDialog(title,label,content,trigger,{pdf=false,action=null,logo=null,skill=false}={}){
   if(!supportsDialog)return false;
   dialog.classList.toggle('pdf-dialog',pdf);
+  dialog.classList.toggle('skill-dialog',skill);
   const heading=$('dialog-title');
   heading.textContent=title;
   if(logo)heading.prepend(logo);
-  heading.classList.toggle('project-name',Boolean(logo));
+  heading.classList.toggle('project-name',Boolean(logo)&&!skill);
   $('dialog-label').textContent=label;
   const titleAction=$('dialog-title-action');
   titleAction.replaceChildren(...(action?[action]:[]));
@@ -230,6 +276,33 @@ function openDialog(title,label,content,trigger,{pdf=false,action=null,logo=null
   dialogClose.focus({preventScroll:true});
   dialogContent.scrollTo(0,0);
   return true;
+}
+function showSkill(skill,trigger,keepChooserFocus=false){
+  const content=document.createElement('div');
+  content.className='skill-detail';
+  const references=skill.references.map(id=>{
+    const source=skillReference(id);
+    return `<li><strong>${escapeHTML(source.title)}</strong><p>${escapeHTML(source.body)}</p><a class="text-link" href="#${id}">${source.action} <span aria-hidden="true">→</span></a></li>`;
+  }).join('');
+  const evidence=(skill.evidence??[]).map(id=>{
+    const source=skillEvidenceLink(id);
+    const external=!source.url.startsWith('#');
+    return `<li><a class="text-link" href="${escapeHTML(source.url)}"${external?' target="_blank" rel="noopener"':''}>${escapeHTML(source.label)}${external?' ↗':''}</a></li>`;
+  }).join('');
+  content.innerHTML=`
+    <label class="skill-chooser">${ui('skillChoose')}<select>${DATA.skillCatalog.map(item=>`<option value="${item.id}"${item.id===skill.id?' selected':''}>${escapeHTML(item.name)}</option>`).join('')}</select></label>
+    <section><h3>${ui('skillUse')}</h3><p>${tx(skill.detail??skill.use)}</p></section>
+    ${skill.tools.length?`<section><h3>${ui('skillTools')}</h3><ul class="skill-tools">${skill.tools.map(item=>`<li>${escapeHTML(item)}</li>`).join('')}</ul></section>`:''}
+    <section><h3>${ui('skillRelated')}</h3><ul class="skill-references">${references}</ul></section>
+    ${evidence?`<section><h3>${ui('skillEvidence')}</h3><ul class="skill-evidence">${evidence}</ul></section>`:''}`;
+  const chooser=content.querySelector('select');
+  chooser.addEventListener('change',()=>showSkill(DATA.skillCatalog.find(item=>item.id===chooser.value),trigger,true));
+  const logo=$('skill-'+skill.id).querySelector('img')?.cloneNode();
+  if(logo)logo.loading='eager';
+  const category=DATA.skillCategories.find(item=>item.id===skill.category);
+  const opened=openDialog(skill.name,t(category),content,trigger,{skill:true,logo});
+  if(opened&&keepChooserFocus)chooser.focus({preventScroll:true});
+  return opened;
 }
 function showProject(project,trigger,target){
   const body=project.querySelector('.project-body').cloneNode(true);
@@ -385,7 +458,7 @@ dialog.addEventListener('click',event=>{
 });
 dialog.addEventListener('close',()=>{
   if(dialog.open)return;
-  dialog.classList.remove('pdf-dialog');
+  dialog.classList.remove('pdf-dialog','skill-dialog');
   document.documentElement.classList.remove('has-dialog');
   dialogContent.replaceChildren();
   dialogActions.replaceChildren();
@@ -408,15 +481,30 @@ function focusDestination(target){
   target.focus({preventScroll:true});
 }
 function openFragmentDetails(target){
-  const detail=target.closest('details')||target.querySelector(':scope > .project-details');
+  const detail=target.closest('details')||target.querySelector(':scope > .project-details, :scope > .work-details');
   if(detail)detail.open=true;
   return detail;
 }
 function moveToFragment({target,top},{smooth=false,focus=false}={}){
+  if(target.dataset.skill&&supportsDialog){
+    if(target.hidden)applySkillFilter('all');
+    target.scrollIntoView({block:'start',behavior:'instant'});
+    showSkill(DATA.skillCatalog.find(item=>item.id===target.dataset.skill),target);
+    updateNavigation();
+    return;
+  }
   const project=target.closest('.project');
   if(project&&supportsDialog){
     project.scrollIntoView({block:'start',behavior:'instant'});
     showProject(project,project.querySelector('summary'),target);
+    updateNavigation();
+    return;
+  }
+  const work=target.closest('.work-card');
+  if(work&&supportsDialog){
+    work.scrollIntoView({block:'start',behavior:'instant'});
+    const summary=work.querySelector('summary');
+    showWork(summary);
     updateNavigation();
     return;
   }
@@ -431,7 +519,7 @@ function moveToFragment({target,top},{smooth=false,focus=false}={}){
 let fragmentFrame=0;
 function revealHash(scroll=true){
   const destination=fragmentDestination(location.hash);if(!destination)return;
-  if(!supportsDialog||!destination.target.closest('.project'))openFragmentDetails(destination.target);
+  if(!supportsDialog||!destination.target.closest('.project, .work-card'))openFragmentDetails(destination.target);
   if(scroll){
     cancelAnimationFrame(fragmentFrame);
     fragmentFrame=requestAnimationFrame(()=>moveToFragment(destination));
@@ -464,6 +552,9 @@ document.addEventListener('focusin',event=>{if(projectMenu.open&&!projectMenu.co
 document.addEventListener('click',event=>{
   if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
   if(supportsDialog){
+    const skillLink=event.target.closest?.('[data-skill]');
+    const skill=skillLink&&DATA.skillCatalog.find(item=>item.id===skillLink.dataset.skill);
+    if(skill&&showSkill(skill,skillLink)){event.preventDefault();return}
     const preview=event.target.closest?.('[data-resume]');
     const resume=preview&&DATA.resumes.find(item=>item.file===preview.dataset.resume);
     if(resume&&showResume(resume,preview)){event.preventDefault();return}
@@ -485,7 +576,8 @@ document.addEventListener('click',event=>{
     cancelAnimationFrame(fragmentFrame);
     const fromMenu=projectMenu.contains(link);
     projectMenu.open=false;
-    showProject(project,fromMenu?projectMenu.querySelector('summary'):link,destination.target);
+    const trigger=dialog.open&&dialog.contains(link)?dialogTrigger:fromMenu?projectMenu.querySelector('summary'):link;
+    showProject(project,trigger,destination.target);
     return;
   }
   // Changing the address with History avoids a second native fragment jump.
@@ -493,9 +585,17 @@ document.addEventListener('click',event=>{
   event.preventDefault();
   cancelAnimationFrame(fragmentFrame);
   projectMenu.open=false;
+  if(dialog.open&&dialog.contains(link)&&!destination.target.closest('.work-card')){
+    dialogTrigger=null;
+    dialog.close();
+  }
   moveToFragment(destination,{smooth:!link.classList.contains('skip-link'),focus:true});
 });
 $('lang-toggle').addEventListener('click',()=>setLang(lang==='zh'?'en':'zh'));
+$('skill-filters').addEventListener('click',event=>{
+  const button=event.target.closest('[data-skill-category]');
+  if(button)applySkillFilter(button.dataset.skillCategory);
+});
 let printStates=[];
 window.addEventListener('beforeprint',()=>{printStates=[...document.querySelectorAll(disclosureSelector)].map(el=>[el,el.open]);printStates.forEach(([el])=>el.open=true)});
 window.addEventListener('afterprint',()=>printStates.forEach(([el,open])=>el.open=open));

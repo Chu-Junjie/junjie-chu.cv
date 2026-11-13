@@ -87,6 +87,10 @@ const DATA = {
       "zh": "背景",
       "en": "Background"
     },
+    "skills": {
+      "zh": "技能",
+      "en": "Skills"
+    },
     "personal": {
       "zh": "关于我",
       "en": "About me"
@@ -98,6 +102,7 @@ const DATA = {
   },
   "education": [
     {
+      "id": "education-jcu",
       "date": {
         "zh": "2025.01–2027.02",
         "en": "Jan 2025–Feb 2027"
@@ -132,6 +137,7 @@ const DATA = {
       ]
     },
     {
+      "id": "education-bca",
       "date": {
         "zh": "2021.10 – 2024.11",
         "en": "Oct 2021 – Nov 2024"
@@ -157,6 +163,159 @@ const DATA = {
       ]
     }
   ],
+  "skillCategories": [
+    { "id": "all", "zh": "全部", "en": "All" },
+    { "id": "ai", "zh": "AI 与机器学习", "en": "AI & Machine Learning" },
+    { "id": "software", "zh": "软件开发", "en": "Software Development" },
+    { "id": "data", "zh": "数据与云", "en": "Data & Cloud" },
+    { "id": "tools", "zh": "测试与工具", "en": "Testing & Tools" }
+  ],
+  "skillCatalog": [
+    {
+      "id": "python", "name": "Python", "logo": "python", "category": "ai",
+      "use": { "zh": "推理连接器、检索接口与模型实验", "en": "Inference connectors, retrieval APIs and model experiments" },
+      "detail": {
+        "zh": "在 Basilos 用 Python 和 ONNX Runtime 封装 InsightFace 人脸一致性连接器。在 SG-Navi 参与检索接口开发与技术验收，在野生动物分类项目参与图像数据处理和训练实验。",
+        "en": "Packaged the InsightFace face-consistency connector with Python and ONNX Runtime at Basilos. Contributed to retrieval APIs and technical acceptance in SG-Navi, and to image preparation and training experiments in the wildlife project."
+      },
+      "tools": ["ONNX Runtime", "InsightFace", "Flask", "PyTorch"],
+      "references": ["work-basilos", "sg-navi", "wildlife"],
+      "evidence": ["sg-navi-acceptance", "wildlife-notebook"]
+    },
+    {
+      "id": "onnxruntime", "name": "ONNX Runtime", "logo": "onnxruntime", "category": "ai",
+      "use": { "zh": "人脸一致性连接器的离线推理与测试", "en": "Offline inference and testing for the face consistency connector" },
+      "tools": ["Python", "InsightFace", "Linux"],
+      "references": ["work-basilos"]
+    },
+    {
+      "id": "pytorch", "name": "PyTorch", "logo": "pytorch", "category": "ai",
+      "use": { "zh": "野生动物图像分类与模型训练", "en": "Model training for wildlife image classification" },
+      "tools": ["FastAI", "ConvNeXt", "Optuna"],
+      "references": ["wildlife"], "evidence": ["wildlife-notebook", "wildlife-quality"]
+    },
+    {
+      "id": "numpy", "name": "NumPy", "logo": "numpy", "category": "ai",
+      "use": { "zh": "数据与机器学习课程中的数组处理", "en": "Array processing in data and machine learning coursework" },
+      "tools": ["Python", "pandas"], "references": ["education-jcu"]
+    },
+    {
+      "id": "pandas", "name": "pandas", "logo": "pandas", "category": "data",
+      "use": { "zh": "数据分析课程中的表格整理", "en": "Tabular data preparation in analytics coursework" },
+      "tools": ["Python", "NumPy"], "references": ["education-jcu"]
+    },
+    {
+      "id": "opencv", "name": "OpenCV", "logo": "opencv", "category": "ai",
+      "use": { "zh": "计算机视觉与图像处理实践", "en": "Computer vision and image-processing practice" },
+      "tools": ["Python"], "references": ["education-jcu"]
+    },
+    {
+      "id": "kaggle", "name": "Kaggle", "logo": "kaggle", "category": "ai",
+      "use": { "zh": "实验笔记本与公开实现调研", "en": "Experiment notebooks and research on public implementations" },
+      "detail": {
+        "zh": "在 Kaggle 查阅公开实现，野生动物分类项目的公开实验笔记本也托管在 Kaggle。该项目的排行榜成绩记录来自 DrivenData。",
+        "en": "Used Kaggle to research public implementations. Kaggle also hosts the wildlife project's experiment notebook. The project's leaderboard result comes from DrivenData."
+      },
+      "tools": ["Python", "PyTorch"],
+      "references": ["wildlife", "work-basilos"], "evidence": ["wildlife-notebook"]
+    },
+    {
+      "id": "kotlin", "name": "Kotlin", "logo": "kotlin", "category": "software",
+      "use": { "zh": "Android 应用逻辑与功能开发", "en": "Android application logic and feature development" },
+      "tools": ["Jetpack Compose", "Room", "Retrofit"],
+      "references": ["scamwise"], "evidence": ["scamwise-unit"]
+    },
+    {
+      "id": "jetpackcompose", "name": "Jetpack Compose", "logo": "jetpackcompose", "category": "software",
+      "use": { "zh": "Android 界面、交互与状态呈现", "en": "Android UI, interactions and state rendering" },
+      "tools": ["Kotlin", "MVVM", "Espresso"],
+      "references": ["scamwise"], "evidence": ["scamwise-ui"]
+    },
+    {
+      "id": "javascript", "name": "JavaScript", "logo": "javascript", "category": "software",
+      "use": { "zh": "网页交互与前后端接口集成", "en": "Web interactions and API integration" },
+      "tools": ["HTML/CSS", "Flask", "REST API"],
+      "references": ["sg-navi", "recommendation"], "evidence": ["sg-navi-acceptance"]
+    },
+    {
+      "id": "cpp", "name": "C++", "logo": "cpp", "category": "software",
+      "use": { "zh": "信息技术课程中的程序设计", "en": "Programming in information technology coursework" },
+      "tools": [], "references": ["education-jcu"]
+    },
+    {
+      "id": "flask", "name": "Flask", "logo": "flask", "category": "software",
+      "use": { "zh": "检索与推荐服务的后端接口", "en": "Backend APIs for retrieval and recommendations" },
+      "tools": ["Python", "PostgreSQL"],
+      "references": ["sg-navi", "recommendation"], "evidence": ["sg-navi-acceptance"]
+    },
+    {
+      "id": "fastapi", "name": "FastAPI", "logo": "fastapi", "category": "software",
+      "use": { "zh": "图像矢量化工具的本地接口", "en": "Local API for image vectorisation tools" },
+      "tools": ["Python", "Potrace", "VTracer"], "references": ["work-basilos"]
+    },
+    {
+      "id": "postgresql", "name": "PostgreSQL", "logo": "postgresql", "category": "data",
+      "use": { "zh": "推荐系统与原型数据库", "en": "Recommendation and prototype databases" },
+      "tools": ["SQL", "Flask"], "references": ["recommendation", "sg-navi"]
+    },
+    {
+      "id": "mysql", "name": "MySQL", "logo": "mysql", "category": "data",
+      "use": { "zh": "借阅数据查询与航空数据库建模", "en": "Library data queries and airline database modelling" },
+      "tools": ["SQL", "MySQL Workbench", "ER/EER"],
+      "references": ["library-sql", "flyhigh"], "evidence": ["library-queries", "flyhigh-erd"]
+    },
+    {
+      "id": "sql", "name": "SQL", "category": "data",
+      "use": { "zh": "关联、聚合与借阅行为分析", "en": "Joins, aggregation and library checkout analysis" },
+      "tools": ["MySQL", "JOIN", "GROUP BY", "HAVING"],
+      "references": ["library-sql", "flyhigh"], "evidence": ["library-queries", "flyhigh-erd"]
+    },
+    {
+      "id": "excel", "name": "Microsoft Excel", "logo": "excel", "category": "data",
+      "use": { "zh": "业务数据、质量记录与日常汇总", "en": "Business data, quality records and routine reporting" },
+      "tools": [], "references": ["work-stas", "work-huaxia"]
+    },
+    {
+      "id": "github", "name": "GitHub", "logo": "github", "category": "tools",
+      "use": { "zh": "版本协作、问题追踪与交付记录", "en": "Version control, issue tracking and delivery records" },
+      "tools": ["Git", "GitHub Issues", "GitHub Actions"],
+      "references": ["sg-navi", "smartseat", "recommendation"], "evidence": ["sg-navi-acceptance"]
+    },
+    {
+      "id": "githubactions", "name": "GitHub Actions", "logo": "githubactions", "category": "tools",
+      "use": { "zh": "推荐平台的自动化验收与发布协作", "en": "Automated acceptance checks and release collaboration" },
+      "tools": ["GitHub", "CI/CD"],
+      "references": ["recommendation"], "evidence": ["recommendation-quality"]
+    },
+    {
+      "id": "linux", "name": "Linux", "logo": "linux", "category": "tools",
+      "use": { "zh": "工作台推理依赖打包与离线部署", "en": "Workbench dependency packaging and offline deployment" },
+      "tools": ["Python", "ONNX Runtime"], "references": ["work-basilos"]
+    },
+    {
+      "id": "junit", "name": "JUnit", "logo": "junit", "category": "tools",
+      "use": { "zh": "Android 应用逻辑的自动化单元测试", "en": "Automated unit tests for Android application logic" },
+      "tools": ["Kotlin", "Mockito", "Espresso"],
+      "references": ["scamwise"], "evidence": ["scamwise-unit", "scamwise-quality"]
+    },
+    {
+      "id": "figma", "name": "Figma", "logo": "figma", "category": "tools",
+      "use": { "zh": "座位管理的交互原型与可用性验证", "en": "Seat management prototypes and usability validation" },
+      "tools": ["Scrum", "Lean UX"], "references": ["smartseat"], "evidence": ["smartseat-quality"]
+    }
+  ],
+  "skillEvidence": {
+    "sg-navi-acceptance": { "project": "sg-navi", "link": "task15-acceptance.md" },
+    "wildlife-notebook": { "project": "wildlife", "link": "kaggle.com/code/" },
+    "wildlife-quality": { "project": "wildlife" },
+    "scamwise-unit": { "project": "scamwise", "link": "/app/src/test" },
+    "scamwise-ui": { "project": "scamwise", "link": "/app/src/androidTest" },
+    "scamwise-quality": { "project": "scamwise" },
+    "recommendation-quality": { "project": "recommendation" },
+    "library-queries": { "project": "library-sql", "link": "practical8-queries.sql" },
+    "flyhigh-erd": { "project": "flyhigh", "link": "flyhigh-original-erd.png" },
+    "smartseat-quality": { "project": "smartseat" }
+  },
   "skills": [
     {
       "label": {
@@ -248,6 +407,7 @@ const DATA = {
   ],
   "experience": [
     {
+      "id": "work-basilos",
       "date": {
         "zh": "2026.07–2026.12",
         "en": "July–December 2026"
@@ -302,6 +462,7 @@ const DATA = {
       ]
     },
     {
+      "id": "work-stas",
       "date": {
         "zh": "2024.04–2024.09",
         "en": "April–September 2024"
@@ -340,6 +501,7 @@ const DATA = {
       ]
     },
     {
+      "id": "work-huaxia",
       "date": {
         "zh": "2021.03–2021.10",
         "en": "March–October 2021"
